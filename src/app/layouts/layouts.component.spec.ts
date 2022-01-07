@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FrontOfficeComponent } from './layouts.component';
+import { LayoutsComponent } from './layouts.component';
 
 describe('FrontOfficeComponent', () => {
-  let component: FrontOfficeComponent;
-  let fixture: ComponentFixture<FrontOfficeComponent>;
+  let component: LayoutsComponent;
+  let fixture: ComponentFixture<LayoutsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FrontOfficeComponent ]
+      declarations: [ LayoutsComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FrontOfficeComponent);
+    fixture = TestBed.createComponent(LayoutsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
