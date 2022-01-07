@@ -7,8 +7,8 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () =>
-      import('./layouts/layouts.module').then(
-        (m) => m.FrontOfficeModule
+      import('./console/console.module').then(
+        (m) => m.ConsoleModule
       ),
   },
   {
