@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BackOfficeRoutingModule } from './back-office-routing.module';
+import { FrontOfficeRoutingModule } from './layouts-routing.module';
 
 
 
@@ -8,7 +8,7 @@ import { BackOfficeRoutingModule } from './back-office-routing.module';
   declarations: [],
   imports: [
     CommonModule,
-    BackOfficeRoutingModule
+    FrontOfficeRoutingModule
   ]
 })
-export class BackOfficeModule { }
+export class FrontOfficeModule { }

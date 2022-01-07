@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FrontOfficeComponent } from './front-office.component';
+import { FrontOfficeComponent } from './layouts.component';
 
 describe('FrontOfficeComponent', () => {
   let component: FrontOfficeComponent;
