@@ -13,7 +13,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     LoginComponent,
     PageNotFoundComponent,
   ],
-  imports: [BrowserModule, ConsoleModule, AppRoutingModule],
+  imports: [BrowserModule, AppRoutingModule],
   providers: [],
   bootstrap: [AppComponent],
 })

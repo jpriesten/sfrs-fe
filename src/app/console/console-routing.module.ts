@@ -4,12 +4,20 @@ import { ConsoleComponent } from './console.component';
 import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: 'console', pathMatch: 'prefix' },
   {
-    path: '',
+    path: 'console',
     component: ConsoleComponent,
     children: [
       { path: '', redirectTo: 'home', pathMatch: 'prefix' },
       { path: 'home', component: HomeComponent },
+      {
+        path: 'iam',
+        loadChildren: () =>
+          import('./iam-service/iam-service.module').then(
+            (m) => m.IamServiceModule
+          ),
+      },
     ],
   },
 ];

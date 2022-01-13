@@ -1,0 +1,56 @@
+<nav class="sidebar" [ngClass]="{ sidebarPushRight: isActive, collapsed: collapsed }">
+  <div class="sidebar-header container pt-3 pb-3" [ngClass]="{ collapsed: collapsed }">
+    <div class="row align-items-center">
+      <div class="col-8 text-wrap">
+        <h5 class="header-text">Identity and Access Management (IAM)</h5>
+      </div>
+      <div class="col d-flex justify-content-end" (click)="toggleCollapsed()">
+        <i class="fw-bold fa fa-fw fa-angle-double-{{ collapsed ? 'right' : 'left' }}"></i>
+      </div>
+    </div>
+  </div>
+  <div class="sidebar-body pt-3 pb-3">
+    <div class="list-group">
+      <!-- <a *ngIf="core.userHasPermission('VIEWGUIDASH')" -->
+      <a routerLink="/console/iam/dashboard" [routerLinkActive]="['router-link-active']" class="list-group-item">
+        <i class="fa fa-chart-line"></i>
+        <span>Dashboard</span>
+      </a>
+
+      <div class="nested-menu" #settings>
+        <a class="list-group-item" (click)="onActive(settings)" (click)="addExpandClass('settings')">
+          <i class="fa fa-users"></i>
+          <span>Access management</span>
+        </a>
+        <li class="nested" [class.expand]="showMenu === 'settings'">
+          <ul class="submenu ps-3">
+            <li>
+              <a [routerLink]="['/access']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                <i class="fa fa-users-cog"></i>
+                <span>User groups</span>
+              </a>
+            </li>
+            <li>
+              <a [routerLink]="['/mailboxes']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                <i class="fa fa-user-cog"></i>
+                <span>Users</span>
+              </a>
+            </li>
+            <li>
+              <a [routerLink]="['/generalsetting']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                <i class="fa fa-wrench"></i>
+                <span>Policies</span>
+              </a>
+            </li>
+            <li>
+              <a [routerLink]="['/generalsetting']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                <i class="fa fa-cog"></i>
+                <span>Account settings</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+      </div>
+    </div>
+  </div>
+</nav>

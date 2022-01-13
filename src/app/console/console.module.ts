@@ -5,6 +5,7 @@ import { HeaderComponent } from './layout/header/header.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { ConsoleComponent } from './console.component';
 import { HomeComponent } from './home/home.component';
+import { DxDataGridModule } from 'devextreme-angular';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,7 @@ import { HomeComponent } from './home/home.component';
     FooterComponent,
     HomeComponent
   ],
-  imports: [CommonModule, ConsoleRoutingModule],
+  imports: [CommonModule, ConsoleRoutingModule, DxDataGridModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class ConsoleModule {}
