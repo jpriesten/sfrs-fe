@@ -12,10 +12,10 @@ const routes: Routes = [
       { path: '', redirectTo: 'home', pathMatch: 'prefix' },
       { path: 'home', component: HomeComponent },
       {
-        path: 'iam',
+        path: 'idap',
         loadChildren: () =>
-          import('./iam-service/iam-service.module').then(
-            (m) => m.IamServiceModule
+          import('./idap-service/idap-service.module').then(
+            (m) => m.IdapServiceModule
           ),
       },
     ],

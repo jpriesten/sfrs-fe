@@ -1,9 +1,9 @@
 <div class="container-fluid">
-  <h3>IAM dashboard</h3>
+  <h4>IDAP dashboard</h4>
 
   <div class="row pt-5">
     <div class="col-10">
-      <h5>IAM resources</h5>
+      <h5>IDAP resources</h5>
     </div>
     <div class="col d-flex justify-content-sm-end">
       <button class="btn btn-sm btn-secondary">
@@ -16,19 +16,19 @@
     <div class="col border-end">
       <div>User groups</div>
       <div>
-        <a href="/user-groups">0</a>
+        <a [routerLink]="['/console/idap/user-groups']">2</a>
       </div>
     </div>
     <div class="col border-end">
       <div>Users</div>
       <div>
-        <a href="/users">0</a>
+        <a routerLink="/console/idap/users">13</a>
       </div>
     </div>
     <div class="col">
       <div>Policies</div>
       <div>
-        <a href="/policies">0</a>
+        <a routerLink="/console/idap/policies">57</a>
       </div>
     </div>
   </div>

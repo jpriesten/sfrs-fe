@@ -79,7 +79,9 @@ $topnav-background-color: $app-primary-color;
 
 .sidebar {
   color: $app-primary-color;
+  background-color: $app-bg-color;
   height: 100%;
+  width: 320px;
   white-space: nowrap;
   -webkit-transition: all 0.2s ease-in-out;
   -moz-transition: all 0.2s ease-in-out;

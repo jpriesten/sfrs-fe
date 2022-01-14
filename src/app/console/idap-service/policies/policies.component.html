@@ -1,0 +1,40 @@
+<div class="container-fluid">
+  <h4>Policies</h4>
+  <hr>
+
+  <div class="pt-3">
+    <dx-data-grid [dataSource]="policies" [columnAutoWidth]="true" [showBorders]="true" [showRowLines]="true"
+      [showColumnLines]="false" [allowColumnReordering]="true" [wordWrapEnabled]="true" [hoverStateEnabled]="true"
+      noDataText="No data available">
+      <dxo-paging [enabled]="true" [pageSize]="20" [remoteOperations]="{ groupPaging: false }">
+      </dxo-paging>
+      <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10, 20, 30, 40, 50]" [showInfo]="true">
+      </dxo-pager>
+      <dxo-load-panel [height]="75" [width]="75" [showPane]="true" [shading]="false">
+      </dxo-load-panel>
+      <dxo-search-panel [visible]="true" [width]="240" placeholder="Search..."></dxo-search-panel>
+
+      <dxi-column dataField="policyName" caption="Policy name"></dxi-column>
+      <dxi-column dataField="Type"></dxi-column>
+      <dxi-column dataField="usedAs" caption="Used as"></dxi-column>
+      <dxi-column dataField="description"></dxi-column>
+      <dxi-column cellTemplate="actionsTemplate" caption="" alignment="right"></dxi-column>
+
+      <div *dxTemplate="let cell of 'actionsTemplate'">
+        <div class="mainActions">
+          <ul>
+            <li>
+              <i class="fa fa-lg fa-edit secondary" title="Edit"></i>
+            </li>
+            <li>
+              <i class="fa fa-lg fa-trash-o secondary" title="Delete"></i>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <dxo-export [enabled]="true" fileName="Policies" [allowExportSelectedData]="true"></dxo-export>
+      <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
+    </dx-data-grid>
+  </div>
+</div>
