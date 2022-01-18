@@ -4,6 +4,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { LoginComponent } from './auth/login/login.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { PasswordResetComponent } from './auth/password-reset/password-reset.component';
+import { NotAuthGuard } from './guards/not-auth.guard';
 
 const routes: Routes = [
   {
@@ -15,6 +16,7 @@ const routes: Routes = [
   },
   {
     path: 'login',
+    canActivate: [NotAuthGuard],
     component: LoginComponent,
   },
   {

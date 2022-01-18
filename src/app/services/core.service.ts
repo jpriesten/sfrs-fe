@@ -1,17 +1,26 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
+import { User } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CoreService {
+  public user: User | null = new User();
   private httpTimeout = 60 * 1000;
 
-  constructor(private http: HttpClient, private toastService: ToastrService) {}
+  constructor(private http: HttpClient, private toastService: ToastrService) {
+    if (!this.isEmptyOrNull(localStorage.getItem('currentUser'))) {
+      this.user = JSON.parse(localStorage.getItem('currentUser')!);
+      console.info('User info set');
+    } else {
+      this.user = null;
+    }
+  }
 
   // test if a string value is null, undefined or empty
-  isEmptyOrNull(value: string) {
+  isEmptyOrNull(value: string | null | undefined): boolean {
     if (value == '' || value == null || value == undefined) {
       return true;
     }
@@ -29,6 +38,13 @@ export class CoreService {
     this.toastService.error(message, undefined, {
       easing: 'ease-in',
       timeOut: 15000,
+    });
+  }
+
+  logout() {
+    return new Promise<void>((resolve, reject) => {
+      localStorage.removeItem('currentUser');
+      resolve();
     });
   }
 

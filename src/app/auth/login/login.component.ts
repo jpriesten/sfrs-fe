@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { User } from 'src/app/models/user.model';
 import { AuthenticationService } from '../../services/authentication.service';
 import { CoreService } from '../../services/core.service';
 
@@ -11,6 +12,8 @@ import { CoreService } from '../../services/core.service';
 export class LoginComponent implements OnInit {
   public loadingData = false;
   public loginformGroup!: FormGroup;
+
+  public user = new User();
 
   constructor(
     private fb: FormBuilder,
@@ -48,7 +51,8 @@ export class LoginComponent implements OnInit {
     this.authService
       .login(this.formValues.username, this.formValues.password)
       .then((response) => {
-        console.log('Login success: ', response);
+        this.user = response;
+        console.log('Login success: ', response, this.user);
         this.loadingData = false;
         this.core.successToast('Login successful!');
         if (response.data.user.passwordResetRequired) {

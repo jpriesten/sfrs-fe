@@ -15,9 +15,10 @@
         </li> -->
       </ul>
       <div class="d-flex align-items-center">
-        <div class="pe-3">Jezeh <i class="fa fa-caret-down"></i></div>
-        <button class="btn btn-sm btn-light">Sign out</button>
+        <div class="pe-3">{{core.user?.data?.user?.userName}} <i class="fa fa-caret-down"></i></div>
+        <button class="btn btn-sm btn-light" (click)="logout()">Sign out</button>
       </div>
     </div>
   </div>
 </nav>
+<ngx-loading [show]="loadingData"></ngx-loading>
