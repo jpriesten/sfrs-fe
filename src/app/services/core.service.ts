@@ -1,7 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { User } from '../models/user.model';
+import { errorTypes } from '../utilities/errors';
 
 @Injectable({
   providedIn: 'root',
@@ -10,10 +11,19 @@ export class CoreService {
   public user: User | null = new User();
   private httpTimeout = 60 * 1000;
 
+  public httpOptions = {
+    baseHeaders: new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded',
+    }),
+    idapHeaders: new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'x-stms-service': 'ida',
+    }),
+  };
+
   constructor(private http: HttpClient, private toastService: ToastrService) {
     if (!this.isEmptyOrNull(localStorage.getItem('currentUser'))) {
       this.user = JSON.parse(localStorage.getItem('currentUser')!);
-      console.info('User info set');
     } else {
       this.user = null;
     }
@@ -41,6 +51,10 @@ export class CoreService {
     });
   }
 
+  getErrorType(errorName: string) {
+    return errorTypes.find((errorType) => errorType.name == errorName);
+  }
+
   logout() {
     return new Promise<void>((resolve, reject) => {
       localStorage.removeItem('currentUser');
@@ -66,12 +80,12 @@ export class CoreService {
     url: string,
     method: string,
     params: any,
-    options: any,
+    options = this.httpOptions.baseHeaders,
     timeout?: number
   ) {
     if (method.toLowerCase() == 'get') {
       return new Promise<any>((resolve, reject) => {
-        this.http.get<any>(url, options).subscribe({
+        this.http.get<any>(url, { headers: options }).subscribe({
           next: (res) => {
             console.log('Success: ', res);
             resolve(res);
@@ -85,20 +99,20 @@ export class CoreService {
       });
     } else if (method.toLowerCase() == 'post') {
       return new Promise<any>((resolve, reject) => {
-        this.http.post<any>(url, params, options).subscribe({
+        this.http.post<any>(url, params, { headers: options }).subscribe({
           next: (res) => {
             console.log('Success: ', res);
             resolve(res);
           },
           error: (err) => {
-            console.log('Error: ', err);
-            reject(err.error);
+            // console.log('Error: ', err);
+            reject(err);
           },
         });
       });
     } else if (method.toLowerCase() == 'put') {
       return new Promise<any>((resolve, reject) => {
-        this.http.put<any>(url, params, options).subscribe({
+        this.http.put<any>(url, params, { headers: options }).subscribe({
           next: (res: any) => {
             console.log('Success: ', res);
             resolve(res);
@@ -112,7 +126,7 @@ export class CoreService {
       });
     } else if (method.toLowerCase() == 'delete') {
       return new Promise<any>((resolve, reject) => {
-        this.http.delete<any>(url, options).subscribe({
+        this.http.delete<any>(url, { headers: options }).subscribe({
           next: (res: any) => {
             console.log('Success: ', res);
             resolve(res);

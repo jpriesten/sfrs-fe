@@ -6,7 +6,7 @@
       <h5>IDAP resources</h5>
     </div>
     <div class="col d-flex justify-content-sm-end">
-      <button class="btn btn-sm btn-secondary">
+      <button class="btn btn-sm btn-secondary" (click)="getAccountSummary()">
         <i class="fas fa-sync-alt"></i>
       </button>
     </div>
@@ -16,20 +16,21 @@
     <div class="col border-end">
       <div>User groups</div>
       <div>
-        <a [routerLink]="['/console/idap/user-groups']">2</a>
+        <a [routerLink]="['/console/idap/user-groups']">{{accountSummary?.data?.summary?.groups}}</a>
       </div>
     </div>
     <div class="col border-end">
       <div>Users</div>
       <div>
-        <a routerLink="/console/idap/users">13</a>
+        <a routerLink="/console/idap/users">{{accountSummary?.data?.summary?.users}}</a>
       </div>
     </div>
     <div class="col">
       <div>Policies</div>
       <div>
-        <a routerLink="/console/idap/policies">57</a>
+        <a routerLink="/console/idap/policies">{{accountSummary?.data?.summary?.policies}}</a>
       </div>
     </div>
   </div>
 </div>
+<ngx-loading [show]="loadingData"></ngx-loading>

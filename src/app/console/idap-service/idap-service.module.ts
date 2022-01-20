@@ -1,6 +1,9 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IdapServiceRoutingModule } from './idap-service-routing.module';
+
+import { NgxLoadingModule } from 'ngx-loading';
+
 import { IdapServiceComponent } from './idap-service.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -20,7 +23,7 @@ import { DxDataGridModule } from 'devextreme-angular';
     PoliciesComponent,
     AccountSettingsComponent,
   ],
-  imports: [CommonModule, IdapServiceRoutingModule, DxDataGridModule],
+  imports: [CommonModule, IdapServiceRoutingModule, DxDataGridModule, NgxLoadingModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class IdapServiceModule {}

@@ -9,12 +9,6 @@ import { HttpHeaders, HttpParams } from '@angular/common/http';
 export class AuthenticationService {
   public fullBaseUrl = `${environment.baseUrl}/${environment.apiPath}`;
 
-  public httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-    }),
-  };
-
   constructor(private core: CoreService) {}
 
   /** POST: Login to account and assume your profile */
@@ -35,7 +29,7 @@ export class AuthenticationService {
       }
 
       //caution: passing the options invalidates the form data
-      return this.core.makeRemoteRequest(url, 'post', params, this.httpOptions);
+      return this.core.makeRemoteRequest(url, 'post', params);
     } else {
       return this.core.fakePromise(
         'error',

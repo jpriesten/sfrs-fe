@@ -11,20 +11,22 @@ import {
   HttpInterceptor,
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { CoreService } from '../services/core.service';
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
+  constructor(private core: CoreService) {}
+
   intercept(
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     // add authorization header with jwt token if available
-    let currentUser = JSON.parse(localStorage.getItem('currentUser')!);
-    console.log('User: ', currentUser);
-    if (currentUser && currentUser.data.credentials.access) {
+    console.log('User intercept: ', this.core.user);
+    if (this.core.user !== null) {
       request = request.clone({
         setHeaders: {
-          Authorization: `Bearer ${currentUser.data.credentials.access.sessionToken}`,
+          Authorization: `Bearer ${this.core.user.data.credentials.access.sessionToken}`,
         },
       });
     }
