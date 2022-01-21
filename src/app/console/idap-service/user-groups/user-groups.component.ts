@@ -13,18 +13,12 @@ export class UserGroupsComponent implements OnInit {
   loadingData = false;
   userGroups = new UserGroups();
 
-  public selectedGroupRows: any[] = [];
-  public currentGroupsSelector = null;
-  public selectedGroupsChangedBySelectbox = false;
+  public selectedRows: any[] = [];
 
   constructor(public core: CoreService, private idapService: IdapService) {}
 
   ngOnInit(): void {
     this.getUserGroups();
-  }
-
-  groupSelected(selected: any) {
-    // console.log('Selected group: ', selected);
   }
 
   getUserGroups() {

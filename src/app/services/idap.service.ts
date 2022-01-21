@@ -101,4 +101,65 @@ export class IdapService {
       );
     }
   }
+
+  /**
+   * IDAP User endpoints
+   */
+
+  /** POST: Fetch users
+   * @param {number} maxItems Maximum number of items per page
+   */
+  getUsers(maxItems: number = 10): Promise<any> {
+    // if (this.core.userHasPermission("SRAUTHCODE")) { // For when policies are to be enforced
+    if (true) {
+      let url = `${this.fullBaseUrl}/listUsers`;
+
+      let params = new HttpParams();
+
+      // These parameters are always passed
+      params = params.set('maxItems', maxItems);
+
+      //caution: passing the options invalidates the form data
+      return this.core.makeRemoteRequest(
+        url,
+        'post',
+        params,
+        this.core.httpOptions.idapHeaders
+      );
+    } else {
+      return this.core.fakePromise(
+        'error',
+        "Sorry, you're not allowed to do this!"
+      );
+    }
+  }
+
+  /** POST: Fetch user details
+   * @param {string} userName Username of the user
+   */
+  getUser(userName: string | null): Promise<any> {
+    // if (this.core.userHasPermission("SRAUTHCODE")) { // For when policies are to be enforced
+    if (true) {
+      let url = `${this.fullBaseUrl}/getUser`;
+
+      let params = new HttpParams();
+
+      // These parameters are always passed
+      if (!this.core.isEmptyOrNull(userName))
+        params = params.set('userName', userName!);
+
+      //caution: passing the options invalidates the form data
+      return this.core.makeRemoteRequest(
+        url,
+        'post',
+        params,
+        this.core.httpOptions.idapHeaders
+      );
+    } else {
+      return this.core.fakePromise(
+        'error',
+        "Sorry, you're not allowed to do this!"
+      );
+    }
+  }
 }

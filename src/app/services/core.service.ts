@@ -141,7 +141,7 @@ export class CoreService {
       return new Promise<any>((resolve, reject) => {
         this.http.post<any>(url, params, { headers: options }).subscribe({
           next: (res) => {
-            console.log('Success: ', res);
+            // console.log('Success: ', res);
             resolve(res);
           },
           error: (err) => {

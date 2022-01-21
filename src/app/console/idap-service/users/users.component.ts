@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CoreService } from 'src/app/services/core.service';
+import { IdapService } from 'src/app/services/idap.service';
 
 @Component({
   selector: 'app-users',
@@ -7,8 +9,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UsersComponent implements OnInit {
   users = [];
+  loadingData = false;
 
-  constructor() {}
+  public selectedRows: any[] = [];
 
-  ngOnInit(): void {}
+  constructor(public core: CoreService, private idapService: IdapService) {}
+
+  ngOnInit(): void {
+    this.getUsers();
+  }
+
+  getUsers() {
+    this.loadingData = true;
+    this.idapService
+      .getUsers()
+      .then((response) => {
+        this.loadingData = false;
+        this.users = response.data.users;
+        console.log(this.users);
+      })
+      .catch((error) => {
+        this.loadingData = false;
+      });
+  }
 }

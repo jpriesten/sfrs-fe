@@ -6,8 +6,13 @@
   </div>
   <hr>
 
-  <div class="d-inline">
-    <h5>User groups <small class="text-muted">({{userGroups?.data?.groups?.length}})</small></h5>
+  <div class="row">
+    <div class="col">
+      <h4>User groups</h4>
+    </div>
+    <div class="col d-flex justify-content-end">
+      <span class="text-muted">Total: {{userGroups?.data?.groups?.length}}</span>
+    </div>
   </div>
 
   <div class="pt-3">
@@ -22,14 +27,13 @@
       </div>
     </div>
     <span class="add-datagrid-buttons">
-      <button class="btn btn-sm btn-danger" [disabled]="selectedGroupRows?.length == 0">Delete</button>
-      <span *ngIf="selectedGroupRows?.length" class="selection-count text-muted">{{
-        selectedGroupRows?.length }} selected</span>
+      <button class="btn btn-sm btn-danger" [disabled]="selectedRows?.length == 0">Delete</button>
+      <span *ngIf="selectedRows?.length" class="selection-count text-muted">{{
+        selectedRows?.length }} selected</span>
     </span>
     <dx-data-grid #userGroupsContainer [dataSource]="userGroups?.data?.groups || []" [columnAutoWidth]="true"
       [showBorders]="true" [showRowLines]="true" [showColumnLines]="false" [allowColumnReordering]="true"
-      [wordWrapEnabled]="true" [(selectedRowKeys)]="selectedGroupRows" (onSelectionChanged)="groupSelected($event)"
-      noDataText="No data available">
+      [wordWrapEnabled]="true" [(selectedRowKeys)]="selectedRows" noDataText="No data available">
       <dxo-paging [enabled]="true" [pageSize]="20" [remoteOperations]="{ groupPaging: false }">
       </dxo-paging>
       <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10, 20, 30, 40, 50]" [showInfo]="true">

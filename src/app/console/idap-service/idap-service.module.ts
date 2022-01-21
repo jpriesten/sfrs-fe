@@ -16,6 +16,8 @@ import { DxDataGridModule } from 'devextreme-angular';
 import { GroupDetailsComponent } from './user-groups/group-details/group-details.component';
 import { CreateGroupComponent } from './user-groups/create-group/create-group.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CreateUserComponent } from './users/create-user/create-user.component';
+import { UserDetailsComponent } from './users/user-details/user-details.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     AccountSettingsComponent,
     GroupDetailsComponent,
     CreateGroupComponent,
+    CreateUserComponent,
+    UserDetailsComponent,
   ],
   imports: [
     CommonModule,

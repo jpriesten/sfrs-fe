@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CoreService } from 'src/app/services/core.service';
+import { IdapService } from 'src/app/services/idap.service';
 
 @Component({
   selector: 'app-policies',
@@ -7,8 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PoliciesComponent implements OnInit {
   policies = [];
+  loadingData = false;
 
-  constructor() {}
+  public selectedRows: any[] = [];
+
+  constructor(public core: CoreService, private idapService: IdapService) {}
 
   ngOnInit(): void {}
+
+  getPolicies() {}
 }

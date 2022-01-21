@@ -7,6 +7,8 @@ import { PoliciesComponent } from './policies/policies.component';
 import { CreateGroupComponent } from './user-groups/create-group/create-group.component';
 import { GroupDetailsComponent } from './user-groups/group-details/group-details.component';
 import { UserGroupsComponent } from './user-groups/user-groups.component';
+import { CreateUserComponent } from './users/create-user/create-user.component';
+import { UserDetailsComponent } from './users/user-details/user-details.component';
 import { UsersComponent } from './users/users.component';
 
 const routes: Routes = [
@@ -36,7 +38,26 @@ const routes: Routes = [
           },
         ],
       },
-      { path: 'users', component: UsersComponent },
+      {
+        path: 'users',
+        children: [
+          {
+            path: '',
+            component: UsersComponent,
+          },
+          {
+            path: 'create',
+            component: CreateUserComponent,
+          },
+          {
+            path: 'details/:userName',
+            children: [
+              { path: '', component: UserDetailsComponent },
+              { path: 'add-users', component: GroupDetailsComponent },
+            ],
+          },
+        ],
+      },
       { path: 'policies', component: PoliciesComponent },
       { path: 'account-settings', component: AccountSettingsComponent },
     ],

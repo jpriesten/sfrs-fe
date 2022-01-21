@@ -1,11 +1,39 @@
 <div class="container-fluid">
-  <h4>Policies</h4>
+  <div>
+    <a [routerLink]="['../dashboard']">IDAP</a> &nbsp;
+    <i class="fa fa-chevron-right"></i> &nbsp;
+    Policies
+  </div>
   <hr>
 
+  <div class="row">
+    <div class="col">
+      <h4>Policies</h4>
+    </div>
+    <div class="col d-flex justify-content-end">
+      <span class="text-muted">Total: {{policies.length}}</span>
+    </div>
+  </div>
+
   <div class="pt-3">
-    <dx-data-grid [dataSource]="policies" [columnAutoWidth]="true" [showBorders]="true" [showRowLines]="true"
-      [showColumnLines]="false" [allowColumnReordering]="true" [wordWrapEnabled]="true" [hoverStateEnabled]="true"
-      noDataText="No data available">
+    <div class="row pb-2">
+      <div class="col">
+        <button class="btn btn-sm btn-custom" [routerLink]="['../policies/create']">Create policy</button>
+      </div>
+      <div class="col d-flex justify-content-end">
+        <button class="btn btn-sm btn-outline-secondary" (click)="getPolicies()" title="Refresh">
+          <i class="fas fa-sync-alt"></i>
+        </button>
+      </div>
+    </div>
+    <span class="add-datagrid-buttons">
+      <button class="btn btn-sm btn-danger" [disabled]="selectedRows?.length == 0">Delete</button>
+      <span *ngIf="selectedRows?.length" class="selection-count text-muted">{{
+        selectedRows?.length }} selected</span>
+    </span>
+    <dx-data-grid #usersContainer [dataSource]="policies" [columnAutoWidth]="true" [showBorders]="true"
+      [showRowLines]="true" [showColumnLines]="false" [allowColumnReordering]="true" [wordWrapEnabled]="true"
+      [(selectedRowKeys)]="selectedRows" noDataText="No data available">
       <dxo-paging [enabled]="true" [pageSize]="20" [remoteOperations]="{ groupPaging: false }">
       </dxo-paging>
       <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10, 20, 30, 40, 50]" [showInfo]="true">
@@ -13,24 +41,20 @@
       <dxo-load-panel [height]="75" [width]="75" [showPane]="true" [shading]="false">
       </dxo-load-panel>
       <dxo-search-panel [visible]="true" [width]="240" placeholder="Search..."></dxo-search-panel>
+      <dxo-selection selectAllMode="allPages" showCheckBoxesMode="always" mode="multiple"></dxo-selection>
 
-      <dxi-column dataField="policyName" caption="Policy name"></dxi-column>
-      <dxi-column dataField="Type"></dxi-column>
-      <dxi-column dataField="usedAs" caption="Used as"></dxi-column>
-      <dxi-column dataField="description"></dxi-column>
-      <dxi-column cellTemplate="actionsTemplate" caption="" alignment="right"></dxi-column>
+      <dxi-column dataField="userId" [visible]="false"></dxi-column>
+      <dxi-column dataField="policyName" caption="Policy name" cellTemplate="userNameTemplate" [allowHiding]="false">
+      </dxi-column>
+      <dxi-column dataField="description" [allowHiding]="false"></dxi-column>
+      <dxi-column dataField="createDate" caption="Created at" cellTemplate="createDateTemplate"></dxi-column>
 
-      <div *dxTemplate="let cell of 'actionsTemplate'">
-        <div class="mainActions">
-          <ul>
-            <li>
-              <i class="fa fa-lg fa-edit secondary" title="Edit"></i>
-            </li>
-            <li>
-              <i class="fa fa-lg fa-trash-o secondary" title="Delete"></i>
-            </li>
-          </ul>
-        </div>
+      <div *dxTemplate="let cell of 'userNameTemplate'">
+        <a [routerLink]="['../policies/details', cell.data.userName]">{{cell.data.userName}}</a>
+      </div>
+
+      <div *dxTemplate="let cell of 'createDateTemplate'">
+        {{core.getDateInMoment(cell.data.createDate)}}
       </div>
 
       <dxo-export [enabled]="true" fileName="Policies" [allowExportSelectedData]="true"></dxo-export>
@@ -38,3 +62,4 @@
     </dx-data-grid>
   </div>
 </div>
+<ngx-loading [show]="loadingData"></ngx-loading>

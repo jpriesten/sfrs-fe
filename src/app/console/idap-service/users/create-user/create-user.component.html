@@ -1,0 +1,35 @@
+<div class="container-fluid">
+  <div>
+    <a [routerLink]="['/console/idap/dashboard']">IDAP</a> &nbsp;
+    <i class="fa fa-chevron-right"></i> &nbsp;
+    <a [routerLink]="['/console/idap/users']">Users</a> &nbsp;
+    <i class="fa fa-chevron-right"></i> &nbsp;
+    Create user
+  </div>
+
+  <div class="row pt-3 align-items-center">
+    <div class="col">
+      <h3>Create user</h3>
+    </div>
+  </div>
+  <hr>
+
+  <form class="mb-3 mt-3 row" [formGroup]="userFormGroup">
+    <label for="groupName" class="form-label">User group name</label>
+    <div class="col col-sm-5">
+      <input type="text" class="form-control form-control-sm" id="groupName" formControlName="userName">
+      <small class="form-text">
+        Maximum 128 characters. Use alphanumeric and '+=,.@-_' characters.
+      </small>
+    </div>
+  </form>
+
+  <div class="row">
+    <div class="col d-flex justify-content-end align-items-center">
+      <a [routerLink]="['/console/idap/users']">Cancel</a>
+      <button class="btn btn-sm btn-custom ms-3" [disabled]="userFormGroup.invalid" (click)="createUser()">Create
+        group</button>
+    </div>
+  </div>
+</div>
+<ngx-loading [show]="loadingData"></ngx-loading>

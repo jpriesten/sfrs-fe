@@ -2,7 +2,7 @@ export const errorTypes = [
   {
     name: 'NoSuchEntity',
     description:
-      'Your authentication information is not found. Please try again.',
+      'Your information was not found. Please double check and try again.',
   },
   {
     name: 'InvalidAuthenticationValue',
