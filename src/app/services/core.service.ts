@@ -4,6 +4,9 @@ import { ToastrService } from 'ngx-toastr';
 import { User } from '../models/user.model';
 import { errorTypes } from '../utilities/errors';
 
+import * as moment from 'moment';
+import { DatePipe } from '@angular/common';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -21,7 +24,15 @@ export class CoreService {
     }),
   };
 
-  constructor(private http: HttpClient, private toastService: ToastrService) {
+  public momentOffset: string = '-0100';
+
+  // moment: any = moment;
+
+  constructor(
+    private http: HttpClient,
+    private toastService: ToastrService,
+    private datePipe: DatePipe
+  ) {
     if (!this.isEmptyOrNull(localStorage.getItem('currentUser'))) {
       this.user = JSON.parse(localStorage.getItem('currentUser')!);
     } else {
@@ -35,6 +46,35 @@ export class CoreService {
       return true;
     }
     return false;
+  }
+
+  formatDate(date: string) {
+    if (date) {
+      if (moment(date).isValid()) {
+        return moment(moment(date).utcOffset(this.momentOffset)).fromNow();
+      } else {
+        console.error(`"${date}" is not a valid date`);
+        return '';
+      }
+    } else {
+      return '';
+    }
+  }
+
+  getDateInMoment(date: string) {
+    if (!this.isEmptyOrNull(date)) {
+      return this.formatDate(date);
+    } else {
+      return '';
+    }
+  }
+
+  getDate(date: any) {
+    if (!this.isEmptyOrNull(date)) {
+      return this.datePipe.transform(date, 'medium');
+    } else {
+      return '';
+    }
   }
 
   successToast(message: string) {

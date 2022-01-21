@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { NgxLoadingModule } from 'ngx-loading';
 import { ToastrModule } from 'ngx-toastr';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,9 +15,15 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { PasswordResetComponent } from './auth/password-reset/password-reset.component';
 import { ErrorInterceptor } from './utilities/error.interceptor';
 import { JwtInterceptor } from './utilities/jwt.interceptor';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, PageNotFoundComponent, PasswordResetComponent],
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    PageNotFoundComponent,
+    PasswordResetComponent,
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -24,6 +31,7 @@ import { JwtInterceptor } from './utilities/jwt.interceptor';
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
+    NgbModule,
     NgxLoadingModule.forRoot({
       primaryColour: '#ffffff',
       secondaryColour: '#3b3054',
@@ -37,6 +45,7 @@ import { JwtInterceptor } from './utilities/jwt.interceptor';
     }),
   ],
   providers: [
+    DatePipe,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],

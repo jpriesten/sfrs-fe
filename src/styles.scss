@@ -11,6 +11,24 @@ body {
 
 a {
   text-decoration: none;
+  color: $app-secondary-color;
+}
+a:hover {
+  text-decoration-line: underline;
+  color: darken($app-secondary-color, 5%);
+}
+
+.add-datagrid-buttons {
+  font-size: 0.8rem;
+  position: relative;
+  top: 35px;
+  z-index: 9;
+}
+
+.selection-count {
+  position: relative;
+  left: 10px;
+  top: 1px;
 }
 
 .nav-container {
@@ -19,22 +37,38 @@ a {
   font-size: 0.75rem;
 }
 
+.app-bg-custom {
+  background-color: $app-primary-color;
+}
+
+.nav-pills .nav-link.active {
+  background-color: $app-secondary-color;
+}
+
+.nav-link {
+  color: $app-secondary-color;
+}
+
+.nav-link:hover {
+  color: darken($app-secondary-color, 5%);
+}
+
 .btn-custom {
   color: #fff;
-  background-color: #6c757d;
-  border-color: #6c757d;
+  background-color: $app-secondary-color;
+  border-color: $app-secondary-color;
 }
 .btn-custom:hover {
   color: #fff;
-  background-color: #5c636a;
-  border-color: #565e64;
+  background-color: darken($app-secondary-color, 5%);
+  border-color: $app-secondary-color;
 }
 .btn-check:focus + .btn-custom,
 .btn-custom:focus {
   color: #fff;
-  background-color: #5c636a;
-  border-color: #565e64;
-  box-shadow: 0 0 0 0.25rem rgba(130, 138, 145, 0.5);
+  background-color: $app-secondary-color;
+  border-color: $app-secondary-color;
+  box-shadow: 0 0 0 0.25rem rgba(248, 191, 3, 0.5);
 }
 .btn-check:checked + .btn-custom,
 .btn-check:active + .btn-custom,
@@ -42,19 +76,19 @@ a {
 .btn-custom.active,
 .show > .btn-custom.dropdown-toggle {
   color: #fff;
-  background-color: #565e64;
-  border-color: #51585e;
+  background-color: $app-secondary-color;
+  border-color: $app-secondary-color;
 }
 .btn-check:checked + .btn-custom:focus,
 .btn-check:active + .btn-custom:focus,
 .btn-custom:active:focus,
 .btn-custom.active:focus,
 .show > .btn-custom.dropdown-toggle:focus {
-  box-shadow: 0 0 0 0.25rem rgba(130, 138, 145, 0.5);
+  box-shadow: 0 0 0 0.25rem rgba(248, 191, 3, 0.5);
 }
 .btn-custom:disabled,
 .btn-custom.disabled {
   color: #fff;
-  background-color: #6c757d;
-  border-color: #6c757d;
+  background-color: $app-secondary-color;
+  border-color: darken($app-secondary-color, 5%);
 }

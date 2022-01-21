@@ -1,0 +1,116 @@
+<div class="container-fluid">
+  <div>
+    <a [routerLink]="['/console/idap/dashboard']">IDAP</a> &nbsp;
+    <i class="fa fa-chevron-right"></i> &nbsp;
+    <a [routerLink]="['/console/idap/user-groups']">User groups</a> &nbsp;
+    <i class="fa fa-chevron-right"></i> &nbsp;
+    {{groupName}}
+  </div>
+
+  <div class="row pt-3 align-items-center">
+    <div class="col">
+      <h3 class="">{{groupName}}</h3>
+    </div>
+    <div class="col d-flex justify-content-end">
+      <button class="btn btn-sm btn-danger">Delete</button>
+    </div>
+  </div>
+
+  <div class="row pt-3 align-items-center">
+    <div class="col">
+      <h5>Summary</h5>
+    </div>
+    <div class="col-12 col-sm-8">
+      <div class="row">
+        <div class="col-4 col-sm d-flex justify-content-sm-end">
+          <span>Creation time:</span>
+        </div>
+        <div class="col">
+          {{core.getDate(groupData?.createDate)}}
+        </div>
+      </div>
+    </div>
+    <div class="col d-flex justify-content-end">
+      <button class="btn btn-sm btn-secondary">Edit</button>
+    </div>
+  </div>
+
+  <nav ngbNav #nav="ngbNav" class="nav-pills pt-3">
+    <ng-container ngbNavItem>
+      <a ngbNavLink>Users</a>
+      <ng-template ngbNavContent>
+        <div class="pt-3">
+          <dx-data-grid [dataSource]="groupUsers" [columnAutoWidth]="true" [showBorders]="true" [showRowLines]="true"
+            [showColumnLines]="false" [allowColumnReordering]="true" [wordWrapEnabled]="true"
+            noDataText="No data available">
+            <dxo-paging [enabled]="true" [pageSize]="20" [remoteOperations]="{ groupPaging: false }">
+            </dxo-paging>
+            <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10, 20, 30, 40, 50]" [showInfo]="true">
+            </dxo-pager>
+            <dxo-load-panel [height]="75" [width]="75" [showPane]="true" [shading]="false">
+            </dxo-load-panel>
+            <dxo-search-panel [visible]="true" [width]="240" placeholder="Search..."></dxo-search-panel>
+
+            <dxi-column dataField="groupId" [visible]="false"></dxi-column>
+            <dxi-column dataField="userName" caption="Group name" headerCellTemplate="userHeaderTemplate"
+              cellTemplate="userTemplate" [allowHiding]="false">
+            </dxi-column>
+            <dxi-column dataField="createDate" caption="Created at" cellTemplate="createDateTemplate"></dxi-column>
+
+            <div *dxTemplate="let info of 'userHeaderTemplate'">
+              {{info.column.caption}}&nbsp;<i class="fa fa-sm fa-external-link-alt"></i>
+            </div>
+            <div *dxTemplate="let cell of 'userTemplate'">
+              <a [routerLink]="['/console/idap/user-groups/details/'+cell.data.userName]">{{cell.data.userName}}</a>
+            </div>
+
+            <div *dxTemplate="let cell of 'createDateTemplate'">
+              {{core.getDateInMoment(cell.data.createDate)}}
+            </div>
+
+            <dxo-export [enabled]="true" fileName="Group users" [allowExportSelectedData]="true"></dxo-export>
+            <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
+          </dx-data-grid>
+        </div>
+      </ng-template>
+    </ng-container>
+    <ng-container ngbNavItem>
+      <a ngbNavLink>Policies</a>
+      <ng-template ngbNavContent>
+        <dx-data-grid [dataSource]="groupPolicies" [columnAutoWidth]="true" [showBorders]="true" [showRowLines]="true"
+          [showColumnLines]="false" [allowColumnReordering]="true" [wordWrapEnabled]="true"
+          noDataText="No data available">
+          <dxo-paging [enabled]="true" [pageSize]="20" [remoteOperations]="{ groupPaging: false }">
+          </dxo-paging>
+          <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10, 20, 30, 40, 50]" [showInfo]="true">
+          </dxo-pager>
+          <dxo-load-panel [height]="75" [width]="75" [showPane]="true" [shading]="false">
+          </dxo-load-panel>
+          <dxo-search-panel [visible]="true" [width]="240" placeholder="Search..."></dxo-search-panel>
+
+          <dxi-column dataField="groupId" [visible]="false"></dxi-column>
+          <dxi-column dataField="policyName" caption="Policy" headerCellTemplate="policyHeaderTemplate"
+            cellTemplate="policyTemplate" [allowHiding]="false">
+          </dxi-column>
+          <dxi-column dataField="createDate" caption="Created at" cellTemplate="createDateTemplate"></dxi-column>
+
+          <div *dxTemplate="let info of 'policyHeaderTemplate'">
+            {{info.column.caption}}&nbsp;<i class="fa fa-sm fa-external-link-alt"></i>
+          </div>
+          <div *dxTemplate="let cell of 'policyTemplate'">
+            <a [routerLink]="['/console/idap/user-groups/details/'+cell.data.policyName]">{{cell.data.policyName}}</a>
+          </div>
+
+          <div *dxTemplate="let cell of 'createDateTemplate'">
+            {{core.getDateInMoment(cell.data.createDate)}}
+          </div>
+
+          <dxo-export [enabled]="true" fileName="Group policies" [allowExportSelectedData]="true"></dxo-export>
+          <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
+        </dx-data-grid>
+      </ng-template>
+    </ng-container>
+  </nav>
+  <div [ngbNavOutlet]="nav" class="mt-2"></div>
+</div>
+<ngx-loading [show]="loadingData"></ngx-loading>
