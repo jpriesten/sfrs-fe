@@ -37,7 +37,7 @@
 
   <nav ngbNav #nav="ngbNav" class="nav-pills pt-3">
     <ng-container ngbNavItem>
-      <a ngbNavLink>Users</a>
+      <a ngbNavLink>Users {{groupUsers.length !== 0? "("+groupUsers.length+")": ""}}</a>
       <ng-template ngbNavContent>
         <div class="pt-3">
           <dx-data-grid [dataSource]="groupUsers" [columnAutoWidth]="true" [showBorders]="true" [showRowLines]="true"
@@ -51,8 +51,8 @@
             </dxo-load-panel>
             <dxo-search-panel [visible]="true" [width]="240" placeholder="Search..."></dxo-search-panel>
 
-            <dxi-column dataField="groupId" [visible]="false"></dxi-column>
-            <dxi-column dataField="userName" caption="Group name" headerCellTemplate="userHeaderTemplate"
+            <dxi-column dataField="userId" [visible]="false"></dxi-column>
+            <dxi-column dataField="userName" caption="Username" headerCellTemplate="userHeaderTemplate"
               cellTemplate="userTemplate" [allowHiding]="false">
             </dxi-column>
             <dxi-column dataField="createDate" caption="Created at" cellTemplate="createDateTemplate"></dxi-column>
@@ -61,7 +61,7 @@
               {{info.column.caption}}&nbsp;<i class="fa fa-sm fa-external-link-alt"></i>
             </div>
             <div *dxTemplate="let cell of 'userTemplate'">
-              <a [routerLink]="['/console/idap/user-groups/details/'+cell.data.userName]">{{cell.data.userName}}</a>
+              <a [routerLink]="['../users/details/'+cell.data.userName]" target="_blank">{{cell.data.userName}}</a>
             </div>
 
             <div *dxTemplate="let cell of 'createDateTemplate'">
@@ -75,7 +75,7 @@
       </ng-template>
     </ng-container>
     <ng-container ngbNavItem>
-      <a ngbNavLink>Policies</a>
+      <a ngbNavLink>Policies {{groupPolicies.length !== 0? "("+groupPolicies.length+")": ""}}</a>
       <ng-template ngbNavContent>
         <dx-data-grid [dataSource]="groupPolicies" [columnAutoWidth]="true" [showBorders]="true" [showRowLines]="true"
           [showColumnLines]="false" [allowColumnReordering]="true" [wordWrapEnabled]="true"

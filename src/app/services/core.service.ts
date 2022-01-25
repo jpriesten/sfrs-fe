@@ -5,7 +5,13 @@ import { User } from '../models/user.model';
 import { errorTypes } from '../utilities/errors';
 
 import * as moment from 'moment';
+import * as _ from 'lodash';
 import { DatePipe } from '@angular/common';
+import {
+  NgbModal,
+  NgbModalRef,
+  ModalDismissReasons,
+} from '@ng-bootstrap/ng-bootstrap';
 
 @Injectable({
   providedIn: 'root',
@@ -26,11 +32,13 @@ export class CoreService {
 
   public momentOffset: string = '-0100';
 
-  // moment: any = moment;
+  private modalReference: NgbModalRef | undefined;
+  private closeResult = '';
 
   constructor(
     private http: HttpClient,
     private toastService: ToastrService,
+    private modalService: NgbModal,
     private datePipe: DatePipe
   ) {
     if (!this.isEmptyOrNull(localStorage.getItem('currentUser'))) {
@@ -38,6 +46,10 @@ export class CoreService {
     } else {
       this.user = null;
     }
+  }
+
+  get _lodashRef() {
+    return _;
   }
 
   // test if a string value is null, undefined or empty
@@ -77,6 +89,49 @@ export class CoreService {
     }
   }
 
+  generatePassword(length: number = 12) {
+    const chars =
+      '0123456789abcdefghijklmnopqrstuvwxyz!@#$%^&*()ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    let password = '';
+    for (var i = 0; i <= length; i++) {
+      var randomNumber = Math.floor(Math.random() * chars.length);
+      password += chars.substring(randomNumber, randomNumber + 1);
+    }
+    return password;
+  }
+
+  openModal(content: any): Promise<boolean> {
+    return new Promise<boolean>((resolve, reject) => {
+      this.modalReference = this.modalService.open(content, { centered: true });
+      this.modalReference.result.then(
+        (result) => {
+          this.closeResult = `Closed with: ${result}`;
+          if (result == true) {
+            resolve(true);
+          } else reject(false);
+        },
+        (reason) => {
+          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+          reject(false);
+        }
+      );
+    });
+  }
+
+  closeModal() {
+    this.modalReference?.close(true);
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
+
   successToast(message: string) {
     this.toastService.success(message, undefined, {
       easing: 'ease-out',
@@ -93,6 +148,35 @@ export class CoreService {
 
   getErrorType(errorName: string) {
     return errorTypes.find((errorType) => errorType.name == errorName);
+  }
+
+  // Delete empty entries or trim entries
+  sanitiseRequestObject(
+    input: any,
+    keyToTrim?: string,
+    keyToDelete?: string,
+    deleteInput?: boolean
+  ) {
+    Object.keys(input).forEach((key, index) => {
+      if (typeof input[key] == 'string' && this.isEmptyOrNull(input[key])) {
+        delete input[key];
+      }
+      if (
+        typeof input[key] == 'string' &&
+        this.isEmptyOrNull(input[key]) &&
+        deleteInput == true
+      ) {
+        Object.keys(input).splice(index, 1);
+      }
+      if (key == keyToTrim && typeof input[key] == 'string') {
+        const trimmedValue = String(input[key]).replace(/\s/g, '');
+        input[key] = trimmedValue;
+      }
+      if (key == keyToDelete) {
+        delete input[key];
+      }
+    });
+    return input;
   }
 
   logout() {

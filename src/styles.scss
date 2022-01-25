@@ -1,9 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 @import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap");
 @import "./assets/scss/_colors.scss";
+@import "./assets/scss/buttons";
 
+html,
 body {
-  font-family: "Nunito", sans-serif;
+  font-family: "Nunito", sans-serif !important;
   background-color: $app-bg-color;
   font-size: clamp(0.8rem, 0.9rem, 1rem);
   height: 100vh;
@@ -14,6 +16,15 @@ a {
   color: $app-secondary-color;
 }
 a:hover {
+  text-decoration-line: underline;
+  color: darken($app-secondary-color, 5%);
+}
+
+.text-button {
+  color: $app-secondary-color;
+  cursor: pointer;
+}
+.text-button:hover {
   text-decoration-line: underline;
   color: darken($app-secondary-color, 5%);
 }
@@ -39,6 +50,7 @@ a:hover {
 
 .app-bg-custom {
   background-color: $app-primary-color;
+  color: #ffff;
 }
 
 .nav-pills .nav-link.active {
@@ -51,44 +63,4 @@ a:hover {
 
 .nav-link:hover {
   color: darken($app-secondary-color, 5%);
-}
-
-.btn-custom {
-  color: #fff;
-  background-color: $app-secondary-color;
-  border-color: $app-secondary-color;
-}
-.btn-custom:hover {
-  color: #fff;
-  background-color: darken($app-secondary-color, 5%);
-  border-color: $app-secondary-color;
-}
-.btn-check:focus + .btn-custom,
-.btn-custom:focus {
-  color: #fff;
-  background-color: $app-secondary-color;
-  border-color: $app-secondary-color;
-  box-shadow: 0 0 0 0.25rem rgba(248, 191, 3, 0.5);
-}
-.btn-check:checked + .btn-custom,
-.btn-check:active + .btn-custom,
-.btn-custom:active,
-.btn-custom.active,
-.show > .btn-custom.dropdown-toggle {
-  color: #fff;
-  background-color: $app-secondary-color;
-  border-color: $app-secondary-color;
-}
-.btn-check:checked + .btn-custom:focus,
-.btn-check:active + .btn-custom:focus,
-.btn-custom:active:focus,
-.btn-custom.active:focus,
-.show > .btn-custom.dropdown-toggle:focus {
-  box-shadow: 0 0 0 0.25rem rgba(248, 191, 3, 0.5);
-}
-.btn-custom:disabled,
-.btn-custom.disabled {
-  color: #fff;
-  background-color: $app-secondary-color;
-  border-color: darken($app-secondary-color, 5%);
 }

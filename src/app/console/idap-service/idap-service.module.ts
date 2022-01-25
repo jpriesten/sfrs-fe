@@ -4,6 +4,7 @@ import { IdapServiceRoutingModule } from './idap-service-routing.module';
 
 import { NgxLoadingModule } from 'ngx-loading';
 import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
+import { MatStepperModule } from '@angular/material/stepper';
 
 import { IdapServiceComponent } from './idap-service.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
@@ -15,7 +16,7 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
 import { DxDataGridModule } from 'devextreme-angular';
 import { GroupDetailsComponent } from './user-groups/group-details/group-details.component';
 import { CreateGroupComponent } from './user-groups/create-group/create-group.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CreateUserComponent } from './users/create-user/create-user.component';
 import { UserDetailsComponent } from './users/user-details/user-details.component';
 
@@ -39,7 +40,10 @@ import { UserDetailsComponent } from './users/user-details/user-details.componen
     DxDataGridModule,
     NgxLoadingModule,
     NgbNavModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatStepperModule,
+    ReactiveFormsModule,
+    FormsModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

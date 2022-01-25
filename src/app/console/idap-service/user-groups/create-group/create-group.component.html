@@ -24,10 +24,11 @@
     </div>
   </form>
 
+  <hr>
   <div class="row">
     <div class="col d-flex justify-content-end align-items-center">
       <a [routerLink]="['/console/idap/user-groups']">Cancel</a>
-      <button class="btn btn-sm btn-custom ms-3" [disabled]="groupformGroup.invalid" (click)="createGroup()">Create
+      <button class="btn btn-sm btn-custom-secondary ms-3" [disabled]="groupformGroup.invalid" (click)="createGroup()">Create
         group</button>
     </div>
   </div>

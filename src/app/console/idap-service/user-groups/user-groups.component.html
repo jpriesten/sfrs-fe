@@ -18,7 +18,7 @@
   <div class="pt-3">
     <div class="row pb-2">
       <div class="col">
-        <button class="btn btn-sm btn-custom" [routerLink]="['../user-groups/create']">Create group</button>
+        <button class="btn btn-sm btn-custom-secondary" [routerLink]="['../user-groups/create']">Create group</button>
       </div>
       <div class="col d-flex justify-content-end">
         <button class="btn btn-sm btn-outline-secondary" (click)="getUserGroups()" title="Refresh">
@@ -49,8 +49,7 @@
       <dxi-column dataField="createDate" caption="Created at" cellTemplate="createDateTemplate"></dxi-column>
 
       <div *dxTemplate="let cell of 'groupNameTemplate'">
-        <a [routerLink]="['../user-groups/details', cell.data.groupName]"
-          [state]="{group: cell.data}">{{cell.data.groupName}}</a>
+        <a [routerLink]="['../user-groups/details', cell.data.groupName]">{{cell.data.groupName}}</a>
       </div>
 
       <div *dxTemplate="let cell of 'createDateTemplate'">

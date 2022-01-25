@@ -13,4 +13,9 @@ export const errorTypes = [
     name: 'MissingServiceHeader',
     description: 'Missing service header. Please contact support',
   },
+  {
+    name: 'EntityAlreadyExists',
+    description:
+      'Entity already exists. Please try again with different values',
+  },
 ];

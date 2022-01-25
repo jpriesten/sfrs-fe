@@ -50,7 +50,7 @@ export class ErrorInterceptor implements HttpInterceptor {
             if (errorType !== undefined) {
               this.core.errorToast(errorType.description);
             } else {
-              this.core.errorToast('Network error. Please contact support.');
+              this.core.errorToast('Unknown error. Please contact support.');
             }
           }
         },

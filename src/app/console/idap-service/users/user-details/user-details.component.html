@@ -88,16 +88,17 @@
             <dxo-search-panel [visible]="true" [width]="240" placeholder="Search..."></dxo-search-panel>
 
             <dxi-column dataField="groupId" [visible]="false"></dxi-column>
-            <dxi-column dataField="userName" caption="Group name" headerCellTemplate="userHeaderTemplate"
-              cellTemplate="userTemplate" [allowHiding]="false">
+            <dxi-column dataField="groupName" caption="Group name" headerCellTemplate="groupHeaderTemplate"
+              cellTemplate="groupTemplate" [allowHiding]="false">
             </dxi-column>
             <dxi-column dataField="createDate" caption="Created at" cellTemplate="createDateTemplate"></dxi-column>
 
-            <div *dxTemplate="let info of 'userHeaderTemplate'">
+            <div *dxTemplate="let info of 'groupHeaderTemplate'">
               {{info.column.caption}}&nbsp;<i class="fa fa-sm fa-external-link-alt"></i>
             </div>
-            <div *dxTemplate="let cell of 'userTemplate'">
-              <a [routerLink]="['/console/idap/user-groups/details/'+cell.data.userName]">{{cell.data.userName}}</a>
+            <div *dxTemplate="let cell of 'groupTemplate'">
+              <a [routerLink]="['/console/idap/user-groups/details/'+cell.data.groupName]"
+                target="_blank">{{cell.data.groupName}}</a>
             </div>
 
             <div *dxTemplate="let cell of 'createDateTemplate'">

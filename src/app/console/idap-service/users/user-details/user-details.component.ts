@@ -25,6 +25,7 @@ export class UserDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.userName = this.route.snapshot.paramMap.get('userName');
     this.getUserDetails(this.userName);
+    this.getUserGroups(this.userName);
   }
 
   getUserDetails(userName: string | null): void {
@@ -35,6 +36,20 @@ export class UserDetailsComponent implements OnInit {
         this.loadingData = false;
         this.userData = response.data;
         console.log('Data: ', this.userData);
+      })
+      .catch((error) => {
+        this.loadingData = false;
+      });
+  }
+
+  getUserGroups(userName: string | null): void {
+    this.loadingData = true;
+    this.idapService
+      .getUserGroups(userName)
+      .then((response) => {
+        this.loadingData = false;
+        this.userGroups = response.data.groups;
+        console.log('Data groups: ', response.data);
       })
       .catch((error) => {
         this.loadingData = false;
