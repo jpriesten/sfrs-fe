@@ -9,13 +9,6 @@ import { CoreService } from './core.service';
 export class IdapService {
   public fullBaseUrl = `${environment.baseUrl}/${environment.apiPath}`;
 
-  public httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      'x-stms-service': 'ida',
-    }),
-  };
-
   constructor(private core: CoreService) {}
 
   /** POST: Fetch account summary information for the dashboard*/
@@ -24,13 +17,13 @@ export class IdapService {
     if (true) {
       let url = `${this.fullBaseUrl}/getAccountSummary`;
 
-      let params = new HttpParams();
+      let body: any = {};
 
       //caution: passing the options invalidates the form data
       return this.core.makeRemoteRequest(
         url,
         'post',
-        params,
+        body,
         this.core.httpOptions.idapHeaders
       );
     } else {
@@ -53,16 +46,16 @@ export class IdapService {
     if (true) {
       let url = `${this.fullBaseUrl}/listGroups`;
 
-      let params = new HttpParams();
+      let body: any = {};
 
       // These parameters are always passed
-      params = params.set('maxItems', maxItems);
+      body.maxItems = maxItems;
 
       //caution: passing the options invalidates the form data
       return this.core.makeRemoteRequest(
         url,
         'post',
-        params,
+        body,
         this.core.httpOptions.idapHeaders
       );
     } else {
@@ -87,22 +80,20 @@ export class IdapService {
     if (true) {
       let url = `${this.fullBaseUrl}/getGroup`;
 
-      let params = new HttpParams();
+      let body: any = {};
 
       // These parameters are always passed
-      if (!this.core.isEmptyOrNull(groupName))
-        params = params.set('groupName', groupName!);
+      if (!this.core.isEmptyOrNull(groupName)) body.groupName = groupName;
 
-      params = params.set('maxItems', maxItems!);
+      body.maxItems = maxItems;
 
-      if (!this.core.isEmptyOrNull(marker))
-        params = params.set('marker', marker!);
+      if (!this.core.isEmptyOrNull(marker)) body.marker = marker;
 
       //caution: passing the options invalidates the form data
       return this.core.makeRemoteRequest(
         url,
         'post',
-        params,
+        body,
         this.core.httpOptions.idapHeaders
       );
     } else {
@@ -121,17 +112,16 @@ export class IdapService {
     if (true) {
       let url = `${this.fullBaseUrl}/createGroup`;
 
-      let params = new HttpParams();
+      let body: any = {};
 
       // These parameters are always passed
-      if (!this.core.isEmptyOrNull(groupName))
-        params = params.set('groupName', groupName);
+      if (!this.core.isEmptyOrNull(groupName)) body.groupName = groupName;
 
       //caution: passing the options invalidates the form data
       return this.core.makeRemoteRequest(
         url,
         'post',
-        params,
+        body,
         this.core.httpOptions.idapHeaders
       );
     } else {
@@ -151,20 +141,18 @@ export class IdapService {
     if (true) {
       let url = `${this.fullBaseUrl}/addUserToGroup`;
 
-      let params = new HttpParams();
+      let body: any = {};
 
       // These parameters are always passed
-      if (!this.core.isEmptyOrNull(groupName))
-        params = params.set('groupName', groupName);
+      if (!this.core.isEmptyOrNull(groupName)) body.groupName = groupName;
 
-      if (!this.core.isEmptyOrNull(userName))
-        params = params.set('userName', userName);
+      if (!this.core.isEmptyOrNull(userName)) body.userName = userName;
 
       //caution: passing the options invalidates the form data
       return this.core.makeRemoteRequest(
         url,
         'post',
-        params,
+        body,
         this.core.httpOptions.idapHeaders
       );
     } else {
@@ -187,16 +175,16 @@ export class IdapService {
     if (true) {
       let url = `${this.fullBaseUrl}/listUsers`;
 
-      let params = new HttpParams();
+      let body: any = {};
 
       // These parameters are always passed
-      params = params.set('maxItems', maxItems);
+      body.maxItems = maxItems;
 
       //caution: passing the options invalidates the form data
       return this.core.makeRemoteRequest(
         url,
         'post',
-        params,
+        body,
         this.core.httpOptions.idapHeaders
       );
     } else {
@@ -215,17 +203,16 @@ export class IdapService {
     if (true) {
       let url = `${this.fullBaseUrl}/getUser`;
 
-      let params = new HttpParams();
+      let body: any = {};
 
       // These parameters are always passed
-      if (!this.core.isEmptyOrNull(userName))
-        params = params.set('userName', userName!);
+      if (!this.core.isEmptyOrNull(userName)) body.userName = userName;
 
       //caution: passing the options invalidates the form data
       return this.core.makeRemoteRequest(
         url,
         'post',
-        params,
+        body,
         this.core.httpOptions.idapHeaders
       );
     } else {
@@ -250,22 +237,20 @@ export class IdapService {
     if (true) {
       let url = `${this.fullBaseUrl}/listGroupsForUser`;
 
-      let params = new HttpParams();
+      let body: any = {};
 
       // These parameters are always passed
-      if (!this.core.isEmptyOrNull(userName))
-        params = params.set('userName', userName!);
+      if (!this.core.isEmptyOrNull(userName)) body.userName = userName;
 
-      params = params.set('maxItems', maxItems!);
+      body.maxItems = maxItems;
 
-      if (!this.core.isEmptyOrNull(marker))
-        params = params.set('marker', marker!);
+      if (!this.core.isEmptyOrNull(marker)) body.marker = marker;
 
       //caution: passing the options invalidates the form data
       return this.core.makeRemoteRequest(
         url,
         'post',
-        params,
+        body,
         this.core.httpOptions.idapHeaders
       );
     } else {
@@ -285,20 +270,18 @@ export class IdapService {
     if (true) {
       let url = `${this.fullBaseUrl}/createUser`;
 
-      let params = new HttpParams();
+      let body: any = {};
 
       // These parameters are always passed
-      if (!this.core.isEmptyOrNull(userName))
-        params = params.set('userName', userName);
+      if (!this.core.isEmptyOrNull(userName)) body.userName = userName;
 
-      if (!this.core.isEmptyOrNull(tags))
-        params = params.set('tags', JSON.stringify(tags));
+      if (!this.core.isEmptyOrNull(tags)) body.tags = tags;
 
       //caution: passing the options invalidates the form data
       return this.core.makeRemoteRequest(
         url,
         'post',
-        params,
+        body,
         this.core.httpOptions.idapHeaders
       );
     } else {
@@ -323,22 +306,20 @@ export class IdapService {
     if (true) {
       let url = `${this.fullBaseUrl}/createLoginProfile`;
 
-      let params = new HttpParams();
+      let body: any = {};
 
       // These parameters are always passed
-      if (!this.core.isEmptyOrNull(userName))
-        params = params.set('userName', userName);
+      if (!this.core.isEmptyOrNull(userName)) body.userName = userName;
 
-      if (!this.core.isEmptyOrNull(password))
-        params = params.set('password', password);
+      if (!this.core.isEmptyOrNull(password)) body.password = password;
 
-      params = params.set('passwordResetRequired', requirePasswordReset);
+      body.passwordResetRequired = requirePasswordReset;
 
       //caution: passing the options invalidates the form data
       return this.core.makeRemoteRequest(
         url,
         'post',
-        params,
+        body,
         this.core.httpOptions.idapHeaders
       );
     } else {
@@ -363,22 +344,20 @@ export class IdapService {
     if (true) {
       let url = `${this.fullBaseUrl}/updateLoginProfile`;
 
-      let params = new HttpParams();
+      let body: any = {};
 
       // These parameters are always passed
-      if (!this.core.isEmptyOrNull(userName))
-        params = params.set('userName', userName);
+      if (!this.core.isEmptyOrNull(userName)) body.userName = userName;
 
-      if (!this.core.isEmptyOrNull(password))
-        params = params.set('password', password);
+      if (!this.core.isEmptyOrNull(password)) body.password = password;
 
-      params = params.set('passwordResetRequired', requirePasswordReset);
+      body.passwordResetRequired = requirePasswordReset;
 
       //caution: passing the options invalidates the form data
       return this.core.makeRemoteRequest(
         url,
         'post',
-        params,
+        body,
         this.core.httpOptions.idapHeaders
       );
     } else {

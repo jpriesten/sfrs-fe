@@ -18,4 +18,8 @@ export const errorTypes = [
     description:
       'Entity already exists. Please try again with different values',
   },
+  {
+    name: 'NotAuthorized',
+    description: 'Unauthorized action',
+  },
 ];

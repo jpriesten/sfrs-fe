@@ -64,3 +64,9 @@ a:hover {
 .nav-link:hover {
   color: darken($app-secondary-color, 5%);
 }
+
+.validateInput,
+.validateInput:focus {
+  border-color: #dc3545;
+  box-shadow: 0 0 0 0.25rem rgba(253, 89, 13, 0.25);
+}

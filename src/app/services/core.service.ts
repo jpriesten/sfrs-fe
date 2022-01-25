@@ -20,12 +20,14 @@ export class CoreService {
   public user: User | null = new User();
   private httpTimeout = 60 * 1000;
 
+  public tagPatten = /^[A-Za-z0-9_.:/=+-@]+$/;
+
   public httpOptions = {
     baseHeaders: new HttpHeaders({
-      'Content-Type': 'application/x-www-form-urlencoded',
+      'Content-Type': 'application/json',
     }),
     idapHeaders: new HttpHeaders({
-      'Content-Type': 'application/x-www-form-urlencoded',
+      'Content-Type': 'application/json',
       'x-stms-service': 'ida',
     }),
   };

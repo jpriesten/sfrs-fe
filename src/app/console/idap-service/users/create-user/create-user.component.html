@@ -53,15 +53,28 @@
                     <td width="20%">
                       <input class="form-control form-control-sm" [(ngModel)]="tag.key"
                         [ngModelOptions]="{standalone: true}" type="text" placeholder="Add new key"
-                        [disabled]="tag.disabled">
+                        [pattern]="core.tagPatten" [disabled]="tag.disabled" #key="ngModel"
+                        [ngClass]="{'validateInput': key.dirty && key.invalid}">
+                      <div *ngIf="key.invalid" class="invalid-feedback d-block">
+                        <div *ngIf="key.errors?.['pattern']">
+                          Key can contain alphanumeric characters, or any of the following: _.:/=+-@
+                        </div>
+                      </div>
                     </td>
                     <td width="68%">
                       <input class="form-control form-control-sm" [(ngModel)]="tag.value"
-                        [ngModelOptions]="{standalone: true}" type="text" [disabled]="tag.disabled">
+                        [ngModelOptions]="{standalone: true}" type="text" [pattern]="core.tagPatten"
+                        [disabled]="tag.disabled" #value="ngModel"
+                        [ngClass]="{'validateInput': value.dirty && value.invalid}">
+                      <div *ngIf="value.invalid" class="invalid-feedback d-block">
+                        <div *ngIf="value.errors?.['pattern']">
+                          Value can contain alphanumeric characters, or any of the following: _.:/=+-@
+                        </div>
+                      </div>
                     </td>
                     <td class="text-center align-middle">
                       <button class="btn btn-sm btn-custom-primary" *ngIf="tags.length-1 === i" (click)="addTag(i)"
-                        [disabled]="core.isEmptyOrNull(tag.key)">
+                        [disabled]="!(!core.isEmptyOrNull(tag.key) && key.valid) || value.invalid">
                         <i class="fas fa-plus"></i>
                         Add tag
                       </button>

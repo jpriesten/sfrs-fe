@@ -61,7 +61,8 @@
               {{info.column.caption}}&nbsp;<i class="fa fa-sm fa-external-link-alt"></i>
             </div>
             <div *dxTemplate="let cell of 'userTemplate'">
-              <a [routerLink]="['../users/details/'+cell.data.userName]" target="_blank">{{cell.data.userName}}</a>
+              <a [routerLink]="['/console/idap/users/details/'+cell.data.userName]"
+                target="_blank">{{cell.data.userName}}</a>
             </div>
 
             <div *dxTemplate="let cell of 'createDateTemplate'">
