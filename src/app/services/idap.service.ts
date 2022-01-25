@@ -348,4 +348,44 @@ export class IdapService {
       );
     }
   }
+
+  /** POST: update a user login profile
+   * @param {string} userName The name of the user
+   * @param {string} password Login password
+   * @param {boolean} requirePasswordReset Determines if user should change password on login
+   */
+  updateLoginProfile(
+    userName: string,
+    password: string,
+    requirePasswordReset: boolean = false
+  ): Promise<any> {
+    // if (this.core.userHasPermission("SRAUTHCODE")) { // For when policies are to be enforced
+    if (true) {
+      let url = `${this.fullBaseUrl}/updateLoginProfile`;
+
+      let params = new HttpParams();
+
+      // These parameters are always passed
+      if (!this.core.isEmptyOrNull(userName))
+        params = params.set('userName', userName);
+
+      if (!this.core.isEmptyOrNull(password))
+        params = params.set('password', password);
+
+      params = params.set('passwordResetRequired', requirePasswordReset);
+
+      //caution: passing the options invalidates the form data
+      return this.core.makeRemoteRequest(
+        url,
+        'post',
+        params,
+        this.core.httpOptions.idapHeaders
+      );
+    } else {
+      return this.core.fakePromise(
+        'error',
+        "Sorry, you're not allowed to do this!"
+      );
+    }
+  }
 }
