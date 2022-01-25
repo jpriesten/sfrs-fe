@@ -1,0 +1,64 @@
+<div class="container-fluid">
+  <div>
+    <a [routerLink]="['../dashboard']">IDAP</a> &nbsp;
+    <i class="fa fa-chevron-right"></i> &nbsp;
+    User groups
+  </div>
+  <hr>
+
+  <div class="row">
+    <div class="col">
+      <h4>User groups</h4>
+    </div>
+    <div class="col d-flex justify-content-end">
+      <span class="text-muted">Total: {{userGroups?.data?.groups?.length}}</span>
+    </div>
+  </div>
+
+  <div class="pt-3">
+    <div class="row pb-2">
+      <div class="col">
+        <button class="btn btn-sm btn-custom-secondary" [routerLink]="['../user-groups/create']">Create group</button>
+      </div>
+      <div class="col d-flex justify-content-end">
+        <button class="btn btn-sm btn-outline-secondary" (click)="getUserGroups()" title="Refresh">
+          <i class="fas fa-sync-alt"></i>
+        </button>
+      </div>
+    </div>
+    <span class="add-datagrid-buttons">
+      <button class="btn btn-sm btn-danger" [disabled]="selectedRows?.length == 0">Delete</button>
+      <span *ngIf="selectedRows?.length" class="selection-count text-muted">{{
+        selectedRows?.length }} selected</span>
+    </span>
+    <dx-data-grid #userGroupsContainer [dataSource]="userGroups?.data?.groups || []" [columnAutoWidth]="true"
+      [showBorders]="true" [showRowLines]="true" [showColumnLines]="false" [allowColumnReordering]="true"
+      [wordWrapEnabled]="true" [(selectedRowKeys)]="selectedRows" noDataText="No data available">
+      <dxo-paging [enabled]="true" [pageSize]="20" [remoteOperations]="{ groupPaging: false }">
+      </dxo-paging>
+      <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10, 20, 30, 40, 50]" [showInfo]="true">
+      </dxo-pager>
+      <dxo-load-panel [height]="75" [width]="75" [showPane]="true" [shading]="false">
+      </dxo-load-panel>
+      <dxo-search-panel [visible]="true" [width]="240" placeholder="Search..."></dxo-search-panel>
+      <dxo-selection selectAllMode="allPages" showCheckBoxesMode="always" mode="multiple"></dxo-selection>
+
+      <dxi-column dataField="groupId" [visible]="false"></dxi-column>
+      <dxi-column dataField="groupName" caption="Group name" cellTemplate="groupNameTemplate" [allowHiding]="false">
+      </dxi-column>
+      <dxi-column dataField="createDate" caption="Created at" cellTemplate="createDateTemplate"></dxi-column>
+
+      <div *dxTemplate="let cell of 'groupNameTemplate'">
+        <a [routerLink]="['../user-groups/details', cell.data.groupName]">{{cell.data.groupName}}</a>
+      </div>
+
+      <div *dxTemplate="let cell of 'createDateTemplate'">
+        {{core.getDateInMoment(cell.data.createDate)}}
+      </div>
+
+      <dxo-export [enabled]="true" fileName="User groups" [allowExportSelectedData]="true"></dxo-export>
+      <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
+    </dx-data-grid>
+  </div>
+</div>
+<ngx-loading [show]="loadingData"></ngx-loading>

@@ -1,0 +1,81 @@
+@import "./colors";
+
+.btn-custom-primary {
+  color: #fff;
+  background-color: $app-primary-color;
+  border-color: $app-primary-color;
+}
+.btn-custom-primary:hover {
+  color: #fff;
+  background-color: $app-primary-color-bright;
+  border-color: $app-primary-color;
+}
+.btn-check:focus + .btn-custom-primary,
+.btn-custom-primary:focus {
+  color: #fff;
+  background-color: $app-primary-color;
+  border-color: $app-primary-color;
+  box-shadow: 0 0 0 0.25rem rgba(1, 38, 117, 0.5);
+}
+.btn-check:checked + .btn-custom-primary,
+.btn-check:active + .btn-custom-primary,
+.btn-custom-primary:active,
+.btn-custom-primary.active,
+.show > .btn-custom-primary.dropdown-toggle {
+  color: #fff;
+  background-color: $app-primary-color;
+  border-color: $app-primary-color;
+}
+.btn-check:checked + .btn-custom-primary:focus,
+.btn-check:active + .btn-custom-primary:focus,
+.btn-custom-primary:active:focus,
+.btn-custom-primary.active:focus,
+.show > .btn-custom-primary.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.25rem rgba(1, 38, 117, 0.5);
+}
+.btn-custom-primary:disabled,
+.btn-custom-primary.disabled {
+  color: #fff;
+  background-color: $app-primary-color;
+  border-color: darken($app-primary-color, 5%);
+}
+
+.btn-custom-secondary {
+  color: #fff;
+  background-color: $app-secondary-color;
+  border-color: $app-secondary-color;
+}
+.btn-custom-secondary:hover {
+  color: #fff;
+  background-color: $app-secondary-color-bright;
+  border-color: $app-secondary-color;
+}
+.btn-check:focus + .btn-custom-secondary,
+.btn-custom-secondary:focus {
+  color: #fff;
+  background-color: $app-secondary-color;
+  border-color: $app-secondary-color;
+  box-shadow: 0 0 0 0.25rem rgba(248, 191, 3, 0.5);
+}
+.btn-check:checked + .btn-custom-secondary,
+.btn-check:active + .btn-custom-secondary,
+.btn-custom-secondary:active,
+.btn-custom-secondary.active,
+.show > .btn-custom-secondary.dropdown-toggle {
+  color: #fff;
+  background-color: $app-secondary-color;
+  border-color: $app-secondary-color;
+}
+.btn-check:checked + .btn-custom-secondary:focus,
+.btn-check:active + .btn-custom-secondary:focus,
+.btn-custom-secondary:active:focus,
+.btn-custom-secondary.active:focus,
+.show > .btn-custom-secondary.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.25rem rgba(248, 191, 3, 0.5);
+}
+.btn-custom-secondary:disabled,
+.btn-custom-secondary.disabled {
+  color: #fff;
+  background-color: $app-secondary-color;
+  border-color: darken($app-secondary-color, 5%);
+}

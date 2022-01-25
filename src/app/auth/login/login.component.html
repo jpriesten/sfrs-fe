@@ -1,0 +1,31 @@
+<main class="is-responsive">
+  <h3 class="text-center fw-bold">SFRS Sign in</h3>
+  <form [formGroup]="loginformGroup">
+    <div class="col-12 mb-3">
+      <label for="username" class="col-form-label-sm fw-bold">Username</label>
+      <input type="text" class="form-control form-control-sm" id="username" formControlName="username">
+    </div>
+    <div class="col-12 mb-1">
+      <label for="password" class="col-form-label-sm fw-bold">Password</label>
+      <input type="password" class="form-control form-control-sm" id="password" formControlName="password">
+    </div>
+    <div class="col-12 mb-3">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="gridCheck">
+        <label class="form-check-label" for="gridCheck">
+          Remember this account
+        </label>
+      </div>
+    </div>
+    <div class="col-12 d-grid mb-4">
+      <button type="submit" class="btn btn-sm btn-primary fw-bold" [disabled]="loginformGroup.invalid"
+        (click)="login()">
+        Sign in
+      </button>
+    </div>
+    <div class="col-12">
+      <a href="#">Forgot password?</a>
+    </div>
+  </form>
+</main>
+<ngx-loading [show]="loadingData"></ngx-loading>
