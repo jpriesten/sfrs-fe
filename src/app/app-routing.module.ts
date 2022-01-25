@@ -10,7 +10,7 @@ const routes: Routes = [
   {
     path: '',
     canActivate: [AuthGuard],
-    // canLoad: [AuthGuard],
+    pathMatch: 'prefix',
     loadChildren: () =>
       import('./console/console.module').then((m) => m.ConsoleModule),
   },
