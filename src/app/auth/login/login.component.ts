@@ -60,24 +60,11 @@ export class LoginComponent implements OnInit {
         if (response.data.user.passwordResetRequired) {
           this.router.navigate(['/password-reset']);
         } else this.router.navigate(['/']);
+        location.reload();
         localStorage.setItem('currentUser', JSON.stringify(response));
       })
       .catch((error) => {
-        // console.error('Login error: ', error);
         this.loadingData = false;
-        // if (error && error.errors && error.errors.length != 0) {
-        //   if (error.errors[0].detail == 'InvalidAuthenticationValue') {
-        //     this.core.errorToast(
-        //       'Your authentication information is incorrect. Please try again.'
-        //     );
-        //   } else if (error.errors[0].detail == 'NoSuchEntity') {
-        //     this.core.errorToast(
-        //       'Your authentication information is not found. Please try again.'
-        //     );
-        //   } else {
-        //     this.core.errorToast('Unknown error. Please contact support');
-        //   }
-        // }
       });
   }
 }

@@ -37,42 +37,6 @@
 
   <nav ngbNav #nav="ngbNav" class="nav-pills pt-3">
     <ng-container ngbNavItem>
-      <a ngbNavLink>Policies {{userPolicies.length !== 0? "("+userPolicies.length+")": ""}}</a>
-      <ng-template ngbNavContent>
-        <dx-data-grid [dataSource]="userPolicies" [columnAutoWidth]="true" [showBorders]="true" [showRowLines]="true"
-          [showColumnLines]="false" [allowColumnReordering]="true" [wordWrapEnabled]="true"
-          noDataText="No data available">
-          <dxo-paging [enabled]="true" [pageSize]="20" [remoteOperations]="{ groupPaging: false }">
-          </dxo-paging>
-          <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10, 20, 30, 40, 50]" [showInfo]="true">
-          </dxo-pager>
-          <dxo-load-panel [height]="75" [width]="75" [showPane]="true" [shading]="false">
-          </dxo-load-panel>
-          <dxo-search-panel [visible]="true" [width]="240" placeholder="Search..."></dxo-search-panel>
-
-          <dxi-column dataField="groupId" [visible]="false"></dxi-column>
-          <dxi-column dataField="policyName" caption="Policy" headerCellTemplate="policyHeaderTemplate"
-            cellTemplate="policyTemplate" [allowHiding]="false">
-          </dxi-column>
-          <dxi-column dataField="createDate" caption="Created at" cellTemplate="createDateTemplate"></dxi-column>
-
-          <div *dxTemplate="let info of 'policyHeaderTemplate'">
-            {{info.column.caption}}&nbsp;<i class="fa fa-sm fa-external-link-alt"></i>
-          </div>
-          <div *dxTemplate="let cell of 'policyTemplate'">
-            <a [routerLink]="['/console/idap/user-groups/details/'+cell.data.policyName]">{{cell.data.policyName}}</a>
-          </div>
-
-          <div *dxTemplate="let cell of 'createDateTemplate'">
-            {{core.getDateInMoment(cell.data.createDate)}}
-          </div>
-
-          <dxo-export [enabled]="true" fileName="User policies" [allowExportSelectedData]="true"></dxo-export>
-          <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
-        </dx-data-grid>
-      </ng-template>
-    </ng-container>
-    <ng-container ngbNavItem>
       <a ngbNavLink>Groups {{userGroups.length !== 0? "("+userGroups.length+")": ""}}</a>
       <ng-template ngbNavContent>
         <div class="pt-3">

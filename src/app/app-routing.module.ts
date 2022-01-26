@@ -5,7 +5,6 @@ import { LoginComponent } from './auth/login/login.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { PasswordResetComponent } from './auth/password-reset/password-reset.component';
 import { NotAuthGuard } from './guards/not-auth.guard';
-import { environment } from 'src/environments/environment';
 
 const routes: Routes = [
   {
@@ -29,7 +28,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { useHash: environment.useHash })],
+  imports: [RouterModule.forRoot(routes, { useHash: true })],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

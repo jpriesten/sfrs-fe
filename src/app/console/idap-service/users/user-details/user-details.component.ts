@@ -13,7 +13,6 @@ export class UserDetailsComponent implements OnInit {
   public userName: string | null = '';
   public userData: any = undefined;
   public userGroups = [];
-  public userPolicies = [];
   public loadingData = false;
   constructor(
     public core: CoreService,

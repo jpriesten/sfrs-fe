@@ -4,7 +4,6 @@
 
 export const environment = {
   production: false,
-  useHash: false,
 
   baseUrl: 'https://sfrs-j75dy.ondigitalocean.app',
   apiPath: 'api',
