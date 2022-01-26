@@ -17,7 +17,7 @@ export class HeaderComponent implements OnInit {
     try {
       this.loadingData = true;
       await this.core.logout();
-      location.href = '/login';
+      location.href = 'login';
       this.loadingData = false;
     } catch (error) {
       this.loadingData = false;
