@@ -22,4 +22,8 @@ export const errorTypes = [
     name: 'NotAuthorized',
     description: 'Unauthorized action',
   },
+  {
+    name: 'AccessDeniedException',
+    description: 'Your access to this resource was denied',
+  },
 ];

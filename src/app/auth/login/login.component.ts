@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { User } from 'src/app/models/user.model';
 import { AuthenticationService } from '../../services/authentication.service';
 import { CoreService } from '../../services/core.service';
@@ -18,7 +19,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private authService: AuthenticationService,
-    public core: CoreService
+    public core: CoreService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -56,8 +58,8 @@ export class LoginComponent implements OnInit {
         this.loadingData = false;
         this.core.successToast('Login successful!');
         if (response.data.user.passwordResetRequired) {
-          location.href = '/password-reset';
-        } else location.href = '/';
+          this.router.navigate(['/password-reset']);
+        } else this.router.navigate(['/']);
         localStorage.setItem('currentUser', JSON.stringify(response));
       })
       .catch((error) => {

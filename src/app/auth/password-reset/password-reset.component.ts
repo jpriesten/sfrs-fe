@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { CoreService } from 'src/app/services/core.service';
 import { IdapService } from 'src/app/services/idap.service';
 
@@ -15,7 +16,8 @@ export class PasswordResetComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private idapService: IdapService,
-    public core: CoreService
+    public core: CoreService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -58,7 +60,7 @@ export class PasswordResetComponent implements OnInit {
       .then(async (response) => {
         this.loadingData = false;
         this.core.successToast('Password reset successful!');
-        location.href = '/';
+        this.router.navigate(['/']);
       })
       .catch((error) => {
         this.loadingData = false;

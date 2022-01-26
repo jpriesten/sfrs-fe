@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CoreService } from 'src/app/services/core.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { CoreService } from 'src/app/services/core.service';
 export class HeaderComponent implements OnInit {
   loadingData = false;
 
-  constructor(public core: CoreService) {}
+  constructor(public core: CoreService, private router: Router) {}
 
   ngOnInit(): void {}
 
@@ -17,7 +18,7 @@ export class HeaderComponent implements OnInit {
     try {
       this.loadingData = true;
       await this.core.logout();
-      location.href = '/login';
+      this.router.navigate(['/login']);
       this.loadingData = false;
     } catch (error) {
       this.loadingData = false;
