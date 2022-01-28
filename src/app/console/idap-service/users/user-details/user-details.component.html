@@ -76,9 +76,9 @@
       </ng-template>
     </ng-container>
     <ng-container ngbNavItem>
-      <a ngbNavLink>Tags {{userData?.tags.length !== 0? "("+userData?.tags.length+")": ""}}</a>
+      <a ngbNavLink>Tags {{userData?.user?.tags?.length !== 0? "("+userData?.user?.tags?.length+")": ""}}</a>
       <ng-template ngbNavContent>
-        <dx-data-grid [dataSource]="userData?.tags || []" [columnAutoWidth]="true" [showBorders]="true"
+        <dx-data-grid [dataSource]="userData?.user?.tags || []" [columnAutoWidth]="true" [showBorders]="true"
           [showRowLines]="true" [showColumnLines]="false" [allowColumnReordering]="true" [wordWrapEnabled]="true"
           noDataText="No data available">
           <dxo-paging [enabled]="true" [pageSize]="20" [remoteOperations]="{ groupPaging: false }">

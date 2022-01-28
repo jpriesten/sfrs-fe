@@ -4,6 +4,7 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { IdapServiceComponent } from './idap-service.component';
 import { PoliciesComponent } from './policies/policies.component';
+import { AddToGroupComponent } from './user-groups/add-to-group/add-to-group.component';
 import { CreateGroupComponent } from './user-groups/create-group/create-group.component';
 import { GroupDetailsComponent } from './user-groups/group-details/group-details.component';
 import { UserGroupsComponent } from './user-groups/user-groups.component';
@@ -33,7 +34,7 @@ const routes: Routes = [
             path: 'details/:groupName',
             children: [
               { path: '', component: GroupDetailsComponent },
-              { path: 'add-users', component: GroupDetailsComponent },
+              { path: 'add-users', component: AddToGroupComponent },
             ],
           },
         ],
@@ -53,7 +54,7 @@ const routes: Routes = [
             path: 'details/:userName',
             children: [
               { path: '', component: UserDetailsComponent },
-              { path: 'add-users', component: GroupDetailsComponent },
+              { path: 'add-groups', component: GroupDetailsComponent },
             ],
           },
         ],

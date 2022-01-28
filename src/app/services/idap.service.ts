@@ -136,7 +136,7 @@ export class IdapService {
    * @param {string} groupName The name of the group
    * @param {string} userName The name of the user
    */
-  addGroupUser(groupName: string, userName: string): Promise<any> {
+  addGroupUser(groupName: string | null, userName: string): Promise<any> {
     // if (this.core.userHasPermission("SRAUTHCODE")) { // For when policies are to be enforced
     if (true) {
       let url = `${this.fullBaseUrl}/addUserToGroup`;

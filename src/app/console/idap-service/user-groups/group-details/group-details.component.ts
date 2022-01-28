@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Group } from 'src/app/models/user-groups';
+import { ActivatedRoute } from '@angular/router';
 import { CoreService } from 'src/app/services/core.service';
 import { IdapService } from 'src/app/services/idap.service';
 
@@ -18,9 +16,7 @@ export class GroupDetailsComponent implements OnInit {
   public loadingData = false;
   constructor(
     public core: CoreService,
-    private fb: FormBuilder,
     private route: ActivatedRoute,
-    private router: Router,
     private idapService: IdapService
   ) {}
 
@@ -37,7 +33,6 @@ export class GroupDetailsComponent implements OnInit {
         this.loadingData = false;
         this.groupData = response.data.group;
         this.groupUsers = response.data.users;
-        console.log('Data: ', response.data);
       })
       .catch((error) => {
         this.loadingData = false;

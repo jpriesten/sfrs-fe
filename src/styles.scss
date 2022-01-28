@@ -54,7 +54,19 @@ a:hover {
 }
 
 .nav-pills .nav-link.active {
-  background-color: $app-secondary-color;
+  background-color: $app-primary-color;
+}
+
+.nav-pills .nav-link.active:hover {
+  color: #ffff;
+}
+
+.nav-pills .nav-link {
+  color: $app-primary-color;
+}
+
+.nav-pills .nav-link:hover {
+  color: darken($app-primary-color, 5%);
 }
 
 .nav-link {

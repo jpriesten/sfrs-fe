@@ -26,4 +26,8 @@ export const errorTypes = [
     name: 'AccessDeniedException',
     description: 'Your access to this resource was denied',
   },
+  {
+    name: 'TokenExpired',
+    description: 'Your session has expired, please login',
+  },
 ];

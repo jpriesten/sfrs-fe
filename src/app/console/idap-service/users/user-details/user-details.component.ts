@@ -34,7 +34,6 @@ export class UserDetailsComponent implements OnInit {
       .then((response) => {
         this.loadingData = false;
         this.userData = response.data;
-        console.log('Data: ', this.userData);
       })
       .catch((error) => {
         this.loadingData = false;
@@ -48,7 +47,6 @@ export class UserDetailsComponent implements OnInit {
       .then((response) => {
         this.loadingData = false;
         this.userGroups = response.data.groups;
-        console.log('Data groups: ', response.data);
       })
       .catch((error) => {
         this.loadingData = false;

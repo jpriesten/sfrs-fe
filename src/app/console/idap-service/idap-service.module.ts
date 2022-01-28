@@ -19,6 +19,7 @@ import { CreateGroupComponent } from './user-groups/create-group/create-group.co
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CreateUserComponent } from './users/create-user/create-user.component';
 import { UserDetailsComponent } from './users/user-details/user-details.component';
+import { AddToGroupComponent } from './user-groups/add-to-group/add-to-group.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { UserDetailsComponent } from './users/user-details/user-details.componen
     CreateGroupComponent,
     CreateUserComponent,
     UserDetailsComponent,
+    AddToGroupComponent,
   ],
   imports: [
     CommonModule,
