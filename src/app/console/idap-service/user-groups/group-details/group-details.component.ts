@@ -23,6 +23,7 @@ export class GroupDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.groupName = this.route.snapshot.paramMap.get('groupName');
     this.getGroupDetails(this.groupName);
+    this.getGroupPolicies(this.groupName);
   }
 
   getGroupDetails(groupName: string | null): void {
@@ -37,5 +38,11 @@ export class GroupDetailsComponent implements OnInit {
       .catch((error) => {
         this.loadingData = false;
       });
+  }
+
+  getGroupPolicies(groupName: string | null) {
+    this.idapService.getGroupPolicies(groupName).then((response) => {
+      this.groupPolicies = response.data.attachedPolicies;
+    });
   }
 }

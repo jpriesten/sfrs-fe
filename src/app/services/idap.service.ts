@@ -66,6 +66,40 @@ export class IdapService {
     }
   }
 
+  /** POST: Fetch attached group policies
+   * @param {string} groupName Group name
+   * @param {number} maxItems Maximum number of items per page
+   */
+  getGroupPolicies(
+    groupName: string | null,
+    maxItems: number = 10
+  ): Promise<any> {
+    // if (this.core.userHasPermission("SRAUTHCODE")) { // For when policies are to be enforced
+    if (true) {
+      let url = `${this.fullBaseUrl}/listAttachedGroupPolicies`;
+
+      let body: any = {};
+
+      // These parameters are always passed
+      if (!this.core.isEmptyOrNull(groupName)) body.groupName = groupName;
+
+      body.maxItems = maxItems;
+
+      //caution: passing the options invalidates the form data
+      return this.core.makeRemoteRequest(
+        url,
+        'post',
+        body,
+        this.core.httpOptions.idapHeaders
+      );
+    } else {
+      return this.core.fakePromise(
+        'error',
+        "Sorry, you're not allowed to do this!"
+      );
+    }
+  }
+
   /** POST: Fetch group details
    * @param {string} groupName Name of the group
    * @param {number} maxItems Maximum number of user items per page
@@ -352,6 +386,66 @@ export class IdapService {
       if (!this.core.isEmptyOrNull(password)) body.password = password;
 
       body.passwordResetRequired = requirePasswordReset;
+
+      //caution: passing the options invalidates the form data
+      return this.core.makeRemoteRequest(
+        url,
+        'post',
+        body,
+        this.core.httpOptions.idapHeaders
+      );
+    } else {
+      return this.core.fakePromise(
+        'error',
+        "Sorry, you're not allowed to do this!"
+      );
+    }
+  }
+
+  /**
+   * IDAP Policy endpoints
+   */
+
+  /** POST: Fetch policies
+   * @param {number} maxItems Maximum number of items per page
+   */
+  getPolicies(maxItems: number = 10): Promise<any> {
+    // if (this.core.userHasPermission("SRAUTHCODE")) { // For when policies are to be enforced
+    if (true) {
+      let url = `${this.fullBaseUrl}/listPolicies`;
+
+      let body: any = {};
+
+      // These parameters are always passed
+      body.maxItems = maxItems;
+
+      //caution: passing the options invalidates the form data
+      return this.core.makeRemoteRequest(
+        url,
+        'post',
+        body,
+        this.core.httpOptions.idapHeaders
+      );
+    } else {
+      return this.core.fakePromise(
+        'error',
+        "Sorry, you're not allowed to do this!"
+      );
+    }
+  }
+
+  /** POST: Fetch policy details
+   * @param {string} policyId Policy Id
+   */
+  getPolicy(policyId: string | null): Promise<any> {
+    // if (this.core.userHasPermission("SRAUTHCODE")) { // For when policies are to be enforced
+    if (true) {
+      let url = `${this.fullBaseUrl}/getPolicy`;
+
+      let body: any = {};
+
+      // These parameters are always passed
+      if (!this.core.isEmptyOrNull(policyId)) body.policyId = policyId;
 
       //caution: passing the options invalidates the form data
       return this.core.makeRemoteRequest(

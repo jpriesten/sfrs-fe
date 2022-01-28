@@ -2,14 +2,14 @@
   <div>
     <a [routerLink]="['/console/idap/dashboard']">IDAP</a> &nbsp;
     <i class="fa fa-chevron-right"></i> &nbsp;
-    <a [routerLink]="['/console/idap/user-groups']">User groups</a> &nbsp;
+    <a [routerLink]="['/console/idap/policies']">Policies</a> &nbsp;
     <i class="fa fa-chevron-right"></i> &nbsp;
-    {{groupName}}
+    {{policyData?.policyName}}
   </div>
 
   <div class="row pt-3 align-items-center">
     <div class="col">
-      <h3 class="">{{groupName}}</h3>
+      <h3 class="">{{policyData?.policyName}}</h3>
     </div>
     <div class="col d-flex justify-content-end">
       <button class="btn btn-sm btn-danger">Delete</button>
@@ -26,7 +26,7 @@
           <span>Creation time:</span>
         </div>
         <div class="col">
-          {{core.getDate(groupData?.createDate)}}
+          {{core.getDate(policyData?.createDate)}}
         </div>
       </div>
     </div>
@@ -35,7 +35,7 @@
     </div>
   </div>
 
-  <nav ngbNav #nav="ngbNav" class="nav-pills pt-3">
+  <!-- <nav ngbNav #nav="ngbNav" class="nav-pills pt-3">
     <ng-container ngbNavItem>
       <a ngbNavLink>Users {{groupUsers.length !== 0? "("+groupUsers.length+")": ""}}</a>
       <ng-template ngbNavContent>
@@ -97,19 +97,17 @@
           </dxo-load-panel>
           <dxo-search-panel [visible]="true" [width]="240" placeholder="Search..."></dxo-search-panel>
 
-          <dxi-column dataField="policyId" [visible]="false"></dxi-column>
+          <dxi-column dataField="groupId" [visible]="false"></dxi-column>
           <dxi-column dataField="policyName" caption="Policy" headerCellTemplate="policyHeaderTemplate"
             cellTemplate="policyTemplate" [allowHiding]="false">
           </dxi-column>
-          <dxi-column dataField="description"></dxi-column>
           <dxi-column dataField="createDate" caption="Created at" cellTemplate="createDateTemplate"></dxi-column>
 
           <div *dxTemplate="let info of 'policyHeaderTemplate'">
             {{info.column.caption}}&nbsp;<i class="fa fa-sm fa-external-link-alt"></i>
           </div>
           <div *dxTemplate="let cell of 'policyTemplate'">
-            <a [routerLink]="['/console/idap/policies/details/'+cell.data.policyId]"
-              target="_blank">{{cell.data.policyName}}</a>
+            <a [routerLink]="['/console/idap/user-groups/details/'+cell.data.policyName]">{{cell.data.policyName}}</a>
           </div>
 
           <div *dxTemplate="let cell of 'createDateTemplate'">
@@ -122,6 +120,6 @@
       </ng-template>
     </ng-container>
   </nav>
-  <div [ngbNavOutlet]="nav" class="mt-2"></div>
+  <div [ngbNavOutlet]="nav" class="mt-2"></div> -->
 </div>
 <ngx-loading [show]="loadingData"></ngx-loading>

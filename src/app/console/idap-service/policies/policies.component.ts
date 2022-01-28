@@ -15,7 +15,20 @@ export class PoliciesComponent implements OnInit {
 
   constructor(public core: CoreService, private idapService: IdapService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getPolicies();
+  }
 
-  getPolicies() {}
+  getPolicies() {
+    this.loadingData = true;
+    this.idapService
+      .getPolicies()
+      .then((response) => {
+        this.loadingData = false;
+        this.policies = response.data.policies;
+      })
+      .catch((error) => {
+        this.loadingData = false;
+      });
+  }
 }

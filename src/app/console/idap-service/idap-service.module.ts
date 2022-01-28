@@ -20,6 +20,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CreateUserComponent } from './users/create-user/create-user.component';
 import { UserDetailsComponent } from './users/user-details/user-details.component';
 import { AddToGroupComponent } from './user-groups/add-to-group/add-to-group.component';
+import { PolicyDetailsComponent } from './policies/policy-details/policy-details.component';
+import { CreatePolicyComponent } from './policies/create-policy/create-policy.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +37,8 @@ import { AddToGroupComponent } from './user-groups/add-to-group/add-to-group.com
     CreateUserComponent,
     UserDetailsComponent,
     AddToGroupComponent,
+    PolicyDetailsComponent,
+    CreatePolicyComponent,
   ],
   imports: [
     CommonModule,

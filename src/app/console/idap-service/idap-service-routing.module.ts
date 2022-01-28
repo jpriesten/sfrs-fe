@@ -3,7 +3,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { IdapServiceComponent } from './idap-service.component';
+import { CreatePolicyComponent } from './policies/create-policy/create-policy.component';
 import { PoliciesComponent } from './policies/policies.component';
+import { PolicyDetailsComponent } from './policies/policy-details/policy-details.component';
 import { AddToGroupComponent } from './user-groups/add-to-group/add-to-group.component';
 import { CreateGroupComponent } from './user-groups/create-group/create-group.component';
 import { GroupDetailsComponent } from './user-groups/group-details/group-details.component';
@@ -54,12 +56,31 @@ const routes: Routes = [
             path: 'details/:userName',
             children: [
               { path: '', component: UserDetailsComponent },
-              { path: 'add-groups', component: GroupDetailsComponent },
+              // { path: 'add-groups', component: GroupDetailsComponent },
             ],
           },
         ],
       },
-      { path: 'policies', component: PoliciesComponent },
+      {
+        path: 'policies',
+        children: [
+          {
+            path: '',
+            component: PoliciesComponent,
+          },
+          {
+            path: 'create',
+            component: CreatePolicyComponent,
+          },
+          {
+            path: 'details/:policyId',
+            children: [
+              { path: '', component: PolicyDetailsComponent },
+              // { path: 'add-groups', component: GroupDetailsComponent },
+            ],
+          },
+        ],
+      },
       { path: 'account-settings', component: AccountSettingsComponent },
     ],
   },

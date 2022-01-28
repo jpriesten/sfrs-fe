@@ -43,18 +43,24 @@
       <dxo-search-panel [visible]="true" [width]="240" placeholder="Search..."></dxo-search-panel>
       <dxo-selection selectAllMode="allPages" showCheckBoxesMode="always" mode="multiple"></dxo-selection>
 
-      <dxi-column dataField="userId" [visible]="false"></dxi-column>
+      <dxi-column dataField="policyId" [visible]="false"></dxi-column>
       <dxi-column dataField="policyName" caption="Policy name" cellTemplate="userNameTemplate" [allowHiding]="false">
-      </dxi-column>
+      </dxi-column>isAttachable
+      <dxi-column dataField="isAttachable"></dxi-column>
       <dxi-column dataField="description" [allowHiding]="false"></dxi-column>
       <dxi-column dataField="createDate" caption="Created at" cellTemplate="createDateTemplate"></dxi-column>
+      <dxi-column dataField="updateDate" caption="Updated at" cellTemplate="updateDateTemplate"></dxi-column>
 
       <div *dxTemplate="let cell of 'userNameTemplate'">
-        <a [routerLink]="['../policies/details', cell.data.userName]">{{cell.data.userName}}</a>
+        <a [routerLink]="['../policies/details', cell.data.policyId]">{{cell.data.policyName}}</a>
       </div>
 
       <div *dxTemplate="let cell of 'createDateTemplate'">
         {{core.getDateInMoment(cell.data.createDate)}}
+      </div>
+
+      <div *dxTemplate="let cell of 'updateDateTemplate'">
+        {{core.getDateInMoment(cell.data.updateDate)}}
       </div>
 
       <dxo-export [enabled]="true" fileName="Policies" [allowExportSelectedData]="true"></dxo-export>
