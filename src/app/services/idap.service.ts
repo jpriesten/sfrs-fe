@@ -461,4 +461,66 @@ export class IdapService {
       );
     }
   }
+
+  /** POST: Attach policies to a group
+   * @param {string} policyId ID of the policy
+   * @param {string} groupName name of group
+   */
+  attachPolicies(policyId: string, groupName: string | null): Promise<any> {
+    // if (this.core.userHasPermission("SRAUTHCODE")) { // For when policies are to be enforced
+    if (true) {
+      let url = `${this.fullBaseUrl}/attachGroupPolicy`;
+
+      let body: any = {};
+
+      // These parameters are always passed
+      if (!this.core.isEmptyOrNull(policyId)) body.policyId = policyId;
+
+      if (!this.core.isEmptyOrNull(groupName)) body.groupName = groupName;
+
+      //caution: passing the options invalidates the form data
+      return this.core.makeRemoteRequest(
+        url,
+        'post',
+        body,
+        this.core.httpOptions.idapHeaders
+      );
+    } else {
+      return this.core.fakePromise(
+        'error',
+        "Sorry, you're not allowed to do this!"
+      );
+    }
+  }
+
+  /** POST: Detach policies from group
+   * @param {string} policyId ID of the policy
+   * @param {string} groupName name of group
+   */
+  detachPolicies(policyId: string, groupName: string | null): Promise<any> {
+    // if (this.core.userHasPermission("SRAUTHCODE")) { // For when policies are to be enforced
+    if (true) {
+      let url = `${this.fullBaseUrl}/detachGroupPolicy`;
+
+      let body: any = {};
+
+      // These parameters are always passed
+      if (!this.core.isEmptyOrNull(policyId)) body.policyId = policyId;
+
+      if (!this.core.isEmptyOrNull(groupName)) body.groupName = groupName;
+
+      //caution: passing the options invalidates the form data
+      return this.core.makeRemoteRequest(
+        url,
+        'post',
+        body,
+        this.core.httpOptions.idapHeaders
+      );
+    } else {
+      return this.core.fakePromise(
+        'error',
+        "Sorry, you're not allowed to do this!"
+      );
+    }
+  }
 }

@@ -6,14 +6,14 @@
     <i class="fa fa-chevron-right"></i> &nbsp;
     <a [routerLink]="['/console/idap/user-groups/details', groupName]">{{groupName}}</a> &nbsp;
     <i class="fa fa-chevron-right"></i> &nbsp;
-    Add users
+    {{addType == 'users'? "Add users":addType == 'policies'? "Attach policies":""}}
   </div>
 
-  <h3 class="pt-3">Add users to {{groupName}}</h3>
+  <h3 class="pt-3">{{addType == 'users'? "Add users":addType == 'policies'? "Attach policies":""}} to {{groupName}}</h3>
 
-  <dx-data-grid [dataSource]="usersNotInGroup" [columnAutoWidth]="true" [showBorders]="true" [showRowLines]="true"
-    [showColumnLines]="false" [allowColumnReordering]="true" [wordWrapEnabled]="true" [(selectedRowKeys)]="selectedRows"
-    noDataText="No data available">
+  <dx-data-grid *ngIf="addType == 'users'" [dataSource]="usersNotInGroup" [columnAutoWidth]="true" [showBorders]="true"
+    [showRowLines]="true" [showColumnLines]="false" [allowColumnReordering]="true" [wordWrapEnabled]="true"
+    [(selectedRowKeys)]="selectedRows" noDataText="No data available">
     <dxo-paging [enabled]="true" [pageSize]="20" [remoteOperations]="{ groupPaging: false }">
     </dxo-paging>
     <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10, 20, 30, 40, 50]" [showInfo]="true">
@@ -44,12 +44,50 @@
     <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
   </dx-data-grid>
 
+  <dx-data-grid *ngIf="addType == 'policies'" [dataSource]="policiesNotInGroup" [columnAutoWidth]="true"
+    [showBorders]="true" [showRowLines]="true" [showColumnLines]="false" [allowColumnReordering]="true"
+    [wordWrapEnabled]="true" [(selectedRowKeys)]="selectedRows" noDataText="No data available">
+    <dxo-paging [enabled]="true" [pageSize]="20" [remoteOperations]="{ groupPaging: false }">
+    </dxo-paging>
+    <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10, 20, 30, 40, 50]" [showInfo]="true">
+    </dxo-pager>
+    <dxo-load-panel [height]="75" [width]="75" [showPane]="true" [shading]="false">
+    </dxo-load-panel>
+    <dxo-search-panel [visible]="true" [width]="240" placeholder="Search..."></dxo-search-panel>
+    <dxo-selection selectAllMode="allPages" showCheckBoxesMode="always" mode="multiple"></dxo-selection>
+
+    <dxi-column dataField="policyId" [visible]="false"></dxi-column>
+    <dxi-column dataField="policyName" caption="Policy name" headerCellTemplate="policyHeaderTemplate"
+      cellTemplate="policyTemplate" [allowHiding]="false">
+    </dxi-column>
+    <dxi-column dataField="createDate" caption="Created at" cellTemplate="createDateTemplate"></dxi-column>
+
+    <div *dxTemplate="let info of 'policyHeaderTemplate'">
+      {{info.column.caption}}&nbsp;<i class="fa fa-sm fa-external-link-alt"></i>
+    </div>
+    <div *dxTemplate="let cell of 'policyTemplate'">
+      <a [routerLink]="['/console/idap/policies/details/'+cell.data.policyId]"
+        target="_blank">{{cell.data.policyName}}</a>
+    </div>
+
+    <div *dxTemplate="let cell of 'createDateTemplate'">
+      {{core.getDateInMoment(cell.data.createDate)}}
+    </div>
+
+    <dxo-export [enabled]="true" fileName="Group users" [allowExportSelectedData]="true"></dxo-export>
+    <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
+  </dx-data-grid>
+
   <hr class="mt-4">
   <div class="row">
     <div class="col d-flex justify-content-end align-items-center">
-      <a [routerLink]="['/console/idap/user-groups/details', groupName]">Cancel</a>
-      <button class="btn btn-sm btn-custom-secondary ms-3" (click)="addUsers()" [disabled]="selectedRows.length == 0">
+      <a [routerLink]="['/console/idap/user-groups/details', groupName]"
+        [queryParams]="{ tab: addType == 'policies'? 2:1}">Cancel</a>
+      <button *ngIf="addType == 'users'" class="btn btn-sm btn-custom-secondary ms-3" (click)="addUsers()" [disabled]="selectedRows.length == 0">
         Add users
+      </button>
+      <button *ngIf="addType == 'policies'" class="btn btn-sm btn-custom-secondary ms-3" (click)="addPolicies()" [disabled]="selectedRows.length == 0">
+        Add policies
       </button>
     </div>
   </div>

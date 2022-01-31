@@ -36,7 +36,7 @@ const routes: Routes = [
             path: 'details/:groupName',
             children: [
               { path: '', component: GroupDetailsComponent },
-              { path: 'add-users', component: AddToGroupComponent },
+              { path: 'add/:addType', component: AddToGroupComponent },
             ],
           },
         ],
