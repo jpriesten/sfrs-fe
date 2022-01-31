@@ -10,8 +10,8 @@ import { IdapService } from 'src/app/services/idap.service';
 })
 export class AddToGroupComponent implements OnInit {
   public groupName: string | null = '';
+  public policyId: string | null = '';
   public addType: string | null = '';
-  public groupData: any = undefined;
 
   // Group users
   public groupUsers = [];
@@ -22,6 +22,12 @@ export class AddToGroupComponent implements OnInit {
   public groupPolicies = [];
   public policiesNotInGroup = [];
   public policies = [];
+
+  // Policy groups
+  public policyGroups = [];
+  public groupsNotInPolicy = [];
+  public groups = [];
+  public policyData: any = undefined;
 
   public selectedRows: any[] = [];
   public loadingData = false;
@@ -34,11 +40,12 @@ export class AddToGroupComponent implements OnInit {
 
   ngOnInit(): void {
     this.groupName = this.route.snapshot.paramMap.get('groupName');
+    this.policyId = this.route.snapshot.paramMap.get('policyId');
     this.addType = this.route.snapshot.paramMap.get('addType');
-    console.log('Types: ', this.addType);
     if (this.addType == 'users') this.getUsersNotInGroup(this.groupName);
     else if (this.addType == 'policies')
       this.getPoliciesNotInGroup(this.groupName);
+    else if (this.addType == 'groups') this.getGroupsNotInPolicy(this.policyId);
   }
 
   async getUsersNotInGroup(groupName: string | null) {
@@ -85,6 +92,29 @@ export class AddToGroupComponent implements OnInit {
     }
   }
 
+  async getGroupsNotInPolicy(policyId: string | null) {
+    try {
+      this.loadingData = true;
+      let groups = await this.idapService.getGroups();
+      this.groups = groups.data.groups;
+      let policy = await this.idapService.getPolicy(policyId);
+      this.policyGroups = policy.data.groups;
+      this.policyData = policy.data.policy;
+      if (this.groups.length != 0) {
+        this.policiesNotInGroup = this.groups.filter((group: any) => {
+          return (
+            this.policyGroups.find(
+              (policyGroup: any) => policyGroup.groupId === group.groupId
+            ) == undefined
+          );
+        });
+      }
+      this.loadingData = false;
+    } catch (error) {
+      this.loadingData = false;
+    }
+  }
+
   addUsers() {
     this.loadingData = true;
     let successCreation = [];
@@ -113,23 +143,46 @@ export class AddToGroupComponent implements OnInit {
     this.loadingData = true;
     let successCreation = [];
     let errorCreation: any[] = [];
-    this.selectedRows.forEach(async (policy: any) => {
-      try {
-        await this.idapService.attachPolicies(policy.policyId, this.groupName);
-        successCreation.push([policy.policyId]);
-        if (this.selectedRows.length == successCreation.length) {
-          this.core.successToast('Policies successfully added');
-          this.loadingData = false;
-          this.router.navigate(
-            ['/console/idap/user-groups/details', this.groupName],
-            { queryParams: { tab: 2 } }
+    if (this.addType == 'policies')
+      this.selectedRows.forEach(async (policy: any) => {
+        try {
+          await this.idapService.attachPolicies(
+            policy.policyId,
+            this.groupName
           );
+          successCreation.push([policy.policyId]);
+          if (this.selectedRows.length == successCreation.length) {
+            this.core.successToast('Policies successfully added');
+            this.loadingData = false;
+            this.router.navigate(
+              ['/console/idap/user-groups/details', this.groupName],
+              { queryParams: { tab: 2 } }
+            );
+          }
+        } catch (error) {
+          errorCreation.push([policy.policyId]);
+          this.core.errorToast('Error adding policy: ' + policy.policyName);
+          this.loadingData = false;
         }
-      } catch (error) {
-        errorCreation.push([policy.policyId]);
-        this.core.errorToast('Error adding policy: ' + policy.policyName);
-        this.loadingData = false;
-      }
-    });
+      });
+    else if (this.addType == 'groups')
+      this.selectedRows.forEach(async (group: any) => {
+        try {
+          await this.idapService.attachPolicies(this.policyId, group.groupName);
+          successCreation.push([group.groupName]);
+          if (this.selectedRows.length == successCreation.length) {
+            this.core.successToast('Groups successfully attached');
+            this.loadingData = false;
+            this.router.navigate([
+              '/console/idap/policies/details',
+              this.policyId,
+            ]);
+          }
+        } catch (error) {
+          errorCreation.push([group.groupName]);
+          this.core.errorToast('Error attaching group: ' + group.groupName);
+          this.loadingData = false;
+        }
+      });
   }
 }

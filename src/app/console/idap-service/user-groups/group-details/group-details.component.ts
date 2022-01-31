@@ -62,25 +62,31 @@ export class GroupDetailsComponent implements OnInit {
   }
 
   detachPolicies() {
-    this.loadingData = true;
-    let successCreation = [];
-    let errorCreation: any[] = [];
-    this.selectedPoliciesRows.forEach(async (policy: any) => {
-      try {
-        await this.idapService.detachPolicies(policy.policyId, this.groupName);
-        successCreation.push([policy.policyId]);
-        if (this.selectedPoliciesRows.length == successCreation.length) {
-          this.core.successToast('Policies successfully detached');
+    let confirmed = confirm('Are you sure you want to detach policies');
+    if (confirmed) {
+      this.loadingData = true;
+      let successCreation = [];
+      let errorCreation: any[] = [];
+      this.selectedPoliciesRows.forEach(async (policy: any) => {
+        try {
+          await this.idapService.detachPolicies(
+            policy.policyId,
+            this.groupName
+          );
+          successCreation.push([policy.policyId]);
+          if (this.selectedPoliciesRows.length == successCreation.length) {
+            this.core.successToast('Policies successfully detached');
+            this.loadingData = false;
+            this.getGroupPolicies(this.groupName);
+            this.getGroupDetails(this.groupName);
+          }
+        } catch (error) {
+          errorCreation.push([policy.policyId]);
+          this.core.errorToast('Error detaching policy: ' + policy.policyName);
           this.loadingData = false;
-          this.getGroupPolicies(this.groupName);
-          this.getGroupDetails(this.groupName);
         }
-      } catch (error) {
-        errorCreation.push([policy.policyId]);
-        this.core.errorToast('Error detaching policy: ' + policy.policyName);
-        this.loadingData = false;
-      }
-    });
+      });
+    }
   }
 
   onNavChange(changeEvent: NgbNavChangeEvent) {

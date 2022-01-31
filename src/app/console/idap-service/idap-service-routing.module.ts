@@ -76,7 +76,7 @@ const routes: Routes = [
             path: 'details/:policyId',
             children: [
               { path: '', component: PolicyDetailsComponent },
-              // { path: 'add-groups', component: GroupDetailsComponent },
+              { path: 'add/:addType', component: AddToGroupComponent },
             ],
           },
         ],

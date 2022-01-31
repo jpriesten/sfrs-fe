@@ -37,7 +37,7 @@
 
   <nav ngbNav #nav="ngbNav" class="nav-pills pt-3">
     <ng-container ngbNavItem>
-      <a ngbNavLink>Groups {{userGroups.length !== 0? "("+userGroups.length+")": ""}}</a>
+      <a ngbNavLink>Groups {{userData?.summary? "("+userData?.summary?.groups+")": ""}}</a>
       <ng-template ngbNavContent>
         <div class="pt-3">
           <dx-data-grid [dataSource]="userGroups" [columnAutoWidth]="true" [showBorders]="true" [showRowLines]="true"
@@ -76,7 +76,7 @@
       </ng-template>
     </ng-container>
     <ng-container ngbNavItem>
-      <a ngbNavLink>Tags {{userData?.user?.tags?.length !== 0? "("+userData?.user?.tags?.length+")": ""}}</a>
+      <a ngbNavLink>Tags {{userData?.summary? "("+userData?.summary?.tags+")": ""}}</a>
       <ng-template ngbNavContent>
         <dx-data-grid [dataSource]="userData?.user?.tags || []" [columnAutoWidth]="true" [showBorders]="true"
           [showRowLines]="true" [showColumnLines]="false" [allowColumnReordering]="true" [wordWrapEnabled]="true"
@@ -93,7 +93,7 @@
           </dxi-column>
           <dxi-column dataField="value"></dxi-column>
 
-          <dxo-export [enabled]="true" fileName="User policies" [allowExportSelectedData]="true"></dxo-export>
+          <dxo-export [enabled]="true" fileName="User tags" [allowExportSelectedData]="true"></dxo-export>
           <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
         </dx-data-grid>
       </ng-template>

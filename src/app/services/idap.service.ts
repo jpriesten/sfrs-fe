@@ -466,7 +466,10 @@ export class IdapService {
    * @param {string} policyId ID of the policy
    * @param {string} groupName name of group
    */
-  attachPolicies(policyId: string, groupName: string | null): Promise<any> {
+  attachPolicies(
+    policyId: string | null,
+    groupName: string | null
+  ): Promise<any> {
     // if (this.core.userHasPermission("SRAUTHCODE")) { // For when policies are to be enforced
     if (true) {
       let url = `${this.fullBaseUrl}/attachGroupPolicy`;
@@ -497,7 +500,10 @@ export class IdapService {
    * @param {string} policyId ID of the policy
    * @param {string} groupName name of group
    */
-  detachPolicies(policyId: string, groupName: string | null): Promise<any> {
+  detachPolicies(
+    policyId: string | null,
+    groupName: string | null
+  ): Promise<any> {
     // if (this.core.userHasPermission("SRAUTHCODE")) { // For when policies are to be enforced
     if (true) {
       let url = `${this.fullBaseUrl}/detachGroupPolicy`;
