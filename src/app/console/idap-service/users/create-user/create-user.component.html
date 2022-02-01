@@ -243,7 +243,8 @@
       <span class="fw-bold">* Required</span>
     </div>
     <div class="col d-flex justify-content-end align-items-center">
-      <a [routerLink]="['/console/idap/users']" *ngIf="stepper.selectedIndex == 3">Close</a>
+      <a [routerLink]="['/console/idap/users']"
+        *ngIf="stepper.selectedIndex == 0 || stepper.selectedIndex == 3">Close</a>
       <button class="btn btn-sm btn-custom-secondary ms-3" [disabled]="userFormGroup.invalid"
         (click)="nextStep(stepper)" *ngIf="stepper.selectedIndex == 0">
         Next: Profile

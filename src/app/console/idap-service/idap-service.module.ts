@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { IdapServiceRoutingModule } from './idap-service-routing.module';
 
 import { NgxLoadingModule } from 'ngx-loading';
-import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbCollapseModule, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatStepperModule } from '@angular/material/stepper';
 
 import { IdapServiceComponent } from './idap-service.component';
@@ -46,6 +46,7 @@ import { CreatePolicyComponent } from './policies/create-policy/create-policy.co
     DxDataGridModule,
     NgxLoadingModule,
     NgbNavModule,
+    NgbCollapseModule,
     ReactiveFormsModule,
     MatStepperModule,
     ReactiveFormsModule,

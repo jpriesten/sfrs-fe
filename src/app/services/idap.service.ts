@@ -462,6 +462,59 @@ export class IdapService {
     }
   }
 
+  /** POST: Fetch allowed services
+   */
+  getServices(): Promise<any> {
+    // if (this.core.userHasPermission("SRAUTHCODE")) { // For when policies are to be enforced
+    if (true) {
+      let url = `${this.fullBaseUrl}/listPolicyActions`;
+
+      let body: any = {};
+
+      // These parameters are always passed
+
+      //caution: passing the options invalidates the form data
+      return this.core.makeRemoteRequest(
+        url,
+        'post',
+        body,
+        this.core.httpOptions.idapHeaders
+      );
+    } else {
+      return this.core.fakePromise(
+        'error',
+        "Sorry, you're not allowed to do this!"
+      );
+    }
+  }
+
+  /** POST: create a policy detail
+   * @param {any} policyData The new policy payload
+   */
+  createPolicy(policyData: any): Promise<any> {
+    // if (this.core.userHasPermission("SRAUTHCODE")) { // For when policies are to be enforced
+    if (true) {
+      let url = `${this.fullBaseUrl}/createPolicy`;
+
+      let body: any = policyData;
+
+      // These parameters are always passed
+
+      //caution: passing the options invalidates the form data
+      return this.core.makeRemoteRequest(
+        url,
+        'post',
+        body,
+        this.core.httpOptions.idapHeaders
+      );
+    } else {
+      return this.core.fakePromise(
+        'error',
+        "Sorry, you're not allowed to do this!"
+      );
+    }
+  }
+
   /** POST: Attach policies to a group
    * @param {string} policyId ID of the policy
    * @param {string} groupName name of group
