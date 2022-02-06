@@ -20,7 +20,7 @@ const routes: Routes = [
     component: LoginComponent,
   },
   {
-    path: 'password-reset',
+    path: 'password-reset/:userName',
     component: PasswordResetComponent,
   },
   { path: '404', component: PageNotFoundComponent },

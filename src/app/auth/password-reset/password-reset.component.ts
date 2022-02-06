@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CoreService } from 'src/app/services/core.service';
 import { IdapService } from 'src/app/services/idap.service';
 
@@ -10,6 +10,7 @@ import { IdapService } from 'src/app/services/idap.service';
   styleUrls: ['./password-reset.component.scss'],
 })
 export class PasswordResetComponent implements OnInit {
+  public userName: string | null = '';
   public loadingData = false;
   public resetFormGroup!: FormGroup;
 
@@ -17,21 +18,23 @@ export class PasswordResetComponent implements OnInit {
     private fb: FormBuilder,
     private idapService: IdapService,
     public core: CoreService,
+    private route: ActivatedRoute,
     private router: Router
   ) {}
 
   ngOnInit(): void {
+    this.userName = this.route.snapshot.paramMap.get('userName');
     this.initForm();
   }
 
   get formValues() {
-    return this.resetFormGroup.value;
+    return this.resetFormGroup.getRawValue();
   }
 
   initForm() {
     this.resetFormGroup = this.fb.group({
       username: [
-        '',
+        { value: this.userName, disabled: true },
         Validators.compose([Validators.required, Validators.maxLength(64)]),
       ],
       password: [

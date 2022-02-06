@@ -387,6 +387,8 @@ export class IdapService {
 
       body.passwordResetRequired = requirePasswordReset;
 
+      console.log(body);
+
       //caution: passing the options invalidates the form data
       return this.core.makeRemoteRequest(
         url,

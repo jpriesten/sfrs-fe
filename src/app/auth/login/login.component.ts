@@ -58,9 +58,10 @@ export class LoginComponent implements OnInit {
         this.loadingData = false;
         this.core.successToast('Login successful!');
         if (response.data.user.passwordResetRequired) {
-          this.router.navigate(['/password-reset']);
-        } else this.router.navigate(['/']);
-        location.reload();
+          this.router.navigate(['/password-reset', this.formValues.username]);
+        } else location.href = '#/';
+        // this.router.navigate(['/']);
+        // location.reload();
         localStorage.setItem('currentUser', JSON.stringify(response));
       })
       .catch((error) => {
