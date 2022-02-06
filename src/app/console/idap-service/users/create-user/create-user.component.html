@@ -49,6 +49,63 @@
                   </tr>
                 </thead>
                 <tbody>
+                  <tr>
+                    <td width="20%">
+                      <input class="form-control form-control-sm" type="text" [value]="provinceTag.key" disabled>
+                    </td>
+                    <td>
+                      <select [(ngModel)]="provinceTag.value" [ngModelOptions]="{standalone: true}"
+                        class="form-select form-select-sm" (change)="onGeoChange('province')">
+                        <option value="">Select a province...</option>
+                        <option [ngValue]="province.provinceId" *ngFor="let province of provinces; let i=index">
+                          {{province.name || province.code}}
+                        </option>
+                      </select>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td width="20%">
+                      <input class="form-control form-control-sm" type="text" [value]="districtTag.key" disabled>
+                    </td>
+                    <td>
+                      <select [(ngModel)]="districtTag.value" [ngModelOptions]="{standalone: true}"
+                        class="form-select form-select-sm" (change)="onGeoChange('district')">
+                        <option value="">Select a district...</option>
+                        <option [ngValue]="district.districtMunicipalityId"
+                          *ngFor="let district of districts; let i=index">
+                          {{district.name || district.code}}
+                        </option>
+                      </select>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td width="20%">
+                      <input class="form-control form-control-sm" type="text" [value]="localTag.key" disabled>
+                    </td>
+                    <td>
+                      <select [(ngModel)]="localTag.value" [ngModelOptions]="{standalone: true}"
+                        class="form-select form-select-sm" (change)="onGeoChange('local')">
+                        <option value="">Select a local...</option>
+                        <option [ngValue]="local.localMunicipalityId" *ngFor="let local of locals; let i=index">
+                          {{local.name || local.code}}
+                        </option>
+                      </select>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td width="20%">
+                      <input class="form-control form-control-sm" type="text" [value]="wardTag.key" disabled>
+                    </td>
+                    <td>
+                      <select [(ngModel)]="wardTag.value" [ngModelOptions]="{standalone: true}"
+                        class="form-select form-select-sm" (change)="onGeoChange('ward')">
+                        <option value="">Select a ward...</option>
+                        <option [ngValue]="ward.wardId" *ngFor="let ward of wards; let i=index">
+                          {{ward.name || ward.code}}
+                        </option>
+                      </select>
+                    </td>
+                  </tr>
                   <tr *ngFor="let tag of tags; let i=index">
                     <td width="20%">
                       <input class="form-control form-control-sm" [(ngModel)]="tag.key"

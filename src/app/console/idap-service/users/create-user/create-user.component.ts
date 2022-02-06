@@ -7,6 +7,7 @@ import { Observable, map } from 'rxjs';
 import { CoreService } from 'src/app/services/core.service';
 import { IdapService } from 'src/app/services/idap.service';
 import { MatStepper } from '@angular/material/stepper';
+import { GeneralService } from 'src/app/services/general.service';
 
 @Component({
   selector: 'app-create-user',
@@ -27,12 +28,21 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
   public modalTitle = '';
 
   public groups = [];
+  public provinces: any[] = [];
+  public districts: any[] = [];
+  public locals: any[] = [];
+  public wards: any[] = [];
   public selectedRows: any[] = [];
 
   // MatStepper values
   public isLinear = true;
   public stepperOrientation: Observable<StepperOrientation>;
 
+  public provinceTag = { key: 'province', value: '' };
+  public districtTag = { key: 'district', value: '' };
+  public localTag = { key: 'local', value: '' };
+  public wardTag = { key: 'ward', value: '' };
+  public defaultTags: any[] = [];
   public tags = [{ key: '', value: '', disabled: false }];
 
   private tempLocalStorageKeys = [
@@ -45,7 +55,7 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
     public core: CoreService,
     private idapService: IdapService,
     private fb: FormBuilder,
-    private router: Router,
+    private generalService: GeneralService,
     breakpointObserver: BreakpointObserver
   ) {
     this.stepperOrientation = breakpointObserver
@@ -61,6 +71,8 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
     this.passwordTypeChange();
 
     this.initGroupForm();
+
+    this.loadGeoData();
   }
 
   ngAfterViewInit() {
@@ -111,6 +123,7 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
         ]),
       ],
       tags: [],
+      defaultTags: [],
       newUser: [],
     });
   }
@@ -173,12 +186,38 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
     });
   }
 
+  loadGeoData() {
+    this.getProvinces();
+    this.getDistricts();
+    this.getLocals();
+    this.getWards();
+  }
+
   addTag(index: number) {
     this.tags[index].disabled = true;
     this.tags.push({ key: '', value: '', disabled: false });
   }
+  addDefaultTag(type: string, tag: any) {
+    let foundTag = this.defaultTags.findIndex((tag: any) => tag.key == type);
+    if (foundTag != -1) {
+      if (!this.core.isEmptyOrNull(tag.value))
+        this.defaultTags.splice(foundTag, 1, tag);
+      else this.defaultTags.splice(foundTag, 1);
+    } else this.defaultTags.push(tag);
+  }
   removeTag(index: number) {
     this.tags.splice(index, 1);
+  }
+  onGeoChange(type: string) {
+    if (type === 'province') {
+      this.addDefaultTag(type, this.provinceTag);
+    } else if (type === 'district') {
+      this.addDefaultTag(type, this.districtTag);
+    } else if (type === 'local') {
+      this.addDefaultTag(type, this.localTag);
+    } else if (type === 'ward') {
+      this.addDefaultTag(type, this.wardTag);
+    }
   }
 
   get password() {
@@ -194,7 +233,11 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
       tagsCopy.map((tag) => {
         this.core.sanitiseRequestObject(tag, '', 'disabled');
       });
-      this.userFormGroup.controls['tags'].setValue([...tagsCopy]);
+      this.userFormGroup.controls['tags'].setValue([
+        ...this.defaultTags,
+        ...tagsCopy,
+      ]);
+      console.log(this.userFormGroup.getRawValue());
       let newUser = await this.idapService.createUser(
         this.userFormGroup.value.userName,
         this.userFormGroup.value.tags
@@ -293,6 +336,30 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
       .catch(() => {
         this.loadingData = false;
       });
+  }
+
+  getProvinces() {
+    this.generalService.getProvinces().then((response) => {
+      this.provinces = response.data;
+    });
+  }
+
+  getDistricts() {
+    this.generalService.getDistricts().then((response) => {
+      this.districts = response.data;
+    });
+  }
+
+  getLocals() {
+    this.generalService.getLocals().then((response) => {
+      this.locals = response.data;
+    });
+  }
+
+  getWards() {
+    this.generalService.getWards().then((response) => {
+      this.wards = response.data;
+    });
   }
 
   openCreateGroupModal(modalTitle: string) {
