@@ -10,6 +10,7 @@ import { IdapService } from 'src/app/services/idap.service';
 export class PoliciesComponent implements OnInit {
   policies = [];
   loadingData = false;
+  unauthorisedDashboard = { authorised: true, description: '' };
 
   public selectedRows: any[] = [];
 
@@ -25,10 +26,13 @@ export class PoliciesComponent implements OnInit {
       .getPolicies()
       .then((response) => {
         this.loadingData = false;
+        this.unauthorisedDashboard.authorised = true;
         this.policies = response.data.policies;
       })
       .catch((error) => {
         this.loadingData = false;
+        this.unauthorisedDashboard =
+          this.core.getUnauthorisedErrorMessage(error);
       });
   }
 }

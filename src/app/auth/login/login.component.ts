@@ -56,11 +56,14 @@ export class LoginComponent implements OnInit {
         this.user = response;
         console.log('Login success: ', response, this.user);
         this.loadingData = false;
-        this.core.successToast('Login successful!');
         if (response.data.user.passwordResetRequired) {
+          this.core.successToast('Password reset required');
           this.router.navigate(['/password-reset', this.formValues.username]);
-        } else this.router.navigate(['/']);
-        location.reload();
+        } else {
+          this.core.successToast('Login successful!');
+          this.router.navigate(['/']);
+          location.reload();
+        }
         localStorage.setItem('currentUser', JSON.stringify(response));
       })
       .catch((error) => {

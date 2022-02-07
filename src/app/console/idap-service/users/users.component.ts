@@ -10,6 +10,7 @@ import { IdapService } from 'src/app/services/idap.service';
 export class UsersComponent implements OnInit {
   users = [];
   loadingData = false;
+  unauthorisedDashboard = { authorised: true, description: '' };
 
   public selectedRows: any[] = [];
 
@@ -25,11 +26,14 @@ export class UsersComponent implements OnInit {
       .getUsers()
       .then((response) => {
         this.loadingData = false;
+        this.unauthorisedDashboard.authorised = true;
         this.users = response.data.users;
         console.log(this.users);
       })
       .catch((error) => {
         this.loadingData = false;
+        this.unauthorisedDashboard =
+          this.core.getUnauthorisedErrorMessage(error);
       });
   }
 }

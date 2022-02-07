@@ -7,7 +7,6 @@ import { NgbCollapseModule, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatStepperModule } from '@angular/material/stepper';
 
 import { IdapServiceComponent } from './idap-service.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { UserGroupsComponent } from './user-groups/user-groups.component';
 import { UsersComponent } from './users/users.component';
@@ -22,11 +21,11 @@ import { UserDetailsComponent } from './users/user-details/user-details.componen
 import { AddToGroupComponent } from './user-groups/add-to-group/add-to-group.component';
 import { PolicyDetailsComponent } from './policies/policy-details/policy-details.component';
 import { CreatePolicyComponent } from './policies/create-policy/create-policy.component';
+import { ConsoleModule } from '../console.module';
 
 @NgModule({
   declarations: [
     IdapServiceComponent,
-    SidebarComponent,
     DashboardComponent,
     UserGroupsComponent,
     UsersComponent,
@@ -51,6 +50,7 @@ import { CreatePolicyComponent } from './policies/create-policy/create-policy.co
     MatStepperModule,
     ReactiveFormsModule,
     FormsModule,
+    ConsoleModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

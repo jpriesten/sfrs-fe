@@ -9,6 +9,7 @@ import { FooterComponent } from './layout/footer/footer.component';
 import { ConsoleComponent } from './console.component';
 import { HomeComponent } from './home/home.component';
 import { DxDataGridModule } from 'devextreme-angular';
+import { SidebarComponent } from './layout/sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
@@ -16,8 +17,15 @@ import { DxDataGridModule } from 'devextreme-angular';
     HeaderComponent,
     FooterComponent,
     HomeComponent,
+    SidebarComponent,
   ],
-  imports: [CommonModule, ConsoleRoutingModule, DxDataGridModule, NgxLoadingModule],
+  imports: [
+    CommonModule,
+    ConsoleRoutingModule,
+    DxDataGridModule,
+    NgxLoadingModule,
+  ],
+  exports: [SidebarComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class ConsoleModule {}

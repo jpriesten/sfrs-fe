@@ -152,6 +152,18 @@ export class CoreService {
     return errorTypes.find((errorType) => errorType.name == errorName);
   }
 
+  getUnauthorisedErrorMessage(error: any) {
+    const errorType = this.getErrorType(error.error.errors[0].detail);
+    let returnedData = { authorised: true, description: '' };
+    if (errorType !== undefined) {
+      if (errorType.name == 'NotAuthorized') {
+        returnedData.authorised = false;
+        returnedData.description = errorType.description;
+      }
+    }
+    return returnedData;
+  }
+
   // Delete empty entries or trim entries
   sanitiseRequestObject(
     input: any,

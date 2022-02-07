@@ -10,6 +10,7 @@ import { IdapService } from 'src/app/services/idap.service';
 })
 export class DashboardComponent implements OnInit {
   loadingData = false;
+  unauthorisedDashboard = { authorised: true, description: '' };
   accountSummary = new AccountSummary();
   constructor(public core: CoreService, private idapService: IdapService) {}
 
@@ -23,12 +24,15 @@ export class DashboardComponent implements OnInit {
       .getAccountSummary()
       .then((response) => {
         this.loadingData = false;
+        this.unauthorisedDashboard.authorised = true;
         this.accountSummary = response;
         console.log('Dashboard: ', this.accountSummary);
       })
       .catch((error) => {
         console.error('Dashboard error: ', error);
         this.loadingData = false;
+        this.unauthorisedDashboard =
+          this.core.getUnauthorisedErrorMessage(error);
       });
   }
 }

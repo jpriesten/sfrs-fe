@@ -12,6 +12,7 @@ import { IdapService } from 'src/app/services/idap.service';
 export class UserGroupsComponent implements OnInit {
   loadingData = false;
   userGroups = new UserGroups();
+  unauthorisedDashboard = { authorised: true, description: '' };
 
   public selectedRows: any[] = [];
 
@@ -27,11 +28,14 @@ export class UserGroupsComponent implements OnInit {
       .getGroups()
       .then((response) => {
         this.loadingData = false;
+        this.unauthorisedDashboard.authorised = true;
         this.userGroups = response;
         console.log('User groups: ', this.userGroups);
       })
       .catch((error) => {
         this.loadingData = false;
+        this.unauthorisedDashboard =
+          this.core.getUnauthorisedErrorMessage(error);
       });
   }
 }

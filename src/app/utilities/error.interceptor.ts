@@ -49,7 +49,9 @@ export class ErrorInterceptor implements HttpInterceptor {
               this.appError.errors[0].detail
             );
             if (errorType !== undefined) {
-              this.core.errorToast(errorType.description);
+              if (errorType.name !== 'NotAuthorized')
+                this.core.errorToast(errorType.description);
+              else this.core.errorToast('Unauthorised action');
             } else {
               this.core.errorToast('Unknown error. Please contact support.');
             }

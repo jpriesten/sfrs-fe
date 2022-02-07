@@ -20,7 +20,8 @@ export const errorTypes = [
   },
   {
     name: 'NotAuthorized',
-    description: 'Unauthorized action',
+    description:
+      'You are trying to access a resource that you are not allowed to access. Please contact your administrator.',
   },
   {
     name: 'AccessDeniedException',
