@@ -57,7 +57,7 @@
                       <select [(ngModel)]="provinceTag.value" [ngModelOptions]="{standalone: true}"
                         class="form-select form-select-sm" (change)="onGeoChange('province')">
                         <option value="">Select a province...</option>
-                        <option [ngValue]="province.provinceId" *ngFor="let province of provinces; let i=index">
+                        <option [ngValue]="province" *ngFor="let province of provinces; let i=index">
                           {{province.name || province.code}}
                         </option>
                       </select>
@@ -71,8 +71,7 @@
                       <select [(ngModel)]="districtTag.value" [ngModelOptions]="{standalone: true}"
                         class="form-select form-select-sm" (change)="onGeoChange('district')">
                         <option value="">Select a district...</option>
-                        <option [ngValue]="district.districtMunicipalityId"
-                          *ngFor="let district of districts; let i=index">
+                        <option [ngValue]="district" *ngFor="let district of districts; let i=index">
                           {{district.name || district.code}}
                         </option>
                       </select>
@@ -86,7 +85,7 @@
                       <select [(ngModel)]="localTag.value" [ngModelOptions]="{standalone: true}"
                         class="form-select form-select-sm" (change)="onGeoChange('local')">
                         <option value="">Select a local...</option>
-                        <option [ngValue]="local.localMunicipalityId" *ngFor="let local of locals; let i=index">
+                        <option [ngValue]="local" *ngFor="let local of locals; let i=index">
                           {{local.name || local.code}}
                         </option>
                       </select>

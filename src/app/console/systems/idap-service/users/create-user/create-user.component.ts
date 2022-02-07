@@ -38,9 +38,9 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
   public isLinear = true;
   public stepperOrientation: Observable<StepperOrientation>;
 
-  public provinceTag = { key: 'province', value: '' };
-  public districtTag = { key: 'district', value: '' };
-  public localTag = { key: 'local', value: '' };
+  public provinceTag: any = { key: 'province', value: '' };
+  public districtTag: any = { key: 'district', value: '' };
+  public localTag: any = { key: 'local', value: '' };
   public wardTag = { key: 'ward', value: '' };
   public defaultTags: any[] = [];
   public tags = [{ key: '', value: '', disabled: false }];
@@ -188,9 +188,6 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
 
   loadGeoData() {
     this.getProvinces();
-    this.getDistricts();
-    this.getLocals();
-    this.getWards();
   }
 
   addTag(index: number) {
@@ -210,11 +207,26 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
   }
   onGeoChange(type: string) {
     if (type === 'province') {
-      this.addDefaultTag(type, this.provinceTag);
+      this.addDefaultTag(type, {
+        key: this.provinceTag.key,
+        value: this.provinceTag.value.provinceId,
+      });
+      this.getProvince(
+        this.provinceTag.value.name,
+        this.provinceTag.value.code
+      );
     } else if (type === 'district') {
-      this.addDefaultTag(type, this.districtTag);
+      this.addDefaultTag(type, {
+        key: this.districtTag.key,
+        value: this.districtTag.value.districtMunicipalityId,
+      });
+      this.locals = this.districtTag.value.locals;
     } else if (type === 'local') {
-      this.addDefaultTag(type, this.localTag);
+      this.addDefaultTag(type, {
+        key: this.localTag.key,
+        value: this.localTag.value.localMunicipalityId,
+      });
+      this.getlocal(this.localTag.value.name, this.localTag.value.code);
     } else if (type === 'ward') {
       this.addDefaultTag(type, this.wardTag);
     }
@@ -267,11 +279,6 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
           this.core.generatePassword()
         );
       }
-      console.log(
-        'New login profile: ',
-        this.userProfileFormGroup.getRawValue()
-      );
-
       let newUser = await this.idapService.createLoginProfile(
         this.userFormGroup.value.userName,
         this.userProfileFormGroup.getRawValue().password,
@@ -287,11 +294,6 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
       );
       stepper.next();
       this.getGroups();
-      console.log(
-        'New login profile: ',
-        newUser,
-        this.userProfileFormGroup.value
-      );
     } catch (error) {
       this.loadingData = false;
     }
@@ -344,22 +346,30 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
     });
   }
 
-  getDistricts() {
-    this.generalService.getDistricts().then((response) => {
-      this.districts = response.data;
-    });
+  getProvince(name: string | null, code: string | null) {
+    this.loadingData = true;
+    this.generalService
+      .getProvince(name, code)
+      .then((response) => {
+        this.districts = response.data.districts;
+        this.loadingData = false;
+      })
+      .catch(() => {
+        this.loadingData = false;
+      });
   }
 
-  getLocals() {
-    this.generalService.getLocals().then((response) => {
-      this.locals = response.data;
-    });
-  }
-
-  getWards() {
-    this.generalService.getWards().then((response) => {
-      this.wards = response.data;
-    });
+  getlocal(name: string | null, code: string | null) {
+    this.loadingData = true;
+    this.generalService
+      .getLocal(name, code)
+      .then((response) => {
+        // this.wards = response.data.wards;
+        this.loadingData = false;
+      })
+      .catch(() => {
+        this.loadingData = false;
+      });
   }
 
   openCreateGroupModal(modalTitle: string) {
