@@ -57,3 +57,45 @@
     </div>
   </nav>
 </ng-container>
+
+<ng-container *ngIf="type == 'infrasys'">
+  <nav class="sidebar" [ngClass]="{ sidebarPushRight: isActive, collapsed: collapsed }">
+    <div class="sidebar-header container pt-3 pb-3" [ngClass]="{ collapsed: collapsed }">
+      <div class="row align-items-center">
+        <div class="col-8 text-wrap">
+          <h5 class="header-text">Infrastructure System (INFRASYS)</h5>
+        </div>
+        <div class="col d-flex justify-content-end" (click)="toggleCollapsed()">
+          <i class="fw-bold fa fa-fw fa-angle-double-{{ collapsed ? 'right' : 'left' }}"></i>
+        </div>
+      </div>
+    </div>
+    <div class="sidebar-body pt-3 pb-3">
+      <div class="list-group">
+        <!-- <a *ngIf="core.userHasPermission('VIEWGUIDASH')" -->
+        <div class="nested-menu" #settings>
+          <a class="list-group-item" (click)="onActive(settings)" (click)="addExpandClass('settings')">
+            <i class="fa fa-users"></i>
+            <span class="fw-bold">Site</span>
+          </a>
+          <li class="nested" [class.expand]="showMenu === 'settings'">
+            <ul class="submenu ps-3">
+              <li>
+                <a [routerLink]="['sites']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                  <i class="fa fa-building"></i>
+                  <span>My sites</span>
+                </a>
+              </li>
+              <li>
+                <a [routerLink]="['create-site']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                  <i class="fa fa-plus"></i>
+                  <span>Create site</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+        </div>
+      </div>
+    </div>
+  </nav>
+</ng-container>

@@ -8,9 +8,11 @@ import { DxDataGridModule } from 'devextreme-angular';
 import { NgxLoadingModule } from 'ngx-loading';
 import { ConsoleModule } from '../../console.module';
 import { InfrasysRoutingModule } from './infrasys-routing.module';
+import { SitesComponent } from './sites/sites.component';
+import { CreateSiteComponent } from './create-site/create-site.component';
 
 @NgModule({
-  declarations: [InfrasysComponent],
+  declarations: [InfrasysComponent, SitesComponent, CreateSiteComponent],
   imports: [
     CommonModule,
     InfrasysRoutingModule,

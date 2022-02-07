@@ -30,6 +30,10 @@ export class CoreService {
       'Content-Type': 'application/json',
       'x-stms-service': 'ida',
     }),
+    infrasysHeaders: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'x-stms-service': 'infrasys',
+    }),
   };
 
   public momentOffset: string = '-0100';
