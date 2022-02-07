@@ -1,1 +1,18 @@
-<p>sites works!</p>
+<div class="container-fluid">
+  <div>
+    <a [routerLink]="['../dashboard']">INFRASYS</a> &nbsp;
+    <i class="fa fa-chevron-right"></i> &nbsp;
+    Sites
+  </div>
+  <hr>
+
+  <div class="row">
+    <div class="col">
+      <h4>Sites</h4>
+    </div>
+    <div class="col d-flex justify-content-end">
+      <span class="text-muted">Total: {{0}}</span>
+    </div>
+  </div>
+</div>
+<ngx-loading [show]="loadingData"></ngx-loading>

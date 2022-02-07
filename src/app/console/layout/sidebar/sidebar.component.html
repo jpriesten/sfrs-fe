@@ -73,6 +73,11 @@
     <div class="sidebar-body pt-3 pb-3">
       <div class="list-group">
         <!-- <a *ngIf="core.userHasPermission('VIEWGUIDASH')" -->
+        <a routerLink="dashboard" [routerLinkActive]="['router-link-active']" class="list-group-item">
+          <i class="fa fa-chart-line"></i>
+          <span>Dashboard</span>
+        </a>
+
         <div class="nested-menu" #settings>
           <a class="list-group-item" (click)="onActive(settings)" (click)="addExpandClass('settings')">
             <i class="fa fa-users"></i>

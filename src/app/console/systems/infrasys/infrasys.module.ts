@@ -10,9 +10,10 @@ import { ConsoleModule } from '../../console.module';
 import { InfrasysRoutingModule } from './infrasys-routing.module';
 import { SitesComponent } from './sites/sites.component';
 import { CreateSiteComponent } from './create-site/create-site.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
-  declarations: [InfrasysComponent, SitesComponent, CreateSiteComponent],
+  declarations: [InfrasysComponent, SitesComponent, CreateSiteComponent, DashboardComponent],
   imports: [
     CommonModule,
     InfrasysRoutingModule,

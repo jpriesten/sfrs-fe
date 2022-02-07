@@ -4,13 +4,18 @@ import { RouterModule, Routes } from '@angular/router';
 import { InfrasysComponent } from './infrasys.component';
 import { SitesComponent } from './sites/sites.component';
 import { CreateSiteComponent } from './create-site/create-site.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
   {
     path: '',
     component: InfrasysComponent,
     children: [
-      { path: '', redirectTo: 'sites', pathMatch: 'prefix' },
+      { path: '', redirectTo: 'dashboard', pathMatch: 'prefix' },
+      {
+        path: 'dashboard',
+        component: DashboardComponent,
+      },
       {
         path: 'sites',
         children: [
