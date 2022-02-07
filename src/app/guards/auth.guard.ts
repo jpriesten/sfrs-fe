@@ -4,6 +4,7 @@ import {
   CanActivate,
   CanLoad,
   Route,
+  Router,
   RouterStateSnapshot,
   UrlSegment,
   UrlTree,
@@ -14,6 +15,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate, CanLoad {
+  constructor(private router: Router) {}
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
@@ -24,7 +26,7 @@ export class AuthGuard implements CanActivate, CanLoad {
     }
 
     // not logged in so redirect to login page with the return url
-    location.href = '/login';
+    this.router.navigate(['/login']);
     return false;
   }
 
@@ -35,7 +37,7 @@ export class AuthGuard implements CanActivate, CanLoad {
     }
 
     // not logged in so do not load lazy loaded modules
-    location.href = '/login';
+    this.router.navigate(['/login']);
     return true;
   }
 }

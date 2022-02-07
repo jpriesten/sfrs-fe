@@ -20,13 +20,19 @@ export class CoreService {
   public user: User | null = new User();
   private httpTimeout = 60 * 1000;
 
+  public tagPatten = /^[A-Za-z0-9_.:/=+-@]+$/;
+
   public httpOptions = {
     baseHeaders: new HttpHeaders({
-      'Content-Type': 'application/x-www-form-urlencoded',
+      'Content-Type': 'application/json',
     }),
     idapHeaders: new HttpHeaders({
-      'Content-Type': 'application/x-www-form-urlencoded',
+      'Content-Type': 'application/json',
       'x-stms-service': 'ida',
+    }),
+    infrasysHeaders: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'x-stms-service': 'infrasys',
     }),
   };
 
@@ -148,6 +154,18 @@ export class CoreService {
 
   getErrorType(errorName: string) {
     return errorTypes.find((errorType) => errorType.name == errorName);
+  }
+
+  getUnauthorisedErrorMessage(error: any) {
+    const errorType = this.getErrorType(error.error.errors[0].detail);
+    let returnedData = { authorised: true, description: '' };
+    if (errorType !== undefined) {
+      if (errorType.name == 'NotAuthorized') {
+        returnedData.authorised = false;
+        returnedData.description = errorType.description;
+      }
+    }
+    return returnedData;
   }
 
   // Delete empty entries or trim entries

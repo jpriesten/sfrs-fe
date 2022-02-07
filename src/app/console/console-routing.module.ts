@@ -14,8 +14,15 @@ const routes: Routes = [
       {
         path: 'idap',
         loadChildren: () =>
-          import('./idap-service/idap-service.module').then(
+          import('./systems/idap-service/idap-service.module').then(
             (m) => m.IdapServiceModule
+          ),
+      },
+      {
+        path: 'infrasys',
+        loadChildren: () =>
+          import('./systems/infrasys/infrasys.module').then(
+            (m) => m.InfrasysModule
           ),
       },
     ],

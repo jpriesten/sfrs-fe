@@ -17,19 +17,19 @@ export class AuthenticationService {
     if (true) {
       let url = `${this.fullBaseUrl}/assumeUserProfile`;
 
-      let params = new HttpParams();
+      let body: any = {};
 
       // These parameters are always passed
       if (!this.core.isEmptyOrNull(username)) {
-        params = params.set('userName', username);
+        body.userName = username;
       }
 
       if (!this.core.isEmptyOrNull(password)) {
-        params = params.set('password', password);
+        body.password = password;
       }
 
       //caution: passing the options invalidates the form data
-      return this.core.makeRemoteRequest(url, 'post', params);
+      return this.core.makeRemoteRequest(url, 'post', body);
     } else {
       return this.core.fakePromise(
         'error',

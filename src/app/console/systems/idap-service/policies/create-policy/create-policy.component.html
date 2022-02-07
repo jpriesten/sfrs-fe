@@ -1,0 +1,244 @@
+<div class="container-fluid">
+  <div>
+    <a [routerLink]="['/console/idap/dashboard']">IDAP</a> &nbsp;
+    <i class="fa fa-chevron-right"></i> &nbsp;
+    <a [routerLink]="['/console/idap/policies']">Policies</a> &nbsp;
+    <i class="fa fa-chevron-right"></i> &nbsp;
+    Create policy
+  </div>
+
+  <div class="row pt-3 align-items-center">
+    <div class="col">
+      <h3>Create policy</h3>
+    </div>
+  </div>
+
+  <div class="row mat-typography">
+    <mat-stepper labelPosition="bottom" [linear]="isLinear" [orientation]="(stepperOrientation | async)!" #stepper>
+      <mat-step [stepControl]="serviceFormGroup">
+        <form [formGroup]="serviceFormGroup">
+          <ng-template matStepLabel>Details</ng-template>
+
+          <h4 class="mb-1 mt-3 fw-bold">Set policy service details</h4>
+          <hr class="mt-1">
+          <div class="row justify-content-center align-items-center pt-2 pb-2 row-selector">
+            <div class="col col-sm-4 d-sm-flex justify-content-sm-end" type="button"
+              (click)="isServiceCollapsed = !isServiceCollapsed" aria-controls="mobileContent"
+              [attr.aria-expanded]="isServiceCollapsed" aria-label="Toggle navigation">
+              <i class="fa fa-lg align-self-center pe-2"
+                [ngClass]="{'fa-caret-right': !isServiceCollapsed, 'fa-caret-down': isServiceCollapsed}"></i>
+              <label class="form-label fw-bold">Service<span>*</span></label>
+            </div>
+            <div class="col col-sm-8">
+              <span *ngIf="!isServiceCollapsed">{{!core.isEmptyOrNull(serviceFormGroup.value.service)?
+                serviceFormGroup.value.service?.service: 'Select a service'}}</span>
+              <div id="selectService" [(ngbCollapse)]="!isServiceCollapsed">
+                <div class="d-flex flex-row">
+                  <a class="me-4 text-button" *ngFor="let service of services"
+                    (click)="selectService(service)">{{service?.service}}</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row justify-content-center pt-2 pb-2 row-selector">
+            <div class="col col-sm-4 d-sm-flex justify-content-sm-end">
+              <label for="groupName" class="form-label fw-bold mt-0">Resources<span>*</span></label>
+            </div>
+            <div class="col col-sm-8">
+              <span *ngIf="core.isEmptyOrNull(serviceFormGroup.value.service)">Select resources</span>
+              <div class="row" *ngIf="!core.isEmptyOrNull(serviceFormGroup.value.service)">
+                <div class="col-12">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="allResources" formControlName="allResources">
+                    <label class="form-check-label" for="allResources">
+                      Select all resources
+                    </label>
+                  </div>
+                </div>
+                <div class="col-4" [ngClass]="{'d-none': resource == '*'}" formArrayName="resourceArray"
+                  *ngFor="let resource of serviceFormGroup.value.service?.resources; let i = index">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" [id]="resource" [formControlName]="i">
+                    <label class="form-check-label" [for]="resource">
+                      {{ resource == '*'? 'Select all resources': resource }}
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Tags</ng-template>
+        <h4 class="mb-1 mt-3 fw-bold">Add tags</h4>
+        <hr class="mt-1 mb-1">
+        <div class="row">
+          <p>IDAP tags are key-value pairs you can add to your user. Tags can include user information, such as an
+            email
+            address, or can be descriptive, such as a job title. You can use the tags to organize, track, or control
+            access for this user.</p>
+
+          <div class="col table-responsive pb-2">
+            <table class="table mb-1">
+              <thead class="table-light">
+                <tr>
+                  <th scope="col">Key*</th>
+                  <th scope="col">Value</th>
+                  <th scope="col" class="text-center">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let tag of tags; let i=index">
+                  <td width="20%">
+                    <input class="form-control form-control-sm" [(ngModel)]="tag.key"
+                      [ngModelOptions]="{standalone: true}" type="text" placeholder="Add new key"
+                      [pattern]="core.tagPatten" [disabled]="tag.disabled" #key="ngModel"
+                      [ngClass]="{'validateInput': key.dirty && key.invalid}">
+                    <div *ngIf="key.invalid" class="invalid-feedback d-block">
+                      <div *ngIf="key.errors?.['pattern']">
+                        Key can contain alphanumeric characters, or any of the following: _.:/=+-@
+                      </div>
+                    </div>
+                  </td>
+                  <td width="68%">
+                    <input class="form-control form-control-sm" [(ngModel)]="tag.value"
+                      [ngModelOptions]="{standalone: true}" type="text" [pattern]="core.tagPatten"
+                      [disabled]="tag.disabled" #value="ngModel"
+                      [ngClass]="{'validateInput': value.dirty && value.invalid}">
+                    <div *ngIf="value.invalid" class="invalid-feedback d-block">
+                      <div *ngIf="value.errors?.['pattern']">
+                        Value can contain alphanumeric characters, or any of the following: _.:/=+-@
+                      </div>
+                    </div>
+                  </td>
+                  <td class="text-center align-middle">
+                    <button class="btn btn-sm btn-custom-primary" *ngIf="tags.length-1 === i" (click)="addTag(i)"
+                      [disabled]="!(!core.isEmptyOrNull(tag.key) && key.valid) || value.invalid">
+                      <i class="fas fa-plus"></i>
+                      Add tag
+                    </button>
+                    <i class="fas fa-times" *ngIf="tags.length-1 !== i" (click)="removeTag(i)"></i>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Summary</ng-template>
+        <form [formGroup]="policyDetailsFormGroup">
+
+          <h4 class="mb-1 mt-3 fw-bold">Policy summary</h4>
+          <hr class="mt-1">
+          <div class="row">
+            <div class="col col-sm-3 d-flex justify-content-end">
+              <label for="policyName" class="form-label fw-bold">Policy name<span>*</span></label>
+            </div>
+            <div class="col col-sm-5">
+              <input type="text" class="form-control form-control-sm" id="policyName" formControlName="policyName">
+              <small class="form-text">
+                Maximum 128 characters. Use alphanumeric and '+=,.@-_' characters.
+              </small>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col col-sm-3 d-flex justify-content-end">
+              <label for="description" class="form-label fw-bold">Policy description</label>
+            </div>
+            <div class="col col-sm-9">
+              <textarea id="description" rows="2" formControlName="description"
+                class="form-control form-control-sm"></textarea>
+              <small class="form-text">
+                Maximum 1000 characters. Use alphanumeric and '+=,.@-_' characters.
+              </small>
+            </div>
+          </div>
+
+          <div class="row mt-4">
+            <div class="col col-sm-3 d-flex justify-content-end">
+              <label for="description" class="form-label fw-bold">Summary</label>
+            </div>
+            <div class="col col-sm-9">
+              <div class="col table-responsive pb-2">
+                <table class="table mb-1">
+                  <thead class="table-light">
+                    <tr>
+                      <th scope="col">Service</th>
+                      <th scope="col">Resources</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td width="20%">
+                        {{serviceFormGroup.value.service?.service}}
+                      </td>
+                      <td>
+                        [{{serviceFormGroup.value.resources}}]
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mt-4">
+            <div class="col col-sm-3 d-flex justify-content-end">
+              <label for="description" class="form-label fw-bold">Tags</label>
+            </div>
+            <div class="col col-sm-9">
+              <div class="col table-responsive pb-2">
+                <table class="table mb-1">
+                  <thead class="table-light">
+                    <tr>
+                      <th scope="col">Key</th>
+                      <th scope="col">Value</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let tag of serviceFormGroup.value.tags || []; let i=index">
+                      <td width="50%">
+                        {{tag.key}}
+                      </td>
+                      <td width="50%">
+                        {{tag.value}}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </form>
+      </mat-step>
+    </mat-stepper>
+  </div>
+
+  <hr class="mt-4">
+  <div class="row">
+    <div class="col">
+      <span class="fw-bold">* Required</span>
+    </div>
+    <div class="col d-flex justify-content-end align-items-center">
+      <a [routerLink]="['/console/idap/policies']">Close</a>
+      <button class="btn btn-sm btn-secondary ms-3" (click)="stepper.previous()" *ngIf="stepper.selectedIndex != 0">
+        Previous
+      </button>
+      <button class="btn btn-sm btn-custom-secondary ms-3" [disabled]="serviceFormGroup.invalid"
+        (click)="nextStep(stepper)" *ngIf="stepper.selectedIndex == 0">
+        Next: Tags
+      </button>
+      <button class="btn btn-sm btn-custom-secondary ms-3" (click)="nextStep(stepper)"
+        *ngIf="stepper.selectedIndex == 1">
+        Next: Summary
+      </button>
+      <button class="btn btn-sm btn-custom-secondary ms-3" [disabled]="policyDetailsFormGroup.invalid"
+        (click)="createPolicy()" *ngIf="stepper.selectedIndex == 2">
+        Create policy
+      </button>
+    </div>
+  </div>
+</div>
+<ngx-loading [show]="loadingData"></ngx-loading>

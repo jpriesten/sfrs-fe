@@ -1,0 +1,44 @@
+<div class="container-fluid">
+  <h4>IDAP dashboard</h4>
+
+  <div class="row pt-5">
+    <div class="col-10">
+      <h5>IDAP resources</h5>
+    </div>
+    <div class="col d-flex justify-content-sm-end" *ngIf="unauthorisedDashboard.authorised">
+      <button class="btn btn-sm btn-outline-secondary" (click)="getAccountSummary()">
+        <i class="fas fa-sync-alt"></i>
+      </button>
+    </div>
+  </div>
+  <hr>
+  <ng-container *ngIf="unauthorisedDashboard.authorised; else elseTemplate">
+    <div class="row">
+      <div class="col border-end">
+        <div>User groups</div>
+        <div>
+          <a [routerLink]="['../user-groups']">{{accountSummary?.data?.summary?.groups}}</a>
+        </div>
+      </div>
+      <div class="col border-end">
+        <div>Users</div>
+        <div>
+          <a routerLink="../users">{{accountSummary?.data?.summary?.users}}</a>
+        </div>
+      </div>
+      <div class="col">
+        <div>Policies</div>
+        <div>
+          <a routerLink="../policies">{{accountSummary?.data?.summary?.policies}}</a>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  <ng-template #elseTemplate>
+    <div class="alert alert-danger">
+      <h4 class="alert-heading">Unauthorised action</h4>
+      <p>{{unauthorisedDashboard.description}}</p>
+    </div>
+  </ng-template>
+</div>
+<ngx-loading [show]="loadingData"></ngx-loading>

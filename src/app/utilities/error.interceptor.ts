@@ -16,11 +16,12 @@ import { tap } from 'rxjs/operators';
 
 import { CoreService } from '../services/core.service';
 import { AppError } from '../models/error.model';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
   private appError = new AppError();
-  constructor(private core: CoreService) {}
+  constructor(private core: CoreService, private router: Router) {}
 
   intercept(
     request: HttpRequest<any>,
@@ -35,7 +36,7 @@ export class ErrorInterceptor implements HttpInterceptor {
           if (err.status === 401) {
             // auto logout if 401 response returned from api
             this.core.logout();
-            location.reload();
+            this.router.navigate(['/login']);
           }
 
           if (err.error instanceof ProgressEvent) {
@@ -48,7 +49,9 @@ export class ErrorInterceptor implements HttpInterceptor {
               this.appError.errors[0].detail
             );
             if (errorType !== undefined) {
-              this.core.errorToast(errorType.description);
+              if (errorType.name !== 'NotAuthorized')
+                this.core.errorToast(errorType.description);
+              else this.core.errorToast('Unauthorised action');
             } else {
               this.core.errorToast('Unknown error. Please contact support.');
             }

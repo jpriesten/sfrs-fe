@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {
   ActivatedRouteSnapshot,
   CanActivate,
+  Router,
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router';
@@ -11,13 +12,14 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class NotAuthGuard implements CanActivate {
+  constructor(private router: Router) {}
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): boolean {
     if (localStorage.getItem('currentUser')) {
       // logged in so return false
-      location.href = '/';
+      this.router.navigate(['/']);
       return false;
     }
 

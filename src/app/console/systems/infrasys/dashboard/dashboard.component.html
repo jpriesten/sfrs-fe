@@ -1,0 +1,42 @@
+<div class="container-fluid">
+  <h4>INFRASYS dashboard</h4>
+
+  <div class="row pt-5">
+    <div class="col-10">
+      <h5>INFRASYS resources</h5>
+    </div>
+    <div class="col d-flex justify-content-sm-end" *ngIf="unauthorisedDashboard.authorised">
+      <button class="btn btn-sm btn-outline-secondary">
+        <i class="fas fa-sync-alt"></i>
+      </button>
+    </div>
+  </div>
+  <hr>
+  <ng-container *ngIf="unauthorisedDashboard.authorised; else elseTemplate">
+    <div class="row pb-3">
+      <div class="col border-end">
+        <div>Sites</div>
+        <div>
+          <a [routerLink]="['../sites']">10</a>
+        </div>
+      </div>
+      <div class="col">
+        <div>My sites</div>
+        <div>
+          <a routerLink="../sites">4</a>
+        </div>
+      </div>
+    </div>
+    <div class="alert alert-warning">
+      <h4 class="alert-heading">My site categories</h4>
+      <p>Overview of the sites the user manages here</p>
+    </div>
+  </ng-container>
+  <ng-template #elseTemplate>
+    <div class="alert alert-danger">
+      <h4 class="alert-heading">Unauthorised action</h4>
+      <p>{{unauthorisedDashboard.description}}</p>
+    </div>
+  </ng-template>
+</div>
+<ngx-loading [show]="loadingData"></ngx-loading>

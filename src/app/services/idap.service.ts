@@ -1,4 +1,3 @@
-import { HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { CoreService } from './core.service';
@@ -9,13 +8,6 @@ import { CoreService } from './core.service';
 export class IdapService {
   public fullBaseUrl = `${environment.baseUrl}/${environment.apiPath}`;
 
-  public httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      'x-stms-service': 'ida',
-    }),
-  };
-
   constructor(private core: CoreService) {}
 
   /** POST: Fetch account summary information for the dashboard*/
@@ -24,13 +16,13 @@ export class IdapService {
     if (true) {
       let url = `${this.fullBaseUrl}/getAccountSummary`;
 
-      let params = new HttpParams();
+      let body: any = {};
 
       //caution: passing the options invalidates the form data
       return this.core.makeRemoteRequest(
         url,
         'post',
-        params,
+        body,
         this.core.httpOptions.idapHeaders
       );
     } else {
@@ -53,16 +45,50 @@ export class IdapService {
     if (true) {
       let url = `${this.fullBaseUrl}/listGroups`;
 
-      let params = new HttpParams();
+      let body: any = {};
 
       // These parameters are always passed
-      params = params.set('maxItems', maxItems);
+      body.maxItems = maxItems;
 
       //caution: passing the options invalidates the form data
       return this.core.makeRemoteRequest(
         url,
         'post',
-        params,
+        body,
+        this.core.httpOptions.idapHeaders
+      );
+    } else {
+      return this.core.fakePromise(
+        'error',
+        "Sorry, you're not allowed to do this!"
+      );
+    }
+  }
+
+  /** POST: Fetch attached group policies
+   * @param {string} groupName Group name
+   * @param {number} maxItems Maximum number of items per page
+   */
+  getGroupPolicies(
+    groupName: string | null,
+    maxItems: number = 10
+  ): Promise<any> {
+    // if (this.core.userHasPermission("SRAUTHCODE")) { // For when policies are to be enforced
+    if (true) {
+      let url = `${this.fullBaseUrl}/listAttachedGroupPolicies`;
+
+      let body: any = {};
+
+      // These parameters are always passed
+      if (!this.core.isEmptyOrNull(groupName)) body.groupName = groupName;
+
+      body.maxItems = maxItems;
+
+      //caution: passing the options invalidates the form data
+      return this.core.makeRemoteRequest(
+        url,
+        'post',
+        body,
         this.core.httpOptions.idapHeaders
       );
     } else {
@@ -87,22 +113,20 @@ export class IdapService {
     if (true) {
       let url = `${this.fullBaseUrl}/getGroup`;
 
-      let params = new HttpParams();
+      let body: any = {};
 
       // These parameters are always passed
-      if (!this.core.isEmptyOrNull(groupName))
-        params = params.set('groupName', groupName!);
+      if (!this.core.isEmptyOrNull(groupName)) body.groupName = groupName;
 
-      params = params.set('maxItems', maxItems!);
+      body.maxItems = maxItems;
 
-      if (!this.core.isEmptyOrNull(marker))
-        params = params.set('marker', marker!);
+      if (!this.core.isEmptyOrNull(marker)) body.marker = marker;
 
       //caution: passing the options invalidates the form data
       return this.core.makeRemoteRequest(
         url,
         'post',
-        params,
+        body,
         this.core.httpOptions.idapHeaders
       );
     } else {
@@ -121,17 +145,16 @@ export class IdapService {
     if (true) {
       let url = `${this.fullBaseUrl}/createGroup`;
 
-      let params = new HttpParams();
+      let body: any = {};
 
       // These parameters are always passed
-      if (!this.core.isEmptyOrNull(groupName))
-        params = params.set('groupName', groupName);
+      if (!this.core.isEmptyOrNull(groupName)) body.groupName = groupName;
 
       //caution: passing the options invalidates the form data
       return this.core.makeRemoteRequest(
         url,
         'post',
-        params,
+        body,
         this.core.httpOptions.idapHeaders
       );
     } else {
@@ -146,25 +169,23 @@ export class IdapService {
    * @param {string} groupName The name of the group
    * @param {string} userName The name of the user
    */
-  addGroupUser(groupName: string, userName: string): Promise<any> {
+  addGroupUser(groupName: string | null, userName: string): Promise<any> {
     // if (this.core.userHasPermission("SRAUTHCODE")) { // For when policies are to be enforced
     if (true) {
       let url = `${this.fullBaseUrl}/addUserToGroup`;
 
-      let params = new HttpParams();
+      let body: any = {};
 
       // These parameters are always passed
-      if (!this.core.isEmptyOrNull(groupName))
-        params = params.set('groupName', groupName);
+      if (!this.core.isEmptyOrNull(groupName)) body.groupName = groupName;
 
-      if (!this.core.isEmptyOrNull(userName))
-        params = params.set('userName', userName);
+      if (!this.core.isEmptyOrNull(userName)) body.userName = userName;
 
       //caution: passing the options invalidates the form data
       return this.core.makeRemoteRequest(
         url,
         'post',
-        params,
+        body,
         this.core.httpOptions.idapHeaders
       );
     } else {
@@ -187,16 +208,16 @@ export class IdapService {
     if (true) {
       let url = `${this.fullBaseUrl}/listUsers`;
 
-      let params = new HttpParams();
+      let body: any = {};
 
       // These parameters are always passed
-      params = params.set('maxItems', maxItems);
+      body.maxItems = maxItems;
 
       //caution: passing the options invalidates the form data
       return this.core.makeRemoteRequest(
         url,
         'post',
-        params,
+        body,
         this.core.httpOptions.idapHeaders
       );
     } else {
@@ -215,17 +236,16 @@ export class IdapService {
     if (true) {
       let url = `${this.fullBaseUrl}/getUser`;
 
-      let params = new HttpParams();
+      let body: any = {};
 
       // These parameters are always passed
-      if (!this.core.isEmptyOrNull(userName))
-        params = params.set('userName', userName!);
+      if (!this.core.isEmptyOrNull(userName)) body.userName = userName;
 
       //caution: passing the options invalidates the form data
       return this.core.makeRemoteRequest(
         url,
         'post',
-        params,
+        body,
         this.core.httpOptions.idapHeaders
       );
     } else {
@@ -250,22 +270,20 @@ export class IdapService {
     if (true) {
       let url = `${this.fullBaseUrl}/listGroupsForUser`;
 
-      let params = new HttpParams();
+      let body: any = {};
 
       // These parameters are always passed
-      if (!this.core.isEmptyOrNull(userName))
-        params = params.set('userName', userName!);
+      if (!this.core.isEmptyOrNull(userName)) body.userName = userName;
 
-      params = params.set('maxItems', maxItems!);
+      body.maxItems = maxItems;
 
-      if (!this.core.isEmptyOrNull(marker))
-        params = params.set('marker', marker!);
+      if (!this.core.isEmptyOrNull(marker)) body.marker = marker;
 
       //caution: passing the options invalidates the form data
       return this.core.makeRemoteRequest(
         url,
         'post',
-        params,
+        body,
         this.core.httpOptions.idapHeaders
       );
     } else {
@@ -285,20 +303,18 @@ export class IdapService {
     if (true) {
       let url = `${this.fullBaseUrl}/createUser`;
 
-      let params = new HttpParams();
+      let body: any = {};
 
       // These parameters are always passed
-      if (!this.core.isEmptyOrNull(userName))
-        params = params.set('userName', userName);
+      if (!this.core.isEmptyOrNull(userName)) body.userName = userName;
 
-      if (!this.core.isEmptyOrNull(tags))
-        params = params.set('tags', JSON.stringify(tags));
+      if (!this.core.isEmptyOrNull(tags)) body.tags = tags;
 
       //caution: passing the options invalidates the form data
       return this.core.makeRemoteRequest(
         url,
         'post',
-        params,
+        body,
         this.core.httpOptions.idapHeaders
       );
     } else {
@@ -323,22 +339,20 @@ export class IdapService {
     if (true) {
       let url = `${this.fullBaseUrl}/createLoginProfile`;
 
-      let params = new HttpParams();
+      let body: any = {};
 
       // These parameters are always passed
-      if (!this.core.isEmptyOrNull(userName))
-        params = params.set('userName', userName);
+      if (!this.core.isEmptyOrNull(userName)) body.userName = userName;
 
-      if (!this.core.isEmptyOrNull(password))
-        params = params.set('password', password);
+      if (!this.core.isEmptyOrNull(password)) body.password = password;
 
-      params = params.set('passwordResetRequired', requirePasswordReset);
+      body.passwordResetRequired = requirePasswordReset;
 
       //caution: passing the options invalidates the form data
       return this.core.makeRemoteRequest(
         url,
         'post',
-        params,
+        body,
         this.core.httpOptions.idapHeaders
       );
     } else {
@@ -363,22 +377,203 @@ export class IdapService {
     if (true) {
       let url = `${this.fullBaseUrl}/updateLoginProfile`;
 
-      let params = new HttpParams();
+      let body: any = {};
 
       // These parameters are always passed
-      if (!this.core.isEmptyOrNull(userName))
-        params = params.set('userName', userName);
+      if (!this.core.isEmptyOrNull(userName)) body.userName = userName;
 
-      if (!this.core.isEmptyOrNull(password))
-        params = params.set('password', password);
+      if (!this.core.isEmptyOrNull(password)) body.password = password;
 
-      params = params.set('passwordResetRequired', requirePasswordReset);
+      body.passwordResetRequired = requirePasswordReset;
+
+      console.log(body);
 
       //caution: passing the options invalidates the form data
       return this.core.makeRemoteRequest(
         url,
         'post',
-        params,
+        body,
+        this.core.httpOptions.idapHeaders
+      );
+    } else {
+      return this.core.fakePromise(
+        'error',
+        "Sorry, you're not allowed to do this!"
+      );
+    }
+  }
+
+  /**
+   * IDAP Policy endpoints
+   */
+
+  /** POST: Fetch policies
+   * @param {number} maxItems Maximum number of items per page
+   */
+  getPolicies(maxItems: number = 10): Promise<any> {
+    // if (this.core.userHasPermission("SRAUTHCODE")) { // For when policies are to be enforced
+    if (true) {
+      let url = `${this.fullBaseUrl}/listPolicies`;
+
+      let body: any = {};
+
+      // These parameters are always passed
+      body.maxItems = maxItems;
+
+      //caution: passing the options invalidates the form data
+      return this.core.makeRemoteRequest(
+        url,
+        'post',
+        body,
+        this.core.httpOptions.idapHeaders
+      );
+    } else {
+      return this.core.fakePromise(
+        'error',
+        "Sorry, you're not allowed to do this!"
+      );
+    }
+  }
+
+  /** POST: Fetch policy details
+   * @param {string} policyId Policy Id
+   */
+  getPolicy(policyId: string | null): Promise<any> {
+    // if (this.core.userHasPermission("SRAUTHCODE")) { // For when policies are to be enforced
+    if (true) {
+      let url = `${this.fullBaseUrl}/getPolicy`;
+
+      let body: any = {};
+
+      // These parameters are always passed
+      if (!this.core.isEmptyOrNull(policyId)) body.policyId = policyId;
+
+      //caution: passing the options invalidates the form data
+      return this.core.makeRemoteRequest(
+        url,
+        'post',
+        body,
+        this.core.httpOptions.idapHeaders
+      );
+    } else {
+      return this.core.fakePromise(
+        'error',
+        "Sorry, you're not allowed to do this!"
+      );
+    }
+  }
+
+  /** POST: Fetch allowed services
+   */
+  getServices(): Promise<any> {
+    // if (this.core.userHasPermission("SRAUTHCODE")) { // For when policies are to be enforced
+    if (true) {
+      let url = `${this.fullBaseUrl}/listPolicyActions`;
+
+      let body: any = {};
+
+      // These parameters are always passed
+
+      //caution: passing the options invalidates the form data
+      return this.core.makeRemoteRequest(
+        url,
+        'post',
+        body,
+        this.core.httpOptions.idapHeaders
+      );
+    } else {
+      return this.core.fakePromise(
+        'error',
+        "Sorry, you're not allowed to do this!"
+      );
+    }
+  }
+
+  /** POST: create a policy detail
+   * @param {any} policyData The new policy payload
+   */
+  createPolicy(policyData: any): Promise<any> {
+    // if (this.core.userHasPermission("SRAUTHCODE")) { // For when policies are to be enforced
+    if (true) {
+      let url = `${this.fullBaseUrl}/createPolicy`;
+
+      let body: any = policyData;
+
+      // These parameters are always passed
+
+      //caution: passing the options invalidates the form data
+      return this.core.makeRemoteRequest(
+        url,
+        'post',
+        body,
+        this.core.httpOptions.idapHeaders
+      );
+    } else {
+      return this.core.fakePromise(
+        'error',
+        "Sorry, you're not allowed to do this!"
+      );
+    }
+  }
+
+  /** POST: Attach policies to a group
+   * @param {string} policyId ID of the policy
+   * @param {string} groupName name of group
+   */
+  attachPolicies(
+    policyId: string | null,
+    groupName: string | null
+  ): Promise<any> {
+    // if (this.core.userHasPermission("SRAUTHCODE")) { // For when policies are to be enforced
+    if (true) {
+      let url = `${this.fullBaseUrl}/attachGroupPolicy`;
+
+      let body: any = {};
+
+      // These parameters are always passed
+      if (!this.core.isEmptyOrNull(policyId)) body.policyId = policyId;
+
+      if (!this.core.isEmptyOrNull(groupName)) body.groupName = groupName;
+
+      //caution: passing the options invalidates the form data
+      return this.core.makeRemoteRequest(
+        url,
+        'post',
+        body,
+        this.core.httpOptions.idapHeaders
+      );
+    } else {
+      return this.core.fakePromise(
+        'error',
+        "Sorry, you're not allowed to do this!"
+      );
+    }
+  }
+
+  /** POST: Detach policies from group
+   * @param {string} policyId ID of the policy
+   * @param {string} groupName name of group
+   */
+  detachPolicies(
+    policyId: string | null,
+    groupName: string | null
+  ): Promise<any> {
+    // if (this.core.userHasPermission("SRAUTHCODE")) { // For when policies are to be enforced
+    if (true) {
+      let url = `${this.fullBaseUrl}/detachGroupPolicy`;
+
+      let body: any = {};
+
+      // These parameters are always passed
+      if (!this.core.isEmptyOrNull(policyId)) body.policyId = policyId;
+
+      if (!this.core.isEmptyOrNull(groupName)) body.groupName = groupName;
+
+      //caution: passing the options invalidates the form data
+      return this.core.makeRemoteRequest(
+        url,
+        'post',
+        body,
         this.core.httpOptions.idapHeaders
       );
     } else {

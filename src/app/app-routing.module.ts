@@ -20,7 +20,7 @@ const routes: Routes = [
     component: LoginComponent,
   },
   {
-    path: 'password-reset',
+    path: 'password-reset/:userName',
     component: PasswordResetComponent,
   },
   { path: '404', component: PageNotFoundComponent },
@@ -28,7 +28,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { useHash: true })],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

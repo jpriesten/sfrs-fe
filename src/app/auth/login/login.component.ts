@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { User } from 'src/app/models/user.model';
 import { AuthenticationService } from '../../services/authentication.service';
 import { CoreService } from '../../services/core.service';
@@ -18,7 +19,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private authService: AuthenticationService,
-    public core: CoreService
+    public core: CoreService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -54,28 +56,18 @@ export class LoginComponent implements OnInit {
         this.user = response;
         console.log('Login success: ', response, this.user);
         this.loadingData = false;
-        this.core.successToast('Login successful!');
         if (response.data.user.passwordResetRequired) {
-          location.href = '/password-reset';
-        } else location.href = '/';
+          this.core.successToast('Password reset required');
+          this.router.navigate(['/password-reset', this.formValues.username]);
+        } else {
+          this.core.successToast('Login successful!');
+          this.router.navigate(['/']);
+          location.reload();
+        }
         localStorage.setItem('currentUser', JSON.stringify(response));
       })
       .catch((error) => {
-        // console.error('Login error: ', error);
         this.loadingData = false;
-        // if (error && error.errors && error.errors.length != 0) {
-        //   if (error.errors[0].detail == 'InvalidAuthenticationValue') {
-        //     this.core.errorToast(
-        //       'Your authentication information is incorrect. Please try again.'
-        //     );
-        //   } else if (error.errors[0].detail == 'NoSuchEntity') {
-        //     this.core.errorToast(
-        //       'Your authentication information is not found. Please try again.'
-        //     );
-        //   } else {
-        //     this.core.errorToast('Unknown error. Please contact support');
-        //   }
-        // }
       });
   }
 }

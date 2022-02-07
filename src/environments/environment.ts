@@ -5,8 +5,8 @@
 export const environment = {
   production: false,
 
-  baseUrl: "https://sfrs-j75dy.ondigitalocean.app",
-  apiPath: "api"
+  baseUrl: 'https://sfrs-j75dy.ondigitalocean.app',
+  apiPath: 'api',
 };
 
 /*
