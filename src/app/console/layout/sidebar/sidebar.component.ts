@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-sidebar',
@@ -14,6 +14,7 @@ export class SidebarComponent implements OnInit {
   pushRightClass = '';
   public loginUser = null;
 
+  @Input() type = '';
   @Output() collapsedEvent = new EventEmitter<boolean>();
 
   constructor() {}
