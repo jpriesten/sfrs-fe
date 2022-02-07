@@ -209,7 +209,7 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
     if (type === 'province') {
       this.addDefaultTag(type, {
         key: this.provinceTag.key,
-        value: this.provinceTag.value.provinceId,
+        value: this.provinceTag.value.code,
       });
       this.getProvince(
         this.provinceTag.value.name,
@@ -218,13 +218,13 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
     } else if (type === 'district') {
       this.addDefaultTag(type, {
         key: this.districtTag.key,
-        value: this.districtTag.value.districtMunicipalityId,
+        value: this.districtTag.value.code,
       });
       this.locals = this.districtTag.value.locals;
     } else if (type === 'local') {
       this.addDefaultTag(type, {
         key: this.localTag.key,
-        value: this.localTag.value.localMunicipalityId,
+        value: this.localTag.value.code,
       });
       this.getlocal(this.localTag.value.name, this.localTag.value.code);
     } else if (type === 'ward') {
@@ -249,7 +249,7 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
         ...this.defaultTags,
         ...tagsCopy,
       ]);
-      console.log(this.userFormGroup.getRawValue());
+      // console.log(this.userFormGroup.getRawValue());
       let newUser = await this.idapService.createUser(
         this.userFormGroup.value.userName,
         this.userFormGroup.value.tags
@@ -364,7 +364,7 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
     this.generalService
       .getLocal(name, code)
       .then((response) => {
-        // this.wards = response.data.wards;
+        this.wards = response.data.wards;
         this.loadingData = false;
       })
       .catch(() => {

@@ -58,7 +58,7 @@
                         class="form-select form-select-sm" (change)="onGeoChange('province')">
                         <option value="">Select a province...</option>
                         <option [ngValue]="province" *ngFor="let province of provinces; let i=index">
-                          {{province.name || province.code}}
+                          {{province.name}}
                         </option>
                       </select>
                     </td>
@@ -72,7 +72,7 @@
                         class="form-select form-select-sm" (change)="onGeoChange('district')">
                         <option value="">Select a district...</option>
                         <option [ngValue]="district" *ngFor="let district of districts; let i=index">
-                          {{district.name || district.code}}
+                          {{district.name}}
                         </option>
                       </select>
                     </td>
@@ -86,7 +86,7 @@
                         class="form-select form-select-sm" (change)="onGeoChange('local')">
                         <option value="">Select a local...</option>
                         <option [ngValue]="local" *ngFor="let local of locals; let i=index">
-                          {{local.name || local.code}}
+                          {{local.name}}
                         </option>
                       </select>
                     </td>
@@ -99,8 +99,8 @@
                       <select [(ngModel)]="wardTag.value" [ngModelOptions]="{standalone: true}"
                         class="form-select form-select-sm" (change)="onGeoChange('ward')">
                         <option value="">Select a ward...</option>
-                        <option [ngValue]="ward.wardId" *ngFor="let ward of wards; let i=index">
-                          {{ward.name || ward.code}}
+                        <option [ngValue]="ward.code" *ngFor="let ward of wards; let i=index">
+                          {{ward.number}}
                         </option>
                       </select>
                     </td>
