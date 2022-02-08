@@ -5,6 +5,7 @@ import { InfrasysComponent } from './infrasys.component';
 import { SitesComponent } from './sites/sites.component';
 import { CreateSiteComponent } from './create-site/create-site.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { SiteDetailsComponent } from './sites/site-details/site-details.component';
 
 const routes: Routes = [
   {
@@ -17,7 +18,7 @@ const routes: Routes = [
         component: DashboardComponent,
       },
       {
-        path: 'sites',
+        path: 'my-sites',
         children: [
           {
             path: '',
@@ -27,12 +28,10 @@ const routes: Routes = [
           //   path: 'update',
           //   component: CreateGroupComponent,
           // },
-          // {
-          //   path: 'details/:siteId',
-          //   children: [
-          //     { path: '', component: GroupDetailsComponent },
-          //   ],
-          // },
+          {
+            path: 'details/:siteId',
+            component: SiteDetailsComponent,
+          },
         ],
       },
       {
