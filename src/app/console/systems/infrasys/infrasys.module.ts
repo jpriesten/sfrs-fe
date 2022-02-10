@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { InfrasysComponent } from './infrasys.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -11,9 +11,18 @@ import { InfrasysRoutingModule } from './infrasys-routing.module';
 import { SitesComponent } from './sites/sites.component';
 import { CreateSiteComponent } from './create-site/create-site.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { SiteDetailsComponent } from './sites/site-details/site-details.component';
+import { MySitesComponent } from './my-sites/my-sites.component';
 
 @NgModule({
-  declarations: [InfrasysComponent, SitesComponent, CreateSiteComponent, DashboardComponent],
+  declarations: [
+    InfrasysComponent,
+    SitesComponent,
+    CreateSiteComponent,
+    DashboardComponent,
+    SiteDetailsComponent,
+    MySitesComponent,
+  ],
   imports: [
     CommonModule,
     InfrasysRoutingModule,
@@ -27,5 +36,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     FormsModule,
     ConsoleModule,
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class InfrasysModule {}

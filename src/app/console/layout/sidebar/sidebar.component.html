@@ -80,23 +80,29 @@
 
         <div class="nested-menu" #settings>
           <a class="list-group-item" (click)="onActive(settings)" (click)="addExpandClass('settings')">
-            <i class="fa fa-users"></i>
+            <i class="fa fa-landmark"></i>
             <span class="fw-bold">Site</span>
           </a>
           <li class="nested" [class.expand]="showMenu === 'settings'">
             <ul class="submenu ps-3">
               <li>
-                <a [routerLink]="['sites']" [routerLinkActive]="['router-link-active']" class="list-group-item">
-                  <i class="fa fa-building"></i>
+                <a [routerLink]="['my-sites']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                  <i class="fa fa-store-alt"></i>
                   <span>My sites</span>
                 </a>
               </li>
               <li>
+                <a [routerLink]="['sites']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                  <i class="fa fa-warehouse"></i>
+                  <span>Sites</span>
+                </a>
+              </li>
+              <!-- <li>
                 <a [routerLink]="['create-site']" [routerLinkActive]="['router-link-active']" class="list-group-item">
                   <i class="fa fa-plus"></i>
                   <span>Create site</span>
                 </a>
-              </li>
+              </li> -->
             </ul>
           </li>
         </div>

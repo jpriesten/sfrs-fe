@@ -40,7 +40,7 @@ export class IdapService {
   /** POST: Fetch groups
    * @param {number} maxItems Maximum number of items per page
    */
-  getGroups(maxItems: number = 10): Promise<any> {
+  getGroups(maxItems: number = this.core.maxItems): Promise<any> {
     // if (this.core.userHasPermission("SRAUTHCODE")) { // For when policies are to be enforced
     if (true) {
       let url = `${this.fullBaseUrl}/listGroups`;
@@ -71,7 +71,7 @@ export class IdapService {
    */
   getGroupPolicies(
     groupName: string | null,
-    maxItems: number = 10
+    maxItems: number = this.core.maxItems
   ): Promise<any> {
     // if (this.core.userHasPermission("SRAUTHCODE")) { // For when policies are to be enforced
     if (true) {
@@ -106,7 +106,7 @@ export class IdapService {
    */
   getGroup(
     groupName: string | null,
-    maxItems: number = 10,
+    maxItems: number = this.core.maxItems,
     marker?: string
   ): Promise<any> {
     // if (this.core.userHasPermission("SRAUTHCODE")) { // For when policies are to be enforced
@@ -203,7 +203,7 @@ export class IdapService {
   /** POST: Fetch users
    * @param {number} maxItems Maximum number of items per page
    */
-  getUsers(maxItems: number = 10): Promise<any> {
+  getUsers(maxItems: number = this.core.maxItems): Promise<any> {
     // if (this.core.userHasPermission("SRAUTHCODE")) { // For when policies are to be enforced
     if (true) {
       let url = `${this.fullBaseUrl}/listUsers`;
@@ -263,7 +263,7 @@ export class IdapService {
    */
   getUserGroups(
     userName: string | null,
-    maxItems: number = 10,
+    maxItems: number = this.core.maxItems,
     marker?: string
   ): Promise<any> {
     // if (this.core.userHasPermission("SRAUTHCODE")) { // For when policies are to be enforced
@@ -410,7 +410,7 @@ export class IdapService {
   /** POST: Fetch policies
    * @param {number} maxItems Maximum number of items per page
    */
-  getPolicies(maxItems: number = 10): Promise<any> {
+  getPolicies(maxItems: number = this.core.maxItems): Promise<any> {
     // if (this.core.userHasPermission("SRAUTHCODE")) { // For when policies are to be enforced
     if (true) {
       let url = `${this.fullBaseUrl}/listPolicies`;

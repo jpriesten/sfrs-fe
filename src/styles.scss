@@ -29,6 +29,10 @@ a:hover {
   color: darken($app-secondary-color, 5%);
 }
 
+.text-custom {
+  font-size: 14px;
+}
+
 .add-datagrid-buttons {
   font-size: 0.8rem;
   position: relative;
@@ -40,6 +44,10 @@ a:hover {
   position: relative;
   left: 10px;
   top: 1px;
+}
+
+.content-design {
+  background-color: #ffff;
 }
 
 .nav-container {

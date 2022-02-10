@@ -6,7 +6,7 @@
       <h5>INFRASYS resources</h5>
     </div>
     <div class="col d-flex justify-content-sm-end" *ngIf="unauthorisedDashboard.authorised">
-      <button class="btn btn-sm btn-outline-secondary">
+      <button class="btn btn-sm btn-outline-secondary" (click)="getSiteSummary()">
         <i class="fas fa-sync-alt"></i>
       </button>
     </div>
@@ -17,13 +17,31 @@
       <div class="col border-end">
         <div>Sites</div>
         <div>
-          <a [routerLink]="['../sites']">10</a>
+          <a [routerLink]="['../sites']">{{siteSummary.sites}}</a>
+        </div>
+      </div>
+      <div class="col border-end">
+        <div>My sites</div>
+        <div>
+          <a routerLink="../my-sites">{{siteSummary.mySites}}</a>
+        </div>
+      </div>
+      <div class="col border-end">
+        <div>My audited sites</div>
+        <div>
+          <a routerLink="../my-sites">{{siteSummary.myAuditedSites}}</a>
+        </div>
+      </div>
+      <div class="col border-end">
+        <div>My closed sites</div>
+        <div>
+          <a routerLink="../my-sites">{{siteSummary.myClosedSites}}</a>
         </div>
       </div>
       <div class="col">
-        <div>My sites</div>
+        <div>My archived sites</div>
         <div>
-          <a routerLink="../sites">4</a>
+          <a routerLink="../my-sites">{{siteSummary.myArchivedSites}}</a>
         </div>
       </div>
     </div>
