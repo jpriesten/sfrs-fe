@@ -336,28 +336,28 @@
             </div> -->
 
             <div *dxTemplate="let element of 'detail'">
-              <div class="row pb-2">
+              <!-- <div class="row pb-2">
                 <label class="form-label col col-sm-3 fw-bold d-flex justify-content-sm-end">Type</label>
                 <div class="col-12 col-sm">
                   <h6 class="form-label fw-bolder col col-sm-3">
                     {{ element.data.elementType?.text}}
                   </h6>
                 </div>
-              </div>
+              </div> -->
               <div class="pb-3" *ngIf="element.data.elementSubType?.text">
                 <!-- <div class="row pb-2" *ngFor="let subType of element.data.elementType?.elementSubTypes"> -->
                 <div class="row pb-2">	
-                  <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Sub
+                  <!-- <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Sub
                     type</label>
                   <div class="col-12 col-sm">
                     <span class="text-custom" [title]="element.data.elementSubType?.description || ''">{{element.data.elementSubType?.text || '-'}}</span>
-                  </div>
+                  </div> -->
 
                   <div class="row pb-2" *ngIf="element.data.elementSubType?.elementSpecificTypes">
-                    <label
+                    <!-- <label
                       class="form-label col col-sm-3 pe-2 pt-2 fw-bold text-custom d-flex justify-content-sm-end">Specific
-                      types</label>
-                    <div class="col-12 col-sm-9">
+                      types</label> -->
+                    <div class="col-12 col-sm-12">
                       <div class="row">
                         <div class="col-12 col-sm-6 ps-sm-3 p-2"
                           *ngFor="let specificType of element.data.elementSubType?.elementSpecificTypes">
