@@ -1,3 +1,5 @@
+
+
 <div class="container-fluid">
    <div>
       <a [routerLink]="['/console/infrasys/dashboard']">INFRASYS</a> &nbsp;
@@ -30,10 +32,10 @@
          </div>
          <div class="row">
             <div class="col-4 col-sm d-flex justify-content-sm-end">
-               <span>Creation date:</span>
+               <span>Audited date:</span>
             </div>
             <div class="col">
-               <small>{{core.getDate(siteData?.createDate)}}</small>
+               <small>{{core.getDate(siteData?.auditedOn)}}</small>
             </div>
          </div>
       </div>
@@ -132,6 +134,54 @@
          </div>
       </ng-template>
    </ng-container>
+   <ng-container ngbNavItem>
+      <a ngbNavLink>Management</a>
+      <ng-template ngbNavContent>
+         <div class="p-3 ps-2 pe-2">
+            <div class="pb-3">
+               <div class="row pb-2">
+                  <label class="form-label fw-bold text-custom col col-sm-3 d-flex justify-content-sm-end">Owner Type</label>
+                  <div class="col-12 col-sm">
+                     <span class="text-custom">{{siteData?.ownerType || '-'}}</span>
+                  </div>
+               </div>
+               <div class="row pb-2">
+                  <label class="form-label fw-bold text-custom col col-sm-3 d-flex justify-content-sm-end">Owner Group</label>
+                  <div class="col-12 col-sm">
+                     <span class="text-custom">{{siteData?.ownerGroup || '-'}}</span>
+                  </div>
+               </div>
+               <div class="row pb-2">
+                  <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Education Phase</label>
+                  <div class="col-12 col-sm">
+                     <span class="text-custom">{{siteData?.educationPhase || '-'}}</span>
+                  </div>
+               </div>
+               <div class="row pb-2">
+                  <label
+                     class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Management Type</label>
+                  <div class="col-12 col-sm">
+                     <span class="text-custom">{{siteData?.managementType || '-'}}</span>
+                  </div>
+               </div>
+               <div class="row pb-2">
+                  <label
+                     class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Management Group</label>
+                  <div class="col-12 col-sm">
+                     <span class="text-custom">{{siteData?.managementGroup || '-'}}</span>
+                  </div>
+               </div>
+               <div class="row pb-2">
+                  <label
+                     class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Operator Name</label>
+                  <div class="col-12 col-sm">
+                     <span class="text-custom">{{siteData?.operatorName || '-'}}</span>
+                  </div>
+               </div>               
+            </div>
+         </div>
+      </ng-template>
+   </ng-container>   
    <ng-container ngbNavItem>
       <a ngbNavLink>Address and Area</a>
       <ng-template ngbNavContent>
