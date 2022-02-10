@@ -2,16 +2,16 @@
   <div>
     <a [routerLink]="['../dashboard']">INFRASYS</a> &nbsp;
     <i class="fa fa-chevron-right"></i> &nbsp;
-    Sites
+    My sites
   </div>
   <hr>
 
   <div class="row">
     <div class="col">
-      <h4>Sites</h4>
+      <h4>My sites</h4>
     </div>
     <div class="col d-flex justify-content-end">
-      <span class="text-muted">Total: {{sites.length}}</span>
+      <span class="text-muted">Total: {{mySites.length}}</span>
     </div>
   </div>
 
@@ -23,13 +23,13 @@
           selectedRows?.length }} selected</span>
       </div>
       <div class="col d-flex justify-content-end" *ngIf="unauthorisedDashboard.authorised">
-        <button class="btn btn-sm btn-outline-secondary" (click)="getSites()" title="Refresh">
+        <button class="btn btn-sm btn-outline-secondary" (click)="getMySites()" title="Refresh">
           <i class="fas fa-sync-alt"></i>
         </button>
       </div>
     </div>
     <ng-container *ngIf="unauthorisedDashboard.authorised; else elseTemplate">
-      <dx-data-grid #mySitesContainer [dataSource]="sites" [columnAutoWidth]="true" [showBorders]="true"
+      <dx-data-grid #mySitesContainer [dataSource]="mySites" [columnAutoWidth]="true" [showBorders]="true"
         [showRowLines]="true" [showColumnLines]="false" [allowColumnReordering]="true" [wordWrapEnabled]="true"
         [(selectedRowKeys)]="selectedRows" noDataText="No data available">
         <dxo-paging [enabled]="true" [pageSize]="20" [remoteOperations]="{ groupPaging: false }">
@@ -70,7 +70,7 @@
         </dxi-column>
 
         <div *dxTemplate="let cell of 'nameTemplate'">
-          <a [routerLink]="['../sites/details', cell.data.sid]">{{cell.data.siteName}}</a>
+          <a [routerLink]="['../my-sites/details', cell.data.sid]">{{cell.data.siteName}}</a>
         </div>
 
         <div *dxTemplate="let cell of 'auditedOnTemplate'">

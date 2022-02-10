@@ -31,6 +31,10 @@ export class SiteDetailsComponent implements OnInit {
     this.getSiteDetails(this.route.snapshot.paramMap.get('siteId'));
   }
 
+  get isMySite(): boolean {
+    return this.router.url.includes('/my-sites');
+  }
+
   getSiteDetails(siteId: string | null): void {
     this.loadingData = true;
     this.infrasysService
@@ -44,10 +48,17 @@ export class SiteDetailsComponent implements OnInit {
         this.siteAddress = response.data.site.address;
         this.siteArea = response.data.site.area;
         this.siteContact = response.data.site.contact;
+
+        console.log('The elements: ', this.siteElements);
       })
       .catch((error) => {
         this.loadingData = false;
-        this.router.navigate(['/console/infrasys/my-sites']);
+        if (this.isMySite) this.router.navigate(['/console/infrasys/my-sites']);
+        else this.router.navigate(['/console/infrasys/sites']);
       });
+  }
+
+  onRowExpanding(event: any) {
+    event.component.collapseAll(-1);
   }
 }

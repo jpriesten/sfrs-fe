@@ -1,17 +1,17 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CoreService } from 'src/app/services/core.service';
 import { InfrasysService } from 'src/app/services/infrasys.service';
 
 @Component({
-  selector: 'app-sites',
-  templateUrl: './sites.component.html',
-  styleUrls: ['./sites.component.scss'],
+  selector: 'app-my-sites',
+  templateUrl: './my-sites.component.html',
+  styleUrls: ['./my-sites.component.scss'],
 })
-export class SitesComponent implements OnInit {
+export class MySitesComponent implements OnInit {
   loadingData = false;
   unauthorisedDashboard = { authorised: true, description: '' };
 
-  public sites: any[] = [];
+  public mySites: any[] = [];
   public selectedRows: any[] = [];
 
   constructor(
@@ -20,17 +20,17 @@ export class SitesComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getSites();
+    this.getMySites();
   }
 
-  getSites() {
+  getMySites() {
     this.loadingData = true;
     this.infrasysService
-      .getSites()
+      .getUserSites()
       .then((response) => {
         this.loadingData = false;
         this.unauthorisedDashboard.authorised = true;
-        this.sites = response.data.sites;
+        this.mySites = response.data.sites;
       })
       .catch((error) => {
         this.loadingData = false;

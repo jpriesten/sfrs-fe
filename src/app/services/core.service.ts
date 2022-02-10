@@ -20,6 +20,8 @@ export class CoreService {
   public user: User | null = new User();
   private httpTimeout = 60 * 1000;
 
+  public maxItems = 100;
+
   public tagPatten = /^[A-Za-z0-9_.:/=+-@]+$/;
 
   public httpOptions = {

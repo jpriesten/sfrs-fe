@@ -2,7 +2,8 @@
   <div>
     <a [routerLink]="['/console/infrasys/dashboard']">INFRASYS</a> &nbsp;
     <i class="fa fa-chevron-right"></i> &nbsp;
-    <a [routerLink]="['/console/infrasys/my-sites']">My sites</a> &nbsp;
+    <a [routerLink]="['/console/infrasys/my-sites']" *ngIf="isMySite">My sites</a> &nbsp;
+    <a [routerLink]="['/console/infrasys/sites']" *ngIf="!isMySite">Sites</a> &nbsp;
     <i class="fa fa-chevron-right"></i> &nbsp;
     {{siteData?.siteName}}
   </div>
@@ -50,25 +51,26 @@
         <div class="p-3 ps-2 pe-2">
           <div class="pb-3">
             <div class="row pb-2">
-              <label class="form-label fw-bold col col-sm-3 d-flex justify-content-sm-end">Title</label>
+              <label class="form-label fw-bold text-custom col col-sm-3 d-flex justify-content-sm-end">Title</label>
               <div class="col-12 col-sm">
                 <span class="text-custom">{{siteContact?.title || '-'}}</span>
               </div>
             </div>
             <div class="row pb-2">
-              <label class="form-label col col-sm-3 fw-bold d-flex justify-content-sm-end">First name</label>
+              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">First
+                name</label>
               <div class="col-12 col-sm">
                 <span class="text-custom">{{siteContact?.firstName || '-'}}</span>
               </div>
             </div>
             <div class="row pb-2">
-              <label class="form-label col col-sm-3 fw-bold d-flex justify-content-sm-end">Last name</label>
+              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Last name</label>
               <div class="col-12 col-sm">
                 <span class="text-custom">{{siteContact?.lastName || '-'}}</span>
               </div>
             </div>
             <div class="row pb-2">
-              <label class="form-label col col-sm-3 fw-bold d-flex justify-content-sm-end">Telephone
+              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Telephone
                 number</label>
               <div class="col-12 col-sm">
                 <span class="text-custom">{{siteContact?.telephoneNumber || '-'}}</span>
@@ -77,51 +79,54 @@
           </div>
           <div class="pb-3">
             <div class="row pb-2">
-              <label class="form-label col col-sm-3 fw-bold d-flex justify-content-sm-end">Email</label>
+              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Email</label>
               <div class="col-12 col-sm">
                 <span class="text-custom">{{siteContact?.email || '-'}}</span>
               </div>
             </div>
             <div class="row pb-2">
-              <label class="form-label col col-sm-3 fw-bold d-flex justify-content-sm-end">Twitter</label>
+              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Twitter</label>
               <div class="col-12 col-sm">
                 <span class="text-custom">{{siteContact?.twitter || '-'}}</span>
               </div>
             </div>
             <div class="row pb-2">
-              <label class="form-label col col-sm-3 fw-bold d-flex justify-content-sm-end">Facebook</label>
+              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Facebook</label>
               <div class="col-12 col-sm">
                 <span class="text-custom">{{siteContact?.facebook || '-'}}</span>
               </div>
             </div>
             <div class="row pb-2">
-              <label class="form-label col col-sm-3 fw-bold d-flex justify-content-sm-end">Website</label>
+              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Website</label>
               <div class="col-12 col-sm">
-                <a [href]="siteContact?.website">{{siteContact?.website || '-'}}</a>
+                <a [href]="siteContact?.website" target="_black">{{siteContact?.website || '-'}}</a>
               </div>
             </div>
           </div>
           <div class="pb-3">
             <div class="row pb-2">
-              <label class="form-label col col-sm-3 fw-bold d-flex justify-content-sm-end">Designation</label>
+              <label
+                class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Designation</label>
               <div class="col-12 col-sm">
                 <span class="text-custom">{{siteContact?.designation || '-'}}</span>
               </div>
             </div>
             <div class="row pb-2">
-              <label class="form-label col col-sm-3 fw-bold d-flex justify-content-sm-end">Type</label>
+              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Type</label>
               <div class="col-12 col-sm">
                 <span class="text-custom">{{siteContact?.type || '-'}}</span>
               </div>
             </div>
             <div class="row pb-2">
-              <label class="form-label col col-sm-3 fw-bold d-flex justify-content-sm-end">Create date</label>
+              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Create
+                date</label>
               <div class="col-12 col-sm">
                 <span class="text-custom">{{siteContact.createDate? core.getDate(siteContact.createDate): '-'}}</span>
               </div>
             </div>
             <div class="row pb-2">
-              <label class="form-label col col-sm-3 fw-bold d-flex justify-content-sm-end">Update date</label>
+              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Update
+                date</label>
               <div class="col-12 col-sm">
                 <span class="text-custom">{{siteContact.updateDate? core.getDate(siteContact.updateDate): '-'}}</span>
               </div>
@@ -136,60 +141,32 @@
         <div class="p-3 ps-2 pe-2">
           <div class="pb-3">
             <div class="row pb-2">
-              <h5 class="form-label fw-bolder col col-sm-3 d-flex justify-content-sm-end">Area</h5>
+              <h6 class="form-label fw-bolder col col-sm-3 d-flex justify-content-sm-end">Address</h6>
             </div>
             <div class="row pb-2">
-              <label class="form-label col col-sm-3 fw-bold d-flex justify-content-sm-end">Province</label>
-              <div class="col-12 col-sm">
-                <span class="text-custom">{{siteArea?.province?.name || '-'}}</span>
-              </div>
-            </div>
-            <div class="row pb-2">
-              <label class="form-label col col-sm-3 fw-bold d-flex justify-content-sm-end">District</label>
-              <div class="col-12 col-sm">
-                <span class="text-custom">{{siteArea?.district?.name || '-'}}</span>
-              </div>
-            </div>
-            <div class="row pb-2">
-              <label class="form-label col col-sm-3 fw-bold d-flex justify-content-sm-end">Local</label>
-              <div class="col-12 col-sm">
-                <span class="text-custom">{{siteArea?.local?.name || '-'}}</span>
-              </div>
-            </div>
-            <div class="row pb-2">
-              <label class="form-label col col-sm-3 fw-bold d-flex justify-content-sm-end">Ward</label>
-              <div class="col-12 col-sm">
-                <span class="text-custom">{{siteArea?.ward?.number || '-'}}</span>
-              </div>
-            </div>
-          </div>
-          <div class="pb-3">
-            <div class="row pb-2">
-              <h5 class="form-label fw-bolder col col-sm-3 d-flex justify-content-sm-end">Address</h5>
-            </div>
-            <div class="row pb-2">
-              <label class="form-label fw-bold col col-sm-3 d-flex justify-content-sm-end">Building
+              <label class="form-label fw-bold text-custom col col-sm-3 d-flex justify-content-sm-end">Building
                 name</label>
               <div class="col-12 col-sm">
                 <span class="text-custom">{{siteAddress?.buildingName || '-'}}</span>
               </div>
             </div>
             <div class="row pb-2">
-              <label class="form-label col col-sm-3 fw-bold d-flex justify-content-sm-end">Sub building
+              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Sub building
                 name</label>
               <div class="col-12 col-sm">
                 <span class="text-custom">{{siteAddress?.subBuildingName || '-'}}</span>
               </div>
             </div>
             <div class="row pb-2">
-              <label class="form-label col col-sm-3 fw-bold d-flex justify-content-sm-end">Building
+              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Building
                 number</label>
               <div class="col-12 col-sm">
                 <span class="text-custom">{{siteAddress?.buildingNumber || '-'}}</span>
               </div>
             </div>
             <div class="row pb-2">
-              <label class="form-label col col-sm-3 fw-bold d-flex justify-content-sm-end">Dependent thorough
+              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Dependent
+                thorough
                 fare
               </label>
               <div class="col-12 col-sm">
@@ -197,57 +174,90 @@
               </div>
             </div>
             <div class="row pb-2">
-              <label class="form-label col col-sm-3 fw-bold d-flex justify-content-sm-end">Thorough fare name
+              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Thorough fare
+                name
               </label>
               <div class="col-12 col-sm">
                 <span class="text-custom">{{siteAddress?.thoroughfareName || '-'}}</span>
               </div>
             </div>
             <div class="row pb-2">
-              <label class="form-label col col-sm-3 fw-bold d-flex justify-content-sm-end">Dependent locality
+              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Dependent
+                locality
               </label>
               <div class="col-12 col-sm">
                 <span class="text-custom">{{siteAddress?.dependentLocality || '-'}}</span>
               </div>
             </div>
             <div class="row pb-2">
-              <label class="form-label col col-sm-3 fw-bold d-flex justify-content-sm-end">Post town
+              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Post town
               </label>
               <div class="col-12 col-sm">
                 <span class="text-custom">{{siteAddress?.postTown || '-'}}</span>
               </div>
             </div>
             <div class="row pb-2">
-              <label class="form-label col col-sm-3 fw-bold d-flex justify-content-sm-end">Post code
+              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Post code
               </label>
               <div class="col-12 col-sm">
                 <span class="text-custom">{{siteAddress?.postCode || '-'}}</span>
               </div>
             </div>
             <div class="row pb-2">
-              <label class="form-label col col-sm-3 fw-bold d-flex justify-content-sm-end">Latitude
+              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Latitude
               </label>
               <div class="col-12 col-sm">
                 <span class="text-custom">{{siteAddress?.latitude || '-'}}</span>
               </div>
             </div>
             <div class="row pb-2">
-              <label class="form-label col col-sm-3 fw-bold d-flex justify-content-sm-end">Longitude
+              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Longitude
               </label>
               <div class="col-12 col-sm">
                 <span class="text-custom">{{siteAddress?.longitude || '-'}}</span>
               </div>
             </div>
             <div class="row pb-2">
-              <label class="form-label col col-sm-3 fw-bold d-flex justify-content-sm-end">Create date</label>
+              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Create
+                date</label>
               <div class="col-12 col-sm">
                 <span class="text-custom">{{siteAddress.createDate? core.getDate(siteContact.createDate): '-'}}</span>
               </div>
             </div>
             <div class="row pb-2">
-              <label class="form-label col col-sm-3 fw-bold d-flex justify-content-sm-end">Update date</label>
+              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Update
+                date</label>
               <div class="col-12 col-sm">
                 <span class="text-custom">{{siteAddress.updateDate? core.getDate(siteContact.updateDate): '-'}}</span>
+              </div>
+            </div>
+          </div>
+          <div class="pb-3">
+            <div class="row pb-2">
+              <h6 class="form-label fw-bolder col col-sm-3 d-flex justify-content-sm-end">Area</h6>
+            </div>
+            <div class="row pb-2">
+              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Province</label>
+              <div class="col-12 col-sm">
+                <span class="text-custom">{{siteArea?.province?.name || '-'}}</span>
+              </div>
+            </div>
+            <div class="row pb-2">
+              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">District</label>
+              <div class="col-12 col-sm">
+                <span class="text-custom">{{siteArea?.district?.name || '-'}}</span>
+              </div>
+            </div>
+            <div class="row pb-2">
+              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Local</label>
+              <div class="col-12 col-sm">
+                <span class="text-custom">{{siteArea?.local?.name || '-'}}</span>
+              </div>
+            </div>
+            <div class="row pb-2">
+              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Ward</label>
+              <div class="col-12 col-sm">
+                <span class="text-custom">{{siteArea?.ward?.number || '-'}}</span>
               </div>
             </div>
           </div>
@@ -293,8 +303,9 @@
       <ng-template ngbNavContent>
         <div class="pt-3">
           <dx-data-grid [dataSource]="siteElements" [columnAutoWidth]="true" [showBorders]="true" [showRowLines]="true"
-            [showColumnLines]="false" [allowColumnReordering]="true" [wordWrapEnabled]="true"
-            noDataText="No data available">
+            [showColumnLines]="false" [allowColumnReordering]="true" [wordWrapEnabled]="true" [hoverStateEnabled]="true"
+            (onRowExpanding)="onRowExpanding($event)" [masterDetail]="{ enabled: true, template: 'detail' }"
+            keyExpr="sid" noDataText="No data available">
             <dxo-paging [enabled]="true" [pageSize]="20" [remoteOperations]="{ groupPaging: false }">
             </dxo-paging>
             <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10, 20, 30, 40, 50]" [showInfo]="true">
@@ -304,8 +315,8 @@
             <dxo-search-panel [visible]="true" [width]="240" placeholder="Search..."></dxo-search-panel>
 
             <dxi-column dataField="sid" [visible]="false"></dxi-column>
-            <dxi-column dataField="elementTypeId" caption="Element type" cellTemplate="typeTextTemplate"></dxi-column>
-            <dxi-column dataField="elementType" caption="Element type descr" cellTemplate="typeDescrTemplate">
+            <dxi-column dataField="elementType" caption="Element type" cellTemplate="typeTextTemplate"></dxi-column>
+            <dxi-column dataField="elementTypeId" caption="Element type descr" cellTemplate="typeDescrTemplate">
             </dxi-column>
             <dxi-column dataField="createDate" cellTemplate="createDateTemplate"></dxi-column>
             <dxi-column dataField="updateDate" cellTemplate="updateDateTemplate"></dxi-column>
@@ -322,6 +333,44 @@
             </div>
             <div *dxTemplate="let cell of 'updateDateTemplate'">
               {{core.getDateInMoment(cell.data.updateDate)}}
+            </div>
+
+            <div *dxTemplate="let element of 'detail'">
+              <div class="row pb-2">
+                <label class="form-label col col-sm-3 fw-bold d-flex justify-content-sm-end">Type</label>
+                <div class="col-12 col-sm">
+                  <h6 class="form-label fw-bolder col col-sm-3">
+                    {{ element.data.elementType?.text}}
+                  </h6>
+                </div>
+              </div>
+              <div class="pb-3" *ngIf="element.data.elementType?.elementSubTypes">
+                <div class="row pb-2" *ngFor="let subType of element.data.elementType?.elementSubTypes">
+                  <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Sub
+                    type</label>
+                  <div class="col-12 col-sm">
+                    <span class="text-custom" [title]="subType?.description || ''">{{subType?.text || '-'}}</span>
+                  </div>
+
+                  <div class="row pb-2" *ngIf="subType?.elementSpecificTypes">
+                    <label
+                      class="form-label col col-sm-3 pe-2 pt-2 fw-bold text-custom d-flex justify-content-sm-end">Specific
+                      types</label>
+                    <div class="col-12 col-sm-9">
+                      <div class="row">
+                        <div class="col-12 col-sm-6 ps-sm-3 p-2"
+                          *ngFor="let specificType of subType?.elementSpecificTypes">
+                          <span class="text-custom" [title]="specificType?.description || ''"
+                            *ngIf="specificType.text">{{specificType.text}}:
+                            {{specificType?.type
+                            == "flag" && specificType?.elementSpecifics.length == 0? ('false' | titlecase):
+                            specificType?.elementSpecifics[0]?.text | titlecase}}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
 
             <dxo-export [enabled]="true" fileName="Site Activities" [allowExportSelectedData]="true"></dxo-export>

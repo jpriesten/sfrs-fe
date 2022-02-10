@@ -12,6 +12,7 @@ import { SitesComponent } from './sites/sites.component';
 import { CreateSiteComponent } from './create-site/create-site.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SiteDetailsComponent } from './sites/site-details/site-details.component';
+import { MySitesComponent } from './my-sites/my-sites.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { SiteDetailsComponent } from './sites/site-details/site-details.componen
     CreateSiteComponent,
     DashboardComponent,
     SiteDetailsComponent,
+    MySitesComponent,
   ],
   imports: [
     CommonModule,
