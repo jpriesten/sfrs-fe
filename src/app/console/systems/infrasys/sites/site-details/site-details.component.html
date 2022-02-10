@@ -76,6 +76,13 @@
               </div>
             </div>
             <div class="row pb-2">
+              <label
+                class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Designation</label>
+              <div class="col-12 col-sm">
+                <span class="text-custom">{{siteContact?.designation || '-'}}</span>
+              </div>
+            </div>            
+            <div class="row pb-2">
               <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Telephone
                 number</label>
               <div class="col-12 col-sm">
@@ -110,13 +117,6 @@
             </div>
           </div>
           <div class="pb-3">
-            <div class="row pb-2">
-              <label
-                class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Designation</label>
-              <div class="col-12 col-sm">
-                <span class="text-custom">{{siteContact?.designation || '-'}}</span>
-              </div>
-            </div>
             <div class="row pb-2">
               <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Create
                 date</label>
@@ -315,8 +315,8 @@
             <dxo-search-panel [visible]="true" [width]="240" placeholder="Search..."></dxo-search-panel>
 
             <dxi-column dataField="sid" [visible]="false"></dxi-column>
-            <dxi-column dataField="elementType" caption="Element type" cellTemplate="typeTextTemplate"></dxi-column>
-            <dxi-column dataField="elementTypeId" caption="Element type descr" cellTemplate="typeDescrTemplate">
+            <dxi-column dataField="elementType" caption="Type" cellTemplate="typeTextTemplate"></dxi-column>
+            <dxi-column dataField="elementTypeId" caption="Description" cellTemplate="typeDescrTemplate">
             </dxi-column>
             <dxi-column dataField="createDate" cellTemplate="createDateTemplate"></dxi-column>
             <!-- <dxi-column dataField="updateDate" cellTemplate="updateDateTemplate"></dxi-column> -->
