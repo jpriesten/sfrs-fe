@@ -237,11 +237,17 @@
               <h6 class="form-label fw-bolder col col-sm-3 d-flex justify-content-sm-end">Area</h6>
             </div>
             <div class="row pb-2">
-              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Province</label>
+              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Ward</label>
               <div class="col-12 col-sm">
-                <span class="text-custom">{{siteArea?.province?.name || '-'}}</span>
+                <span class="text-custom">{{siteArea?.ward?.number || '-'}}</span>
               </div>
-            </div>
+            </div>            
+            <div class="row pb-2">
+              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Local</label>
+              <div class="col-12 col-sm">
+                <span class="text-custom">{{siteArea?.local?.name || '-'}}</span>
+              </div>
+            </div> 
             <div class="row pb-2">
               <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">District</label>
               <div class="col-12 col-sm">
@@ -249,15 +255,9 @@
               </div>
             </div>
             <div class="row pb-2">
-              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Local</label>
+              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Province</label>
               <div class="col-12 col-sm">
-                <span class="text-custom">{{siteArea?.local?.name || '-'}}</span>
-              </div>
-            </div>
-            <div class="row pb-2">
-              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Ward</label>
-              <div class="col-12 col-sm">
-                <span class="text-custom">{{siteArea?.ward?.number || '-'}}</span>
+                <span class="text-custom">{{siteArea?.province?.name || '-'}}</span>
               </div>
             </div>
           </div>
