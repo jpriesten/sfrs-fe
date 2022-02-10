@@ -51,6 +51,12 @@
         <div class="p-3 ps-2 pe-2">
           <div class="pb-3">
             <div class="row pb-2">
+              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Type</label>
+              <div class="col-12 col-sm">
+                <span class="text-custom">{{siteContact?.type || '-'}}</span>
+              </div>
+            </div>          	
+            <div class="row pb-2">
               <label class="form-label fw-bold text-custom col col-sm-3 d-flex justify-content-sm-end">Title</label>
               <div class="col-12 col-sm">
                 <span class="text-custom">{{siteContact?.title || '-'}}</span>
@@ -109,12 +115,6 @@
                 class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Designation</label>
               <div class="col-12 col-sm">
                 <span class="text-custom">{{siteContact?.designation || '-'}}</span>
-              </div>
-            </div>
-            <div class="row pb-2">
-              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Type</label>
-              <div class="col-12 col-sm">
-                <span class="text-custom">{{siteContact?.type || '-'}}</span>
               </div>
             </div>
             <div class="row pb-2">
@@ -318,8 +318,8 @@
             <dxi-column dataField="elementType" caption="Element type" cellTemplate="typeTextTemplate"></dxi-column>
             <dxi-column dataField="elementTypeId" caption="Element type descr" cellTemplate="typeDescrTemplate">
             </dxi-column>
-            <!-- <dxi-column dataField="createDate" cellTemplate="createDateTemplate"></dxi-column>
-            <dxi-column dataField="updateDate" cellTemplate="updateDateTemplate"></dxi-column> -->
+            <dxi-column dataField="createDate" cellTemplate="createDateTemplate"></dxi-column>
+            <!-- <dxi-column dataField="updateDate" cellTemplate="updateDateTemplate"></dxi-column> -->
 
             <div *dxTemplate="let cell of 'typeTextTemplate'">
               {{cell.data.elementType?.text}} >>  {{cell.data.elementSubType?.text}}
@@ -328,10 +328,10 @@
               {{cell.data.elementType?.description}}
             </div>
 
-            <!-- <div *dxTemplate="let cell of 'createDateTemplate'">
+            <div *dxTemplate="let cell of 'createDateTemplate'">
               {{core.getDateInMoment(cell.data.createDate)}}
             </div>
-            <div *dxTemplate="let cell of 'updateDateTemplate'">
+            <!-- <div *dxTemplate="let cell of 'updateDateTemplate'">
               {{core.getDateInMoment(cell.data.updateDate)}}
             </div> -->
 
@@ -344,7 +344,7 @@
                   </h6>
                 </div>
               </div>
-              <div class="pb-3" *ngIf="element.data.elementSubTypes?.text">
+              <div class="pb-3" *ngIf="element.data.elementSubType?.text">
                 <!-- <div class="row pb-2" *ngFor="let subType of element.data.elementType?.elementSubTypes"> -->
                 <div class="row pb-2">	
                   <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Sub
