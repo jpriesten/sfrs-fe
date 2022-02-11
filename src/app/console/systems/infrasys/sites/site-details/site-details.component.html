@@ -1,274 +1,302 @@
+
+
 <div class="container-fluid">
-  <div>
-    <a [routerLink]="['/console/infrasys/dashboard']">INFRASYS</a> &nbsp;
-    <i class="fa fa-chevron-right"></i> &nbsp;
-    <a [routerLink]="['/console/infrasys/my-sites']" *ngIf="isMySite">My sites</a> &nbsp;
-    <a [routerLink]="['/console/infrasys/sites']" *ngIf="!isMySite">Sites</a> &nbsp;
-    <i class="fa fa-chevron-right"></i> &nbsp;
-    {{siteData?.siteName}}
-  </div>
-
-  <div class="row pt-3 align-items-center">
-    <div class="col">
-      <h3 class="">{{siteData?.siteName}}</h3>
-    </div>
-    <div class="col d-flex justify-content-end">
-      <button class="btn btn-sm btn-danger">Delete</button>
-    </div>
-  </div>
-
-  <div class="row pt-3 align-items-center">
-    <div class="col">
-      <h5>Summary</h5>
-    </div>
-    <div class="col-12 col-sm-8">
-      <div class="row">
-        <div class="col-4 col-sm d-flex justify-content-sm-end">
-          <span>Start date:</span>
-        </div>
-        <div class="col">
-          <small>{{core.getDate(siteData?.startDate)}}</small>
-        </div>
+   <div>
+      <a [routerLink]="['/console/infrasys/dashboard']">INFRASYS</a> &nbsp;
+      <i class="fa fa-chevron-right"></i> &nbsp;
+      <a [routerLink]="['/console/infrasys/my-sites']" *ngIf="isMySite">My sites</a> &nbsp;
+      <a [routerLink]="['/console/infrasys/sites']" *ngIf="!isMySite">Sites</a> &nbsp;
+      <i class="fa fa-chevron-right"></i> &nbsp;
+      {{siteData?.siteName}}
+   </div>
+   <div class="row pt-3 align-items-center">
+      <div class="col">
+         <h3 class="">{{siteData?.siteName}}</h3>
       </div>
-      <div class="row">
-        <div class="col-4 col-sm d-flex justify-content-sm-end">
-          <span>Creation date:</span>
-        </div>
-        <div class="col">
-          <small>{{core.getDate(siteData?.createDate)}}</small>
-        </div>
+      <div class="col d-flex justify-content-end">
+         <button class="btn btn-sm btn-danger">Delete</button>
       </div>
-    </div>
-    <div class="col d-flex justify-content-end">
-      <button class="btn btn-sm btn-secondary">Edit</button>
-    </div>
-  </div>
-
-  <nav ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-pills pt-3">
-    <ng-container ngbNavItem>
+   </div>
+   <div class="row pt-3 align-items-center">
+      <div class="col">
+         <h5>Summary</h5>
+      </div>
+      <div class="col-12 col-sm-8">
+         <div class="row">
+            <div class="col-4 col-sm d-flex justify-content-sm-end">
+               <span>Start date:</span>
+            </div>
+            <div class="col">
+               <small>{{core.getDate(siteData?.startDate)}}</small>
+            </div>
+         </div>
+         <div class="row">
+            <div class="col-4 col-sm d-flex justify-content-sm-end">
+               <span>Audited date:</span>
+            </div>
+            <div class="col">
+               <small>{{core.getDate(siteData?.auditedOn)}}</small>
+            </div>
+         </div>
+      </div>
+      <div class="col d-flex justify-content-end">
+         <button class="btn btn-sm btn-secondary">Edit</button>
+      </div>
+   </div>
+   <nav ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-pills pt-3">
+   <ng-container ngbNavItem>
       <a ngbNavLink>Contact</a>
       <ng-template ngbNavContent>
-        <div class="p-3 ps-2 pe-2">
-          <div class="pb-3">
-            <div class="row pb-2">
-              <label class="form-label fw-bold text-custom col col-sm-3 d-flex justify-content-sm-end">Title</label>
-              <div class="col-12 col-sm">
-                <span class="text-custom">{{siteContact?.title || '-'}}</span>
-              </div>
+         <div class="p-3 ps-2 pe-2">
+            <div class="pb-3">
+               <div class="row pb-2">
+                  <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Type</label>
+                  <div class="col-12 col-sm">
+                     <span class="text-custom">{{siteContact?.type || '-'}}</span>
+                  </div>
+               </div>
+               <div class="row pb-2">
+                  <label class="form-label fw-bold text-custom col col-sm-3 d-flex justify-content-sm-end">Title</label>
+                  <div class="col-12 col-sm">
+                     <span class="text-custom">{{siteContact?.title || '-'}}</span>
+                  </div>
+               </div>
+               <div class="row pb-2">
+                  <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">First
+                  name</label>
+                  <div class="col-12 col-sm">
+                     <span class="text-custom">{{siteContact?.firstName || '-'}}</span>
+                  </div>
+               </div>
+               <div class="row pb-2">
+                  <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Last name</label>
+                  <div class="col-12 col-sm">
+                     <span class="text-custom">{{siteContact?.lastName || '-'}}</span>
+                  </div>
+               </div>
+               <div class="row pb-2">
+                  <label
+                     class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Designation</label>
+                  <div class="col-12 col-sm">
+                     <span class="text-custom">{{siteContact?.designation || '-'}}</span>
+                  </div>
+               </div>
+               <div class="row pb-2">
+                  <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Telephone
+                  number</label>
+                  <div class="col-12 col-sm">
+                     <span class="text-custom">{{siteContact?.telephoneNumber || '-'}}</span>
+                  </div>
+               </div>
             </div>
-            <div class="row pb-2">
-              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">First
-                name</label>
-              <div class="col-12 col-sm">
-                <span class="text-custom">{{siteContact?.firstName || '-'}}</span>
-              </div>
+            <div class="pb-3">
+               <div class="row pb-2">
+                  <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Email</label>
+                  <div class="col-12 col-sm">
+                     <span class="text-custom">{{siteContact?.email || '-'}}</span>
+                  </div>
+               </div>
+               <div class="row pb-2">
+                  <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Twitter</label>
+                  <div class="col-12 col-sm">
+                     <span class="text-custom">{{siteContact?.twitter || '-'}}</span>
+                  </div>
+               </div>
+               <div class="row pb-2">
+                  <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Facebook</label>
+                  <div class="col-12 col-sm">
+                     <span class="text-custom">{{siteContact?.facebook || '-'}}</span>
+                  </div>
+               </div>
+               <div class="row pb-2">
+                  <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Website</label>
+                  <div class="col-12 col-sm">
+                     <a [href]="siteContact?.website" target="_black">{{siteContact?.website || '-'}}</a>
+                  </div>
+               </div>
             </div>
-            <div class="row pb-2">
-              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Last name</label>
-              <div class="col-12 col-sm">
-                <span class="text-custom">{{siteContact?.lastName || '-'}}</span>
-              </div>
+            <div class="pb-3">
+               <div class="row pb-2">
+                  <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Create
+                  date</label>
+                  <div class="col-12 col-sm">
+                     <span class="text-custom">{{siteContact.createDate? core.getDate(siteContact.createDate): '-'}}</span>
+                  </div>
+               </div>
+               <div class="row pb-2">
+                  <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Update
+                  date</label>
+                  <div class="col-12 col-sm">
+                     <span class="text-custom">{{siteContact.updateDate? core.getDate(siteContact.updateDate): '-'}}</span>
+                  </div>
+               </div>
             </div>
-            <div class="row pb-2">
-              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Telephone
-                number</label>
-              <div class="col-12 col-sm">
-                <span class="text-custom">{{siteContact?.telephoneNumber || '-'}}</span>
-              </div>
-            </div>
-          </div>
-          <div class="pb-3">
-            <div class="row pb-2">
-              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Email</label>
-              <div class="col-12 col-sm">
-                <span class="text-custom">{{siteContact?.email || '-'}}</span>
-              </div>
-            </div>
-            <div class="row pb-2">
-              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Twitter</label>
-              <div class="col-12 col-sm">
-                <span class="text-custom">{{siteContact?.twitter || '-'}}</span>
-              </div>
-            </div>
-            <div class="row pb-2">
-              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Facebook</label>
-              <div class="col-12 col-sm">
-                <span class="text-custom">{{siteContact?.facebook || '-'}}</span>
-              </div>
-            </div>
-            <div class="row pb-2">
-              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Website</label>
-              <div class="col-12 col-sm">
-                <a [href]="siteContact?.website" target="_black">{{siteContact?.website || '-'}}</a>
-              </div>
-            </div>
-          </div>
-          <div class="pb-3">
-            <div class="row pb-2">
-              <label
-                class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Designation</label>
-              <div class="col-12 col-sm">
-                <span class="text-custom">{{siteContact?.designation || '-'}}</span>
-              </div>
-            </div>
-            <div class="row pb-2">
-              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Type</label>
-              <div class="col-12 col-sm">
-                <span class="text-custom">{{siteContact?.type || '-'}}</span>
-              </div>
-            </div>
-            <div class="row pb-2">
-              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Create
-                date</label>
-              <div class="col-12 col-sm">
-                <span class="text-custom">{{siteContact.createDate? core.getDate(siteContact.createDate): '-'}}</span>
-              </div>
-            </div>
-            <div class="row pb-2">
-              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Update
-                date</label>
-              <div class="col-12 col-sm">
-                <span class="text-custom">{{siteContact.updateDate? core.getDate(siteContact.updateDate): '-'}}</span>
-              </div>
-            </div>
-          </div>
-        </div>
+         </div>
       </ng-template>
-    </ng-container>
-    <ng-container ngbNavItem>
+   </ng-container>
+   <ng-container ngbNavItem>
+      <a ngbNavLink>Management</a>
+      <ng-template ngbNavContent>
+         <div class="p-3 ps-2 pe-2">
+            <div class="pb-3">
+               <div class="row pb-2">
+                  <label class="form-label fw-bold text-custom col col-sm-3 d-flex justify-content-sm-end">Owner Type</label>
+                  <div class="col-12 col-sm">
+                     <span class="text-custom">{{siteData?.ownerType || '-'}}</span>
+                  </div>
+               </div>
+               <div class="row pb-2">
+                  <label class="form-label fw-bold text-custom col col-sm-3 d-flex justify-content-sm-end">Owner Group</label>
+                  <div class="col-12 col-sm">
+                     <span class="text-custom">{{siteData?.ownerGroup || '-'}}</span>
+                  </div>
+               </div>
+               <div class="row pb-2">
+                  <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Education Phase</label>
+                  <div class="col-12 col-sm">
+                     <span class="text-custom">{{siteData?.educationPhase || '-'}}</span>
+                  </div>
+               </div>
+               <div class="row pb-2">
+                  <label
+                     class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Management Type</label>
+                  <div class="col-12 col-sm">
+                     <span class="text-custom">{{siteData?.managementType || '-'}}</span>
+                  </div>
+               </div>
+               <div class="row pb-2">
+                  <label
+                     class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Management Group</label>
+                  <div class="col-12 col-sm">
+                     <span class="text-custom">{{siteData?.managementGroup || '-'}}</span>
+                  </div>
+               </div>
+               <div class="row pb-2">
+                  <label
+                     class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Operator Name</label>
+                  <div class="col-12 col-sm">
+                     <span class="text-custom">{{siteData?.operatorName || '-'}}</span>
+                  </div>
+               </div>               
+            </div>
+         </div>
+      </ng-template>
+   </ng-container>   
+   <ng-container ngbNavItem>
       <a ngbNavLink>Address and Area</a>
       <ng-template ngbNavContent>
-        <div class="p-3 ps-2 pe-2">
-          <div class="pb-3">
-            <div class="row pb-2">
-              <h6 class="form-label fw-bolder col col-sm-3 d-flex justify-content-sm-end">Address</h6>
+         <div class="p-3 ps-2 pe-2">
+            <div class="pb-3">
+               <!-- <div class="row pb-2">
+                  <h6 class="form-label fw-bolder col col-sm-3 d-flex justify-content-sm-end">Address</h6>
+                  </div> -->
+               <div class="row pb-2">
+                  <label class="form-label fw-bold text-custom col col-sm-3 d-flex justify-content-sm-end">Building
+                  name</label>
+                  <div class="col-12 col-sm">
+                     <span class="text-custom">{{siteAddress?.buildingName || '-'}}</span>
+                  </div>
+               </div>
+               <div class="row pb-2">
+                  <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Sub building
+                  name</label>
+                  <div class="col-12 col-sm">
+                     <span class="text-custom">{{siteAddress?.subBuildingName || '-'}}</span>
+                  </div>
+               </div>
+               <div class="row pb-2">
+                  <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Building
+                  number</label>
+                  <div class="col-12 col-sm">
+                     <span class="text-custom">{{siteAddress?.buildingNumber || '-'}}</span>
+                  </div>
+               </div>
+               <div class="row pb-2">
+                  <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Dependent
+                  thorough
+                  fare
+                  </label>
+                  <div class="col-12 col-sm">
+                     <span class="text-custom">{{siteAddress?.dependentThoroughfare || '-'}}</span>
+                  </div>
+               </div>
+               <div class="row pb-2">
+                  <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Thorough fare
+                  name
+                  </label>
+                  <div class="col-12 col-sm">
+                     <span class="text-custom">{{siteAddress?.thoroughfareName || '-'}}</span>
+                  </div>
+               </div>
+               <div class="row pb-2">
+                  <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Dependent
+                  locality
+                  </label>
+                  <div class="col-12 col-sm">
+                     <span class="text-custom">{{siteAddress?.dependentLocality || '-'}}</span>
+                  </div>
+               </div>
+               <div class="row pb-2">
+                  <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Post town
+                  </label>
+                  <div class="col-12 col-sm">
+                     <span class="text-custom">{{siteAddress?.postTown || '-'}}</span>
+                  </div>
+               </div>
+               <div class="row pb-2">
+                  <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Post code
+                  </label>
+                  <div class="col-12 col-sm">
+                     <span class="text-custom">{{siteAddress?.postCode || '-'}}</span>
+                  </div>
+               </div>
+               <div class="row pb-2">
+                  <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Latitude
+                  </label>
+                  <div class="col-12 col-sm">
+                     <span class="text-custom">{{siteAddress?.latitude || '-'}}</span>
+                  </div>
+               </div>
+               <div class="row pb-2">
+                  <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Longitude
+                  </label>
+                  <div class="col-12 col-sm">
+                     <span class="text-custom">{{siteAddress?.longitude || '-'}}</span>
+                  </div>
+               </div>
+               <div class="row pb-2">
+                  <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Ward</label>
+                  <div class="col-12 col-sm">
+                     <span class="text-custom">{{siteArea?.ward?.number || '-'}}</span>
+                  </div>
+               </div>
+               <div class="row pb-2">
+                  <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Local</label>
+                  <div class="col-12 col-sm">
+                     <span class="text-custom">{{siteArea?.local?.name || '-'}}</span>
+                  </div>
+               </div>
+               <div class="row pb-2">
+                  <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">District</label>
+                  <div class="col-12 col-sm">
+                     <span class="text-custom">{{siteArea?.district?.name || '-'}}</span>
+                  </div>
+               </div>
+               <div class="row pb-2">
+                  <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Province</label>
+                  <div class="col-12 col-sm">
+                     <span class="text-custom">{{siteArea?.province?.name || '-'}}</span>
+                  </div>
+               </div>
             </div>
-            <div class="row pb-2">
-              <label class="form-label fw-bold text-custom col col-sm-3 d-flex justify-content-sm-end">Building
-                name</label>
-              <div class="col-12 col-sm">
-                <span class="text-custom">{{siteAddress?.buildingName || '-'}}</span>
-              </div>
-            </div>
-            <div class="row pb-2">
-              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Sub building
-                name</label>
-              <div class="col-12 col-sm">
-                <span class="text-custom">{{siteAddress?.subBuildingName || '-'}}</span>
-              </div>
-            </div>
-            <div class="row pb-2">
-              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Building
-                number</label>
-              <div class="col-12 col-sm">
-                <span class="text-custom">{{siteAddress?.buildingNumber || '-'}}</span>
-              </div>
-            </div>
-            <div class="row pb-2">
-              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Dependent
-                thorough
-                fare
-              </label>
-              <div class="col-12 col-sm">
-                <span class="text-custom">{{siteAddress?.dependentThoroughfare || '-'}}</span>
-              </div>
-            </div>
-            <div class="row pb-2">
-              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Thorough fare
-                name
-              </label>
-              <div class="col-12 col-sm">
-                <span class="text-custom">{{siteAddress?.thoroughfareName || '-'}}</span>
-              </div>
-            </div>
-            <div class="row pb-2">
-              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Dependent
-                locality
-              </label>
-              <div class="col-12 col-sm">
-                <span class="text-custom">{{siteAddress?.dependentLocality || '-'}}</span>
-              </div>
-            </div>
-            <div class="row pb-2">
-              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Post town
-              </label>
-              <div class="col-12 col-sm">
-                <span class="text-custom">{{siteAddress?.postTown || '-'}}</span>
-              </div>
-            </div>
-            <div class="row pb-2">
-              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Post code
-              </label>
-              <div class="col-12 col-sm">
-                <span class="text-custom">{{siteAddress?.postCode || '-'}}</span>
-              </div>
-            </div>
-            <div class="row pb-2">
-              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Latitude
-              </label>
-              <div class="col-12 col-sm">
-                <span class="text-custom">{{siteAddress?.latitude || '-'}}</span>
-              </div>
-            </div>
-            <div class="row pb-2">
-              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Longitude
-              </label>
-              <div class="col-12 col-sm">
-                <span class="text-custom">{{siteAddress?.longitude || '-'}}</span>
-              </div>
-            </div>
-            <div class="row pb-2">
-              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Create
-                date</label>
-              <div class="col-12 col-sm">
-                <span class="text-custom">{{siteAddress.createDate? core.getDate(siteContact.createDate): '-'}}</span>
-              </div>
-            </div>
-            <div class="row pb-2">
-              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Update
-                date</label>
-              <div class="col-12 col-sm">
-                <span class="text-custom">{{siteAddress.updateDate? core.getDate(siteContact.updateDate): '-'}}</span>
-              </div>
-            </div>
-          </div>
-          <div class="pb-3">
-            <div class="row pb-2">
-              <h6 class="form-label fw-bolder col col-sm-3 d-flex justify-content-sm-end">Area</h6>
-            </div>
-            <div class="row pb-2">
-              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Province</label>
-              <div class="col-12 col-sm">
-                <span class="text-custom">{{siteArea?.province?.name || '-'}}</span>
-              </div>
-            </div>
-            <div class="row pb-2">
-              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">District</label>
-              <div class="col-12 col-sm">
-                <span class="text-custom">{{siteArea?.district?.name || '-'}}</span>
-              </div>
-            </div>
-            <div class="row pb-2">
-              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Local</label>
-              <div class="col-12 col-sm">
-                <span class="text-custom">{{siteArea?.local?.name || '-'}}</span>
-              </div>
-            </div>
-            <div class="row pb-2">
-              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Ward</label>
-              <div class="col-12 col-sm">
-                <span class="text-custom">{{siteArea?.ward?.number || '-'}}</span>
-              </div>
-            </div>
-          </div>
-        </div>
+         </div>
       </ng-template>
-    </ng-container>
-    <ng-container ngbNavItem>
+   </ng-container>
+   <ng-container ngbNavItem>
       <a ngbNavLink>Activities ({{siteActivities.length}})</a>
       <ng-template ngbNavContent>
-        <div class="pt-3">
-          <dx-data-grid [dataSource]="siteActivities" [columnAutoWidth]="true" [showBorders]="true"
+         <div class="pt-3">
+            <dx-data-grid [dataSource]="siteActivities" [columnAutoWidth]="true" [showBorders]="true"
             [showRowLines]="true" [showColumnLines]="false" [allowColumnReordering]="true" [wordWrapEnabled]="true"
             noDataText="No data available">
             <dxo-paging [enabled]="true" [pageSize]="20" [remoteOperations]="{ groupPaging: false }">
@@ -278,31 +306,28 @@
             <dxo-load-panel [height]="75" [width]="75" [showPane]="true" [shading]="false">
             </dxo-load-panel>
             <dxo-search-panel [visible]="true" [width]="240" placeholder="Search..."></dxo-search-panel>
-
             <dxi-column dataField="sid" [visible]="false"></dxi-column>
             <dxi-column dataField="code" [allowHiding]="false"></dxi-column>
             <dxi-column dataField="association"></dxi-column>
             <dxi-column dataField="createDate" cellTemplate="createDateTemplate"></dxi-column>
             <dxi-column dataField="updateDate" cellTemplate="updateDateTemplate"></dxi-column>
-
             <div *dxTemplate="let cell of 'createDateTemplate'">
-              {{core.getDateInMoment(cell.data.createDate)}}
+               {{core.getDateInMoment(cell.data.createDate)}}
             </div>
             <div *dxTemplate="let cell of 'updateDateTemplate'">
-              {{core.getDateInMoment(cell.data.updateDate)}}
+               {{core.getDateInMoment(cell.data.updateDate)}}
             </div>
-
             <dxo-export [enabled]="true" fileName="Site Activities" [allowExportSelectedData]="true"></dxo-export>
             <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
-          </dx-data-grid>
-        </div>
+            </dx-data-grid>
+         </div>
       </ng-template>
-    </ng-container>
-    <ng-container ngbNavItem>
+   </ng-container>
+   <ng-container ngbNavItem>
       <a ngbNavLink>Elements ({{siteElements.length}})</a>
       <ng-template ngbNavContent>
-        <div class="pt-3">
-          <dx-data-grid [dataSource]="siteElements" [columnAutoWidth]="true" [showBorders]="true" [showRowLines]="true"
+         <div class="pt-3">
+            <dx-data-grid [dataSource]="siteElements" [columnAutoWidth]="true" [showBorders]="true" [showRowLines]="true"
             [showColumnLines]="false" [allowColumnReordering]="true" [wordWrapEnabled]="true" [hoverStateEnabled]="true"
             (onRowExpanding)="onRowExpanding($event)" [masterDetail]="{ enabled: true, template: 'detail' }"
             keyExpr="sid" noDataText="No data available">
@@ -313,77 +338,78 @@
             <dxo-load-panel [height]="75" [width]="75" [showPane]="true" [shading]="false">
             </dxo-load-panel>
             <dxo-search-panel [visible]="true" [width]="240" placeholder="Search..."></dxo-search-panel>
-
             <dxi-column dataField="sid" [visible]="false"></dxi-column>
-            <dxi-column dataField="elementType" caption="Element type" cellTemplate="typeTextTemplate"></dxi-column>
-            <dxi-column dataField="elementTypeId" caption="Element type descr" cellTemplate="typeDescrTemplate">
+            <dxi-column dataField="elementType" caption="Type" cellTemplate="typeTextTemplate"></dxi-column>
+            <dxi-column dataField="elementTypeId" caption="Description" cellTemplate="typeDescrTemplate">
             </dxi-column>
             <dxi-column dataField="createDate" cellTemplate="createDateTemplate"></dxi-column>
-            <dxi-column dataField="updateDate" cellTemplate="updateDateTemplate"></dxi-column>
-
+            <!-- <dxi-column dataField="updateDate" cellTemplate="updateDateTemplate"></dxi-column> -->
             <div *dxTemplate="let cell of 'typeTextTemplate'">
-              {{cell.data.elementType?.text}}
+               {{cell.data.elementType?.text}} >>  {{cell.data.elementSubType?.text}}
             </div>
             <div *dxTemplate="let cell of 'typeDescrTemplate'">
-              {{cell.data.elementType?.description}}
+               {{cell.data.elementType?.description}}
             </div>
-
             <div *dxTemplate="let cell of 'createDateTemplate'">
-              {{core.getDateInMoment(cell.data.createDate)}}
+               {{core.getDateInMoment(cell.data.createDate)}}
             </div>
-            <div *dxTemplate="let cell of 'updateDateTemplate'">
-              {{core.getDateInMoment(cell.data.updateDate)}}
-            </div>
-
+            <!-- <div *dxTemplate="let cell of 'updateDateTemplate'">
+               {{core.getDateInMoment(cell.data.updateDate)}}
+               </div> -->
             <div *dxTemplate="let element of 'detail'">
-              <div class="row pb-2">
-                <label class="form-label col col-sm-3 fw-bold d-flex justify-content-sm-end">Type</label>
-                <div class="col-12 col-sm">
-                  <h6 class="form-label fw-bolder col col-sm-3">
-                    {{ element.data.elementType?.text}}
-                  </h6>
-                </div>
-              </div>
-              <div class="pb-3" *ngIf="element.data.elementType?.elementSubTypes">
-                <div class="row pb-2" *ngFor="let subType of element.data.elementType?.elementSubTypes">
-                  <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Sub
-                    type</label>
+               <!-- <div class="row pb-2">
+                  <label class="form-label col col-sm-3 fw-bold d-flex justify-content-sm-end">Type</label>
                   <div class="col-12 col-sm">
-                    <span class="text-custom" [title]="subType?.description || ''">{{subType?.text || '-'}}</span>
+                    <h6 class="form-label fw-bolder col col-sm-3">
+                      {{ element.data.elementType?.text}}
+                    </h6>
                   </div>
-
-                  <div class="row pb-2" *ngIf="subType?.elementSpecificTypes">
-                    <label
-                      class="form-label col col-sm-3 pe-2 pt-2 fw-bold text-custom d-flex justify-content-sm-end">Specific
-                      types</label>
-                    <div class="col-12 col-sm-9">
-                      <div class="row">
-                        <div class="col-12 col-sm-6 ps-sm-3 p-2"
-                          *ngFor="let specificType of subType?.elementSpecificTypes">
-                          <span class="text-custom" [title]="specificType?.description || ''"
-                            *ngIf="specificType.text">{{specificType.text}}:
-                            {{specificType?.type
-                            == "flag" && specificType?.elementSpecifics.length == 0? ('false' | titlecase):
-                            specificType?.elementSpecifics[0]?.text | titlecase}}</span>
+                  </div> -->
+               <div class="pb-3" *ngIf="element.data.elementSubType?.text">
+                  <!-- <div class="row pb-2" *ngFor="let subType of element.data.elementType?.elementSubTypes"> -->
+                  <div class="row pb-2">
+                     <!-- <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Sub
+                        type</label>
+                        <div class="col-12 col-sm">
+                        <span class="text-custom" [title]="element.data.elementSubType?.description || ''">{{element.data.elementSubType?.text || '-'}}</span>
+                        </div> -->
+                     <div class="row pb-2" *ngIf="element.data.elementSubType?.elementSpecificTypes">
+                        <!-- <label
+                           class="form-label col col-sm-3 pe-2 pt-2 fw-bold text-custom d-flex justify-content-sm-end">Specific
+                           types</label> -->
+                        <div class="col-12 col-sm-12">
+                           <div class="row">
+                              <div class="col-12 col-sm-6 ps-sm-3 p-2"
+                                 *ngFor="let specificType of element.data.elementSubType?.elementSpecificTypes">
+                                 <span class="text-custom" [title]="specificType?.description || ''"
+                                 *ngIf="specificType.text && specificType?.type
+                                 == 'flag'">{{specificType.text}}:
+                                 
+                                 <span class="is-false" *ngIf="specificType?.elementSpecifics.length == 0 || specificType?.elementSpecifics[0]?.text?.toLowerCase() == 'false'">
+                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" class="h-6 w-6 mr-2" fill="red" viewBox="0 0 1792 1792"><path d="M1277 1122q0-26-19-45l-181-181 181-181q19-19 19-45 0-27-19-46l-90-90q-19-19-46-19-26 0-45 19l-181 181-181-181q-19-19-45-19-27 0-46 19l-90 90q-19 19-19 46 0 26 19 45l181 181-181 181q-19 19-19 45 0 27 19 46l90 90q19 19 46 19 26 0 45-19l181-181 181 181q19 19 45 19 27 0 46-19l90-90q19-19 19-46zm387-226q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"></path></svg>
+                                 </span>
+                                 <span class="is-true" *ngIf="specificType?.elementSpecifics.length > 0 && specificType?.elementSpecifics[0]?.text?.toLowerCase() == 'true'">
+                                   <svg class="h-6 w-6 mr-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" stroke="currentColor" fill="#10b981" viewBox="0 0 1792 1792"><path d="M1412 734q0-28-18-46l-91-90q-19-19-45-19t-45 19l-408 407-226-226q-19-19-45-19t-45 19l-91 90q-18 18-18 46 0 27 18 45l362 362q19 19 45 19 27 0 46-19l543-543q18-18 18-45zm252 162q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"></path></svg>
+                                 </span>
+                              </span>
+                              </div>
+                           </div>
                         </div>
-                      </div>
-                    </div>
+                     </div>
                   </div>
-                </div>
-              </div>
+               </div>
             </div>
-
             <dxo-export [enabled]="true" fileName="Site Activities" [allowExportSelectedData]="true"></dxo-export>
             <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
-          </dx-data-grid>
-        </div>
+            </dx-data-grid>
+         </div>
       </ng-template>
-    </ng-container>
-    <ng-container ngbNavItem>
+   </ng-container>
+   <ng-container ngbNavItem>
       <a ngbNavLink>Facilities ({{siteFacilities.length}})</a>
       <ng-template ngbNavContent>
-        <div class="pt-3">
-          <dx-data-grid [dataSource]="siteFacilities" [columnAutoWidth]="true" [showBorders]="true"
+         <div class="pt-3">
+            <dx-data-grid [dataSource]="siteFacilities" [columnAutoWidth]="true" [showBorders]="true"
             [showRowLines]="true" [showColumnLines]="false" [allowColumnReordering]="true" [wordWrapEnabled]="true"
             noDataText="No data available">
             <dxo-paging [enabled]="true" [pageSize]="20" [remoteOperations]="{ groupPaging: false }">
@@ -393,11 +419,10 @@
             <dxo-load-panel [height]="75" [width]="75" [showPane]="true" [shading]="false">
             </dxo-load-panel>
             <dxo-search-panel [visible]="true" [width]="240" placeholder="Search..."></dxo-search-panel>
-
             <dxi-column dataField="sid" [visible]="false"></dxi-column>
             <dxi-column dataField="facilityTypeId" caption="Facility type" cellTemplate="typeTextTemplate"></dxi-column>
             <dxi-column dataField="facilityType" caption="Facility type descr" [visible]="false"
-              cellTemplate="typeDescrTemplate"></dxi-column>
+               cellTemplate="typeDescrTemplate"></dxi-column>
             <dxi-column dataField="facilitySportCode" [allowHiding]="false"></dxi-column>
             <dxi-column dataField="status"></dxi-column>
             <dxi-column dataField="yearBuilt"></dxi-column>
@@ -438,43 +463,40 @@
             <dxi-column dataField="closureDate" [visible]="false" cellTemplate="closureDateTemplate"></dxi-column>
             <dxi-column dataField="createDate" cellTemplate="createDateTemplate"></dxi-column>
             <dxi-column dataField="updateDate" [visible]="false" cellTemplate="updateDateTemplate"></dxi-column>
-
             <div *dxTemplate="let cell of 'typeTextTemplate'">
-              {{cell.data.facilityType?.text}}
+               {{cell.data.facilityType?.text}}
             </div>
             <div *dxTemplate="let cell of 'typeDescrTemplate'">
-              {{cell.data.facilityType?.description}}
+               {{cell.data.facilityType?.description}}
             </div>
-
             <div *dxTemplate="let cell of 'auditedOnTemplate'">
-              {{core.getDate(cell.data.auditedOn)}}
+               {{core.getDate(cell.data.auditedOn)}}
             </div>
             <div *dxTemplate="let cell of 'startDateTemplate'">
-              {{core.getDateInMoment(cell.data.startDate)}}
+               {{core.getDateInMoment(cell.data.startDate)}}
             </div>
             <div *dxTemplate="let cell of 'closureDateTemplate'">
-              {{core.getDate(cell.data.closureDate)}}
+               {{core.getDate(cell.data.closureDate)}}
             </div>
             <div *dxTemplate="let cell of 'openingDateTemplate'">
-              {{core.getDate(cell.data.openingDate)}}
+               {{core.getDate(cell.data.openingDate)}}
             </div>
             <div *dxTemplate="let cell of 'expectedOpeningTemplate'">
-              {{core.getDate(cell.data.expectedOpening)}}
+               {{core.getDate(cell.data.expectedOpening)}}
             </div>
             <div *dxTemplate="let cell of 'createDateTemplate'">
-              {{core.getDateInMoment(cell.data.createDate)}}
+               {{core.getDateInMoment(cell.data.createDate)}}
             </div>
             <div *dxTemplate="let cell of 'updateDateTemplate'">
-              {{core.getDateInMoment(cell.data.updateDate)}}
+               {{core.getDateInMoment(cell.data.updateDate)}}
             </div>
-
             <dxo-export [enabled]="true" fileName="Site Activities" [allowExportSelectedData]="true"></dxo-export>
             <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
-          </dx-data-grid>
-        </div>
+            </dx-data-grid>
+         </div>
       </ng-template>
-    </ng-container>
-  </nav>
-  <div [ngbNavOutlet]="nav" class="mt-2"></div>
+   </ng-container>
+   </nav>
+   <div [ngbNavOutlet]="nav" class="mt-2"></div>
 </div>
 <ngx-loading [show]="loadingData"></ngx-loading>
