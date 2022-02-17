@@ -7,7 +7,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
   isActive = false;
-  collapsed = false;
+  collapsed = true;
   showMenu = 'settings';
   showMenu2 = '';
   classActive: any = null;

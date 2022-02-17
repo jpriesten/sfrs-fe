@@ -1,0 +1,165 @@
+// media queries
+@mixin w {
+  @media only screen and (max-width: "1419px") {
+    @content;
+  }
+}
+@mixin x {
+  @media only screen and (max-width: "1339px") {
+    @content;
+  }
+}
+@mixin d {
+  @media only screen and (max-width: "1259px") {
+    @content;
+  }
+}
+@mixin t {
+  @media only screen and (max-width: "1023px") {
+    @content;
+  }
+}
+@mixin t-min {
+  @media only screen and (min-width: "1023.89px") {
+    @content;
+  }
+}
+@mixin m {
+  @media only screen and (max-width: "767px") {
+    @content;
+  }
+}
+@mixin m-min {
+  @media only screen and (min-width: "767.89px") {
+    @content;
+  }
+}
+@mixin a {
+  @media only screen and (max-width: "639px") {
+    @content;
+  }
+}
+@mixin sm {
+  @media only screen and (min-width: "576px") {
+    @content;
+  }
+}
+@mixin sm-max {
+  @media only screen and (max-width: "576px") {
+    @content;
+  }
+}
+@mixin s {
+  @media only screen and (max-width: "474px") {
+    @content;
+  }
+}
+
+// width
+@mixin r($width) {
+  @media only screen and (max-width: $width) {
+    @content;
+  }
+}
+@mixin rmin($width) {
+  @media only screen and (min-width: $width) {
+    @content;
+  }
+} // height
+@mixin rh($height) {
+  @media only screen and (max-height: $height) {
+    @content;
+  }
+}
+@mixin rhmin($height) {
+  @media only screen and (min-height: $height) {
+    @content;
+  }
+}
+
+// typography
+@mixin title1-s {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: calc(32 / 20);
+  letter-spacing: -0.02em;
+  @include m {
+    font-size: 18px;
+  }
+}
+@mixin title1-m {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: calc(32 / 20);
+  letter-spacing: -0.02em;
+  @include m {
+    font-size: 18px;
+  }
+}
+@mixin title2 {
+  font-size: 18px;
+  line-height: calc(24 / 18);
+  letter-spacing: -0.02em;
+}
+@mixin base1-s {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: calc(24 / 15);
+}
+@mixin base1-b {
+  font-size: 15px;
+  font-weight: 700;
+  line-height: calc(24 / 15);
+}
+@mixin base2 {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: calc(24 / 14);
+}
+@mixin body1-m {
+  font-size: 15px;
+  font-weight: 500;
+  line-height: calc(24 / 15);
+  letter-spacing: -0.015em;
+}
+@mixin body1-s {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: calc(24 / 15);
+  letter-spacing: -0.015em;
+}
+@mixin body2-s {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: calc(24 / 14);
+}
+@mixin caption1 {
+  font-size: 13px;
+  font-weight: 600;
+  line-height: calc(16 / 13);
+}
+@mixin caption1-m {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: calc(16 / 13);
+}
+@mixin caption2 {
+  font-size: 12px;
+  font-weight: 700;
+  line-height: calc(16 / 12);
+}
+@mixin caption2-m {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
+}
+@mixin button1 {
+  font-size: 15px;
+  font-weight: 700;
+  line-height: calc(24 / 15);
+}
+@mixin button2 {
+  font-size: 13px;
+  font-weight: 700;
+  line-height: calc(24 / 13);
+}

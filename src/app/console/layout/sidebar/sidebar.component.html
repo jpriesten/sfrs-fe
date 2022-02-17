@@ -1,19 +1,20 @@
 <ng-container *ngIf="type == 'idap'">
-  <nav class="sidebar" [ngClass]="{ sidebarPushRight: isActive, collapsed: collapsed }">
-    <div class="sidebar-header container pt-3 pb-3" [ngClass]="{ collapsed: collapsed }">
+  <nav class="sidebar" [ngClass]="{'expanded': !collapsed}">
+    <div class="sidebar-header container pt-3 pb-3">
       <div class="row align-items-center">
         <div class="col-8 text-wrap">
           <h5 class="header-text">Identity and Access Platform (IDAP)</h5>
         </div>
-        <div class="col d-flex justify-content-end" (click)="toggleCollapsed()">
-          <i class="fw-bold fa fa-fw fa-angle-double-{{ collapsed ? 'right' : 'left' }}"></i>
+        <div class="col justify-content-end toggler" (click)="toggleCollapsed(); isActive = !isActive">
+          <i class="fw-bold fa fa-fw fa-angle-double-{{ !collapsed ? 'left' : 'right' }}"></i>
         </div>
       </div>
     </div>
     <div class="sidebar-body pt-3 pb-3">
-      <div class="list-group">
+      <div class="list-group text-wrap">
         <!-- <a *ngIf="core.userHasPermission('VIEWGUIDASH')" -->
-        <a routerLink="dashboard" [routerLinkActive]="['router-link-active']" class="list-group-item">
+        <a routerLink="dashboard" [routerLinkActive]="['router-link-active']" class="list-group-item"
+          (click)="isActive = false; collapsed = true">
           <i class="fa fa-chart-line"></i>
           <span>Dashboard</span>
         </a>
@@ -26,26 +27,29 @@
           <li class="nested" [class.expand]="showMenu === 'settings'">
             <ul class="submenu ps-3">
               <li>
-                <a [routerLink]="['user-groups']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                <a [routerLink]="['user-groups']" [routerLinkActive]="['router-link-active']" class="list-group-item"
+                  (click)="isActive = false; collapsed = true">
                   <i class="fa fa-users-cog"></i>
                   <span>User groups</span>
                 </a>
               </li>
               <li>
-                <a [routerLink]="['users']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                <a [routerLink]="['users']" [routerLinkActive]="['router-link-active']" class="list-group-item"
+                  (click)="isActive = false; collapsed = true">
                   <i class="fa fa-user-cog"></i>
                   <span>Users</span>
                 </a>
               </li>
               <li>
-                <a [routerLink]="['policies']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                <a [routerLink]="['policies']" [routerLinkActive]="['router-link-active']" class="list-group-item"
+                  (click)="isActive = false; collapsed = true">
                   <i class="fa fa-wrench"></i>
                   <span>Policies</span>
                 </a>
               </li>
               <li>
                 <a [routerLink]="['account-settings']" [routerLinkActive]="['router-link-active']"
-                  class="list-group-item">
+                  class="list-group-item" (click)="isActive = false; collapsed = true">
                   <i class="fa fa-cog"></i>
                   <span>Account settings</span>
                 </a>
@@ -56,24 +60,26 @@
       </div>
     </div>
   </nav>
+  <div class="overlay" [ngClass]="{'active': isActive}"></div>
 </ng-container>
 
 <ng-container *ngIf="type == 'infrasys'">
-  <nav class="sidebar" [ngClass]="{ sidebarPushRight: isActive, collapsed: collapsed }">
-    <div class="sidebar-header container pt-3 pb-3" [ngClass]="{ collapsed: collapsed }">
+  <nav class="sidebar" [ngClass]="{'expanded': !collapsed }">
+    <div class="sidebar-header container pt-3 pb-3">
       <div class="row align-items-center">
         <div class="col-8 text-wrap">
           <h5 class="header-text">Infrastructure System (INFRASYS)</h5>
         </div>
-        <div class="col d-flex justify-content-end" (click)="toggleCollapsed()">
-          <i class="fw-bold fa fa-fw fa-angle-double-{{ collapsed ? 'right' : 'left' }}"></i>
+        <div class="col justify-content-end toggler" (click)="toggleCollapsed(); isActive = !isActive">
+          <i class="fw-bold fa fa-fw fa-angle-double-{{ !collapsed ? 'left' : 'right' }}"></i>
         </div>
       </div>
     </div>
     <div class="sidebar-body pt-3 pb-3">
-      <div class="list-group">
+      <div class="list-group text-wrap">
         <!-- <a *ngIf="core.userHasPermission('VIEWGUIDASH')" -->
-        <a routerLink="dashboard" [routerLinkActive]="['router-link-active']" class="list-group-item">
+        <a routerLink="dashboard" [routerLinkActive]="['router-link-active']" class="list-group-item"
+          (click)="isActive = false; collapsed = true">
           <i class="fa fa-chart-line"></i>
           <span>Dashboard</span>
         </a>
@@ -86,13 +92,15 @@
           <li class="nested" [class.expand]="showMenu === 'settings'">
             <ul class="submenu ps-3">
               <li>
-                <a [routerLink]="['my-sites']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                <a [routerLink]="['my-sites']" [routerLinkActive]="['router-link-active']" class="list-group-item"
+                  (click)="isActive = false; collapsed = true">
                   <i class="fa fa-store-alt"></i>
                   <span>My sites</span>
                 </a>
               </li>
               <li>
-                <a [routerLink]="['sites']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                <a [routerLink]="['sites']" [routerLinkActive]="['router-link-active']" class="list-group-item"
+                  (click)="isActive = false; collapsed = true">
                   <i class="fa fa-warehouse"></i>
                   <span>Sites</span>
                 </a>
@@ -109,4 +117,5 @@
       </div>
     </div>
   </nav>
+  <div class="overlay" [ngClass]="{'active': isActive}"></div>
 </ng-container>
