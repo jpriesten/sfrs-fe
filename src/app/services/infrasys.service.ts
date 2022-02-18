@@ -116,4 +116,39 @@ export class InfrasysService {
       );
     }
   }
+
+  /** POST: Fetch site facility details
+   * @param {string} siteId Site Id
+   * @param {string} facilityId Facility Id
+   */
+  getFacilityDetails(
+    siteId: string | null,
+    facilityId: string | null
+  ): Promise<any> {
+    // if (this.core.userHasPermission("SRAUTHCODE")) { // For when policies are to be enforced
+    if (true) {
+      let url = `${this.fullBaseUrl}/getSiteFacility`;
+      8;
+
+      let body: any = {};
+
+      // These parameters are always passed
+      if (!this.core.isEmptyOrNull(siteId)) body.siteId = siteId;
+
+      if (!this.core.isEmptyOrNull(facilityId)) body.facilityId = facilityId;
+
+      //caution: passing the options invalidates the form data
+      return this.core.makeRemoteRequest(
+        url,
+        'post',
+        body,
+        this.core.httpOptions.infrasysHeaders
+      );
+    } else {
+      return this.core.fakePromise(
+        'error',
+        "Sorry, you're not allowed to do this!"
+      );
+    }
+  }
 }

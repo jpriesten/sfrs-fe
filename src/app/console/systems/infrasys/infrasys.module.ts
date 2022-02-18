@@ -11,8 +11,9 @@ import { InfrasysRoutingModule } from './infrasys-routing.module';
 import { SitesComponent } from './sites/sites.component';
 import { CreateSiteComponent } from './create-site/create-site.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { SiteDetailsComponent } from './sites/site-details/site-details.component';
+import { SiteDetailsComponent } from './details/site-details/site-details.component';
 import { MySitesComponent } from './my-sites/my-sites.component';
+import { FacilityDetailsComponent } from './details/facility-details/facility-details.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { MySitesComponent } from './my-sites/my-sites.component';
     DashboardComponent,
     SiteDetailsComponent,
     MySitesComponent,
+    FacilityDetailsComponent
   ],
   imports: [
     CommonModule,

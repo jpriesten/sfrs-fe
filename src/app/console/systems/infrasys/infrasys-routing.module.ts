@@ -5,8 +5,9 @@ import { InfrasysComponent } from './infrasys.component';
 import { SitesComponent } from './sites/sites.component';
 import { CreateSiteComponent } from './create-site/create-site.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { SiteDetailsComponent } from './sites/site-details/site-details.component';
+import { SiteDetailsComponent } from './details/site-details/site-details.component';
 import { MySitesComponent } from './my-sites/my-sites.component';
+import { FacilityDetailsComponent } from './details/facility-details/facility-details.component';
 
 const routes: Routes = [
   {
@@ -29,6 +30,10 @@ const routes: Routes = [
             path: 'details/:siteId',
             component: SiteDetailsComponent,
           },
+          {
+            path: 'details/:siteId/:facilityId',
+            component: FacilityDetailsComponent,
+          },
         ],
       },
       {
@@ -45,6 +50,10 @@ const routes: Routes = [
           {
             path: 'details/:siteId',
             component: SiteDetailsComponent,
+          },
+          {
+            path: 'details/:siteId/:facilityId',
+            component: FacilityDetailsComponent,
           },
         ],
       },

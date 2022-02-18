@@ -92,17 +92,17 @@
           <li class="nested" [class.expand]="showMenu === 'settings'">
             <ul class="submenu ps-3">
               <li>
-                <a [routerLink]="['my-sites']" [routerLinkActive]="['router-link-active']" class="list-group-item"
-                  (click)="isActive = false; collapsed = true">
-                  <i class="fa fa-store-alt"></i>
-                  <span>My sites</span>
-                </a>
-              </li>
-              <li>
                 <a [routerLink]="['sites']" [routerLinkActive]="['router-link-active']" class="list-group-item"
                   (click)="isActive = false; collapsed = true">
                   <i class="fa fa-warehouse"></i>
                   <span>Sites</span>
+                </a>
+              </li>
+              <li>
+                <a [routerLink]="['my-sites']" [routerLinkActive]="['router-link-active']" class="list-group-item"
+                  (click)="isActive = false; collapsed = true">
+                  <i class="fa fa-store-alt"></i>
+                  <span>My sites</span>
                 </a>
               </li>
               <!-- <li>

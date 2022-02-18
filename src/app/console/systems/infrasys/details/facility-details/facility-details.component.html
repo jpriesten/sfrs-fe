@@ -1,0 +1,467 @@
+<div class="container-fluid">
+  <div>
+    <a [routerLink]="['/console/infrasys/dashboard']">INFRASYS</a> &nbsp;
+    <i class="fa fa-chevron-right"></i> &nbsp;
+    <a [routerLink]="['/console/infrasys/my-sites']" *ngIf="isMySite">My sites</a> &nbsp;
+    <a [routerLink]="['/console/infrasys/sites']" *ngIf="!isMySite">Sites</a> &nbsp;
+    <i class="fa fa-chevron-right"></i> &nbsp;
+    <a [routerLink]="['/console/infrasys/my-sites/details', siteData?.sid]" *ngIf="isMySite">{{siteData?.siteName}}</a>
+    &nbsp;
+    <a [routerLink]="['/console/infrasys/sites/details', siteData?.sid]" *ngIf="!isMySite">{{siteData?.siteName}}</a>
+    &nbsp;
+    <i class="fa fa-chevron-right"></i> &nbsp;
+    {{siteFacility?.facilityType?.text}}
+  </div>
+  <div class="row pt-3 align-items-center">
+    <div class="col">
+      <h3 class="">{{siteData?.siteName}}</h3>
+    </div>
+    <div class="col d-flex justify-content-end">
+      <button class="btn btn-sm btn-danger">Delete</button>
+    </div>
+  </div>
+  <div class="row pt-3 align-items-center">
+    <div class="col">
+      <h5>Summary</h5>
+    </div>
+    <div class="col-12 col-sm-8">
+      <div class="row">
+        <div class="col-4 col-sm d-flex justify-content-sm-end">
+          <span>Start date:</span>
+        </div>
+        <div class="col">
+          <small>{{core.getDate(siteData?.startDate) || '-'}}</small>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-4 col-sm d-flex justify-content-sm-end">
+          <span>Create date:</span>
+        </div>
+        <div class="col">
+          <small>{{core.getDate(siteData?.createDate) || '-'}}</small>
+        </div>
+      </div>
+    </div>
+    <div class="col d-flex justify-content-end">
+      <button class="btn btn-sm btn-secondary">Edit</button>
+    </div>
+  </div>
+  <div class="row pt-3 text-wrap">
+    <p class="text-custom">{{siteFacility?.facilityType?.description}}</p>
+  </div>
+  <nav ngbNav #nav="ngbNav" class="nav-pills">
+    <ng-container ngbNavItem>
+      <a ngbNavLink>Details</a>
+      <ng-template ngbNavContent>
+        <div class="p-3 ps-2 pe-2">
+          <div class="pb-3">
+            <div class="row pb-2">
+              <label class="form-label fw-bold text-custom col col-sm-3 d-flex justify-content-sm-end">
+                Status
+              </label>
+              <div class="col-12 col-sm">
+                <span class="text-custom">{{siteFacility?.status || '-'}}</span>
+              </div>
+            </div>
+            <div class="row pb-2">
+              <label class="form-label fw-bold text-custom col col-sm-3 d-flex justify-content-sm-end">
+                Facility sport code
+              </label>
+              <div class="col-12 col-sm">
+                <span class="text-custom">{{siteFacility?.facilitySportCode || '-'}}</span>
+              </div>
+            </div>
+            <div class="row pb-2">
+              <label class="form-label fw-bold text-custom col col-sm-3 d-flex justify-content-sm-end">
+                Accessibility
+              </label>
+              <div class="col-12 col-sm">
+                <span class="text-custom">{{siteFacility?.accessibility || '-'}}</span>
+              </div>
+            </div>
+            <div class="row pb-2">
+              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">
+                Accessibility group
+              </label>
+              <div class="col-12 col-sm">
+                <span class="text-custom">{{siteFacility?.accessibilityGroup || '-'}}</span>
+              </div>
+            </div>
+            <div class="row pb-2">
+              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Management
+                Group</label>
+              <div class="col-12 col-sm">
+                <span class="text-custom">{{siteFacility?.managementGroup || '-'}}</span>
+              </div>
+            </div>
+            <div class="row pb-2">
+              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Management
+                Type</label>
+              <div class="col-12 col-sm">
+                <span class="text-custom">{{siteFacility?.managementType || '-'}}</span>
+              </div>
+            </div>
+            <div class="row pb-2">
+              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Operator
+                Name</label>
+              <div class="col-12 col-sm">
+                <span class="text-custom">{{siteFacility?.operatorName || '-'}}</span>
+              </div>
+            </div>
+            <div class="row pb-2">
+              <label class="form-label fw-bold text-custom col col-sm-3 d-flex justify-content-sm-end">
+                Has changing rooms
+              </label>
+              <div class="col-12 col-sm">
+                <span class="text-custom">
+                  <i class="fa fa-lg fa-check-circle text-success" *ngIf="siteFacility?.hasChangingRooms"></i>
+                  <i class="fa fa-lg fa-times-circle text-danger" *ngIf="!siteFacility?.hasChangingRooms"></i>
+                </span>
+              </div>
+            </div>
+            <div class="row pb-2">
+              <label class="form-label fw-bold text-custom col col-sm-3 d-flex justify-content-sm-end">
+                Are changing rooms refurbished
+              </label>
+              <div class="col-12 col-sm">
+                <span class="text-custom">
+                  <i class="fa fa-lg fa-check-circle text-success"
+                    *ngIf="siteFacility?.areChangingRoomsRefurbished"></i>
+                  <i class="fa fa-lg fa-times-circle text-danger"
+                    *ngIf="!siteFacility?.areChangingRoomsRefurbished"></i>
+                </span>
+              </div>
+            </div>
+            <div class="row pb-2">
+              <label class="form-label fw-bold text-custom col col-sm-3 d-flex justify-content-sm-end">
+                Archived
+              </label>
+              <div class="col-12 col-sm">
+                <span class="text-custom">
+                  <i class="fa fa-lg fa-check-circle text-success" *ngIf="siteFacility?.isArchived"></i>
+                  <i class="fa fa-lg fa-times-circle text-danger" *ngIf="!siteFacility?.isArchived"></i>
+                </span>
+              </div>
+            </div>
+            <div class="row pb-2">
+              <label class="form-label fw-bold text-custom col col-sm-3 d-flex justify-content-sm-end">
+                Audited
+              </label>
+              <div class="col-12 col-sm">
+                <span class="text-custom">
+                  <i class="fa fa-lg fa-check-circle text-success" *ngIf="siteFacility?.isAudited"></i>
+                  <i class="fa fa-lg fa-times-circle text-danger" *ngIf="!siteFacility?.isAudited"></i>
+                </span>
+              </div>
+            </div>
+            <div class="row pb-2">
+              <label class="form-label fw-bold text-custom col col-sm-3 d-flex justify-content-sm-end">
+                Refurbished
+              </label>
+              <div class="col-12 col-sm">
+                <span class="text-custom">
+                  <i class="fa fa-lg fa-check-circle text-success" *ngIf="siteFacility?.isRefurbished"></i>
+                  <i class="fa fa-lg fa-times-circle text-danger" *ngIf="!siteFacility?.isRefurbished"></i>
+                </span>
+              </div>
+            </div>
+            <div class="row pb-2">
+              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">
+                Year built estimated
+              </label>
+              <div class="col-12 col-sm">
+                <span class="text-custom">
+                  <i class="fa fa-lg fa-check-circle text-success" *ngIf="siteFacility?.yearBuiltEstimated"></i>
+                  <i class="fa fa-lg fa-times-circle text-danger" *ngIf="!siteFacility?.yearBuiltEstimated"></i>
+                </span>
+              </div>
+            </div>
+            <div class="row pb-2">
+              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">
+                Year built
+              </label>
+              <div class="col-12 col-sm">
+                <span class="text-custom">{{siteFacility?.yearBuilt || '-'}}</span>
+              </div>
+            </div>
+            <div class="row pb-2">
+              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">
+                Year changing rooms refurbished
+              </label>
+              <div class="col-12 col-sm">
+                <span class="text-custom">{{siteFacility?.yearChangingRoomsRefurbished || '-'}}</span>
+              </div>
+            </div>
+            <div class="row pb-2">
+              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">
+                Year refurbished
+              </label>
+              <div class="col-12 col-sm">
+                <span class="text-custom">{{siteFacility?.yearRefurbished || '-'}}</span>
+              </div>
+            </div>
+            <div class="row pb-2">
+              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">
+                Closure reason
+              </label>
+              <div class="col-12 col-sm">
+                <span class="text-custom">{{siteFacility?.closureReason || '-'}}</span>
+              </div>
+            </div>
+            <div class="row pb-2">
+              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">
+                Seasonality type
+              </label>
+              <div class="col-12 col-sm">
+                <span class="text-custom">{{siteFacility?.seasonalityType || '-'}}</span>
+              </div>
+            </div>
+            <div class="row pb-2">
+              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">
+                Seasonality end
+              </label>
+              <div class="col-12 col-sm">
+                <span class="text-custom">{{ core.getDate(siteFacility?.seasonalityEnd) || '-'}}</span>
+              </div>
+            </div>
+            <div class="row pb-2">
+              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">
+                Seasonality start
+              </label>
+              <div class="col-12 col-sm">
+                <span class="text-custom">{{ core.getDate(siteFacility?.seasonalityStart) || '-'}}</span>
+              </div>
+            </div>
+            <div class="row pb-2">
+              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">
+                Audited on
+              </label>
+              <div class="col-12 col-sm">
+                <span class="text-custom">{{ core.getDate(siteFacility?.auditedOn) || '-'}}</span>
+              </div>
+            </div>
+            <div class="row pb-2">
+              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">
+                Closure date
+              </label>
+              <div class="col-12 col-sm">
+                <span class="text-custom">{{ core.getDate(siteFacility?.closureDate) || '-'}}</span>
+              </div>
+            </div>
+            <div class="row pb-2">
+              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">
+                Expected opening
+              </label>
+              <div class="col-12 col-sm">
+                <span class="text-custom">{{ core.getDate(siteFacility?.expectedOpening) || '-'}}</span>
+              </div>
+            </div>
+            <div class="row pb-2">
+              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">
+                Opening date
+              </label>
+              <div class="col-12 col-sm">
+                <span class="text-custom">{{ core.getDate(siteFacility?.openingDate) || '-'}}</span>
+              </div>
+            </div>
+            <div class="row pb-2">
+              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">
+                Start date
+              </label>
+              <div class="col-12 col-sm">
+                <span class="text-custom">{{ core.getDate(siteFacility?.startDate) || '-'}}</span>
+              </div>
+            </div>
+            <div class="row pb-2">
+              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">
+                Create date
+              </label>
+              <div class="col-12 col-sm">
+                <span class="text-custom">{{ core.getDate(siteFacility?.createDate) || '-'}}</span>
+              </div>
+            </div>
+            <div class="row pb-2">
+              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">
+                Update date
+              </label>
+              <div class="col-12 col-sm">
+                <span class="text-custom">{{ core.getDate(siteFacility?.updateDate) || '-'}}</span>
+              </div>
+            </div>
+
+            <!--
+              closureReason: null
+             -->
+          </div>
+        </div>
+      </ng-template>
+    </ng-container>
+    <ng-container ngbNavItem>
+      <a ngbNavLink>Disablity</a>
+      <ng-template ngbNavContent>
+        <div class="p-3 ps-2 pe-2">
+          <div class="pb-3">
+            <div class="row pb-2">
+              <label class="form-label fw-bold text-custom col col-sm-3 d-flex justify-content-sm-end">
+                Access
+              </label>
+              <div class="col-12 col-sm">
+                <span class="text-custom">
+                  <i class="fa fa-lg fa-check-circle text-success" *ngIf="siteFacility?.disabilityAccess"></i>
+                  <i class="fa fa-lg fa-times-circle text-danger" *ngIf="!siteFacility?.disabilityAccess"></i>
+                </span>
+              </div>
+            </div>
+            <div class="row pb-2">
+              <label class="form-label fw-bold text-custom col col-sm-3 d-flex justify-content-sm-end">
+                Changing places toilets exist
+              </label>
+              <div class="col-12 col-sm">
+                <span class="text-custom">
+                  <i class="fa fa-lg fa-check-circle text-success"
+                    *ngIf="siteFacility?.disabilityChangingPlacesToiletsExist"></i>
+                  <i class="fa fa-lg fa-times-circle text-danger"
+                    *ngIf="!siteFacility?.disabilityChangingPlacesToiletsExist"></i>
+                </span>
+              </div>
+            </div>
+            <div class="row pb-2">
+              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">
+                Equipped activity areas
+              </label>
+              <div class="col-12 col-sm">
+                <span class="text-custom">
+                  <i class="fa fa-lg fa-check-circle text-success"
+                    *ngIf="siteFacility?.disabilityEquippedActivityAreas"></i>
+                  <i class="fa fa-lg fa-times-circle text-danger"
+                    *ngIf="!siteFacility?.disabilityEquippedActivityAreas"></i>
+                </span>
+              </div>
+            </div>
+            <div class="row pb-2">
+              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">
+                Equipped changing facilities
+              </label>
+              <div class="col-12 col-sm">
+                <span class="text-custom">
+                  <i class="fa fa-lg fa-check-circle text-success"
+                    *ngIf="siteFacility?.disabilityEquippedChangingFacilities"></i>
+                  <i class="fa fa-lg fa-times-circle text-danger"
+                    *ngIf="!siteFacility?.disabilityEquippedChangingFacilities"></i>
+                </span>
+              </div>
+            </div>
+            <div class="row pb-2">
+              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">
+                Equipped doorways
+              </label>
+              <div class="col-12 col-sm">
+                <span class="text-custom">
+                  <i class="fa fa-lg fa-check-circle text-success" *ngIf="siteFacility?.disabilityEquippedDoorways"></i>
+                  <i class="fa fa-lg fa-times-circle text-danger" *ngIf="!siteFacility?.disabilityEquippedDoorways"></i>
+                </span>
+              </div>
+            </div>
+            <div class="row pb-2">
+              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">
+                Equipped emergency exits
+              </label>
+              <div class="col-12 col-sm">
+                <span class="text-custom">
+                  <i class="fa fa-lg fa-check-circle text-success"
+                    *ngIf="siteFacility?.disabilityEquippedEmergencyExits"></i>
+                  <i class="fa fa-lg fa-times-circle text-danger"
+                    *ngIf="!siteFacility?.disabilityEquippedEmergencyExits"></i>
+                </span>
+              </div>
+            </div>
+            <div class="row pb-2">
+              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">
+                Equipped finding reaching entrance
+              </label>
+              <div class="col-12 col-sm">
+                <span class="text-custom">
+                  <i class="fa fa-lg fa-check-circle text-success"
+                    *ngIf="siteFacility?.disabilityEquippedFindingReachingEntrance"></i>
+                  <i class="fa fa-lg fa-times-circle text-danger"
+                    *ngIf="!siteFacility?.disabilityEquippedFindingReachingEntrance"></i>
+                </span>
+              </div>
+            </div>
+            <div class="row pb-2">
+              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">
+                Equipped parking
+              </label>
+              <div class="col-12 col-sm">
+                <span class="text-custom">
+                  <i class="fa fa-lg fa-check-circle text-success" *ngIf="siteFacility?.disabilityEquippedParking"></i>
+                  <i class="fa fa-lg fa-times-circle text-danger" *ngIf="!siteFacility?.disabilityEquippedParking"></i>
+                </span>
+              </div>
+            </div>
+            <div class="row pb-2">
+              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">
+                Equipped reception area
+              </label>
+              <div class="col-12 col-sm">
+                <span class="text-custom">
+                  <i class="fa fa-lg fa-check-circle text-success"
+                    *ngIf="siteFacility?.disabilityEquippedReceptionArea"></i>
+                  <i class="fa fa-lg fa-times-circle text-danger"
+                    *ngIf="!siteFacility?.disabilityEquippedReceptionArea"></i>
+                </span>
+              </div>
+            </div>
+            <div class="row pb-2">
+              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">
+                Equipped social areas
+              </label>
+              <div class="col-12 col-sm">
+                <span class="text-custom">
+                  <i class="fa fa-lg fa-check-circle text-success"
+                    *ngIf="siteFacility?.disabilityEquippedSocialAreas"></i>
+                  <i class="fa fa-lg fa-times-circle text-danger"
+                    *ngIf="!siteFacility?.disabilityEquippedSocialAreas"></i>
+                </span>
+              </div>
+            </div>
+            <div class="row pb-2">
+              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">
+                Equipped spectator areas
+              </label>
+              <div class="col-12 col-sm">
+                <span class="text-custom">
+                  <i class="fa fa-lg fa-check-circle text-success"
+                    *ngIf="siteFacility?.disabilityEquippedSpectatorAreas"></i>
+                  <i class="fa fa-lg fa-times-circle text-danger"
+                    *ngIf="!siteFacility?.disabilityEquippedSpectatorAreas"></i>
+                </span>
+              </div>
+            </div>
+            <div class="row pb-2">
+              <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">
+                Equipped toilets
+              </label>
+              <div class="col-12 col-sm">
+                <span class="text-custom">
+                  <i class="fa fa-lg fa-check-circle text-success" *ngIf="siteFacility?.disabilityEquippedToilets"></i>
+                  <i class="fa fa-lg fa-times-circle text-danger" *ngIf="!siteFacility?.disabilityEquippedToilets"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </ng-container>
+    <ng-container ngbNavItem>
+      <a ngbNavLink>Facility subtypes</a>
+      <ng-template ngbNavContent>
+        <div class="p-3">
+          <h5>Sub types</h5>
+        </div>
+      </ng-template>
+    </ng-container>
+  </nav>
+  <div [ngbNavOutlet]="nav" class="mt-2"></div>
+</div>
+<ngx-loading [show]="loadingData"></ngx-loading>
