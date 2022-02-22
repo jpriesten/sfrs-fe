@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgbNavChangeEvent } from '@ng-bootstrap/ng-bootstrap';
+import { DxDataGridComponent } from 'devextreme-angular';
 import { CoreService } from 'src/app/services/core.service';
 import { InfrasysService } from 'src/app/services/infrasys.service';
 
@@ -9,12 +11,15 @@ import { InfrasysService } from 'src/app/services/infrasys.service';
   styleUrls: ['./site-details.component.scss'],
 })
 export class SiteDetailsComponent implements OnInit {
+  @ViewChild('elementsContainer', { static: false })
+  elementsContainer!: DxDataGridComponent;
+
   public active: any;
   public loadingData = false;
 
   public siteData: any = {};
   public siteFacilities = [];
-  public siteElements = [];
+  public siteElements: any[] = [];
   public siteActivities = [];
   public siteAddress: any = {};
   public siteArea: any = {};
@@ -48,8 +53,6 @@ export class SiteDetailsComponent implements OnInit {
         this.siteAddress = response.data.site.address;
         this.siteArea = response.data.site.area;
         this.siteContact = response.data.site.contact;
-
-        console.log('The elements: ', this.siteFacilities);
       })
       .catch((error) => {
         this.loadingData = false;

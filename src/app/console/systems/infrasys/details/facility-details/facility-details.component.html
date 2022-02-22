@@ -457,7 +457,24 @@
       <a ngbNavLink>Facility subtypes</a>
       <ng-template ngbNavContent>
         <div class="p-3">
-          <h5>Sub types</h5>
+          <h5>{{siteFacility?.facilitySubType?.text}}</h5>
+          <div class="row pb-2 text-wrap">
+            <p class="text-custom">{{siteFacility?.facilitySubType?.description}}</p>
+          </div>
+          <div class="row pb-2" *ngFor="let item of siteFacility?.facilitySubType?.facilitySpecificTypes">
+            <label class="form-label fw-bold text-custom col col-sm-3 d-flex justify-content-sm-end">
+              {{item.text}}
+            </label>
+            <div class="col-12 col-sm">
+              <span class="text-custom" *ngIf="item.type == 'flag'">
+                <i class="fa fa-lg fa-check-circle text-success" *ngIf="item?.facilitySpecifics[0]?.text == 'true'"></i>
+                <i class="fa fa-lg fa-times-circle text-danger" *ngIf="item?.facilitySpecifics[0]?.text == 'false'"></i>
+              </span>
+              <span class="text-custom" *ngIf="item.type != 'flag'">
+                {{item?.facilitySpecifics[0]?.text || '-'}}
+              </span>
+            </div>
+          </div>
         </div>
       </ng-template>
     </ng-container>
