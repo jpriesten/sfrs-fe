@@ -434,6 +434,8 @@
             <dxo-search-panel [visible]="true" [width]="240" placeholder="Search..."></dxo-search-panel>
             <dxi-column dataField="sid" [visible]="false"></dxi-column>
             <dxi-column dataField="facilityTypeId" caption="Facility type" cellTemplate="typeTextTemplate"></dxi-column>
+            <dxi-column dataField="facilitySubTypeId" caption="Facility subtype" cellTemplate="subtypeTextTemplate">
+            </dxi-column>
             <dxi-column dataField="facilityType" caption="Facility type descr" [visible]="false"
               cellTemplate="typeDescrTemplate"></dxi-column>
             <dxi-column dataField="facilitySportCode" [allowHiding]="false"></dxi-column>
@@ -442,7 +444,7 @@
             <dxi-column dataField="managementGroup"></dxi-column>
             <dxi-column dataField="managementType" [visible]="false"></dxi-column>
             <dxi-column dataField="operatorName"></dxi-column>
-            <dxi-column dataField="accessibility"></dxi-column>
+            <dxi-column dataField="accessibility" [visible]="false"></dxi-column>
             <dxi-column dataField="accessibilityGroup"></dxi-column>
             <dxi-column dataField="yearBuiltEstimated" [visible]="false"></dxi-column>
             <dxi-column dataField="isRefurbished" [visible]="false"></dxi-column>
@@ -479,6 +481,9 @@
 
             <div *dxTemplate="let cell of 'typeTextTemplate'">
               <a [routerLink]="['../', siteData.sid, cell.data.sid]">{{cell.data.facilityType?.text}}</a>
+            </div>
+            <div *dxTemplate="let cell of 'subtypeTextTemplate'">
+              {{cell.data.facilitySubType?.text}}
             </div>
             <div *dxTemplate="let cell of 'typeDescrTemplate'">
               {{cell.data.facilityType?.description}}

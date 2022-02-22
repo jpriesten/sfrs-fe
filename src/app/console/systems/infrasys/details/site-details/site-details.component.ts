@@ -53,6 +53,8 @@ export class SiteDetailsComponent implements OnInit {
         this.siteAddress = response.data.site.address;
         this.siteArea = response.data.site.area;
         this.siteContact = response.data.site.contact;
+
+        console.log('The elements: ', this.siteFacilities);
       })
       .catch((error) => {
         this.loadingData = false;
