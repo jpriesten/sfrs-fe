@@ -12,6 +12,7 @@ export class SitesComponent implements OnInit {
   unauthorisedDashboard = { authorised: true, description: '' };
 
   public sites: any[] = [];
+  public sitesData: any = {};
   public selectedRows: any[] = [];
 
   constructor(
@@ -23,19 +24,32 @@ export class SitesComponent implements OnInit {
     this.getSites();
   }
 
-  getSites() {
+  getSites(maxItems?: number, marker?: string) {
     this.loadingData = true;
     this.infrasysService
-      .getSites()
+      .getSites(maxItems, marker)
       .then((response) => {
         this.loadingData = false;
         this.unauthorisedDashboard.authorised = true;
         this.sites = response.data.sites;
+        this.sitesData = response.data;
       })
       .catch((error) => {
         this.loadingData = false;
         this.unauthorisedDashboard =
           this.core.getUnauthorisedErrorMessage(error);
       });
+  }
+
+  onSelectionChanged(maxItems: number) {
+    this.getSites(maxItems);
+  }
+
+  onNextPage(nextPageData: any) {
+    this.getSites(nextPageData.maxItems, nextPageData.marker);
+  }
+
+  onPreviousPage(previousPageData: any) {
+    this.getSites(previousPageData.maxItems, previousPageData.marker);
   }
 }

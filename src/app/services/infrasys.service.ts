@@ -39,9 +39,13 @@ export class InfrasysService {
   }
 
   /** POST: Fetch all sites
-  @param {number} maxItems Maximum number of items per page
+   * @param {number} maxItems Maximum number of items per page
+   * @param {string} marker Next page marker
    */
-  getSites(maxItems: number = this.core.maxItems): Promise<any> {
+  getSites(
+    maxItems: number = this.core.maxItems,
+    marker?: string
+  ): Promise<any> {
     // if (this.core.userHasPermission("SRAUTHCODE")) { // For when policies are to be enforced
     if (true) {
       let url = `${this.fullBaseUrl}/listSites`;
@@ -50,6 +54,7 @@ export class InfrasysService {
 
       // These parameters are always passed
       body.maxItems = maxItems;
+      if (!this.core.isEmptyOrNull(marker)) body.marker = marker;
 
       //caution: passing the options invalidates the form data
       return this.core.makeRemoteRequest(
@@ -67,12 +72,19 @@ export class InfrasysService {
   }
 
   /** POST: Fetch all user created sites*/
-  getUserSites(): Promise<any> {
+  getUserSites(
+    maxItems: number = this.core.maxItems,
+    marker?: string
+  ): Promise<any> {
     // if (this.core.userHasPermission("SRAUTHCODE")) { // For when policies are to be enforced
     if (true) {
       let url = `${this.fullBaseUrl}/listSitesForUser`;
 
       let body: any = {};
+
+      // These parameters are always passed
+      body.maxItems = maxItems;
+      if (!this.core.isEmptyOrNull(marker)) body.marker = marker;
 
       //caution: passing the options invalidates the form data
       return this.core.makeRemoteRequest(

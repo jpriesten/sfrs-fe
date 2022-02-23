@@ -92,6 +92,10 @@
         <dxo-export [enabled]="true" fileName="User Sites" [allowExportSelectedData]="true"></dxo-export>
         <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
       </dx-data-grid>
+      <component-remote-pagination [maxItemsList]="core.maxItemsList" [maxItems]="core.maxItems" [data]="mySitesData"
+        (onSelectionChanged)="onSelectionChanged($event)" (onNextPage)="onNextPage($event)"
+        (onPreviousPage)="onPreviousPage($event)">
+      </component-remote-pagination>
     </ng-container>
     <ng-template #elseTemplate>
       <div class="alert alert-danger">
