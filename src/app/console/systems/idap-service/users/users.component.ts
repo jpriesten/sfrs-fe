@@ -8,6 +8,7 @@ import { IdapService } from 'src/app/services/idap.service';
   styleUrls: ['./users.component.scss'],
 })
 export class UsersComponent implements OnInit {
+  usersData: any = {};
   users = [];
   loadingData = false;
   unauthorisedDashboard = { authorised: true, description: '' };
@@ -20,14 +21,15 @@ export class UsersComponent implements OnInit {
     this.getUsers();
   }
 
-  getUsers() {
+  getUsers(maxItems?: number, marker?: string) {
     this.loadingData = true;
     this.idapService
-      .getUsers()
+      .getUsers(maxItems, marker)
       .then((response) => {
         this.loadingData = false;
         this.unauthorisedDashboard.authorised = true;
         this.users = response.data.users;
+        this.usersData = response.data;
         console.log(this.users);
       })
       .catch((error) => {
@@ -35,5 +37,17 @@ export class UsersComponent implements OnInit {
         this.unauthorisedDashboard =
           this.core.getUnauthorisedErrorMessage(error);
       });
+  }
+
+  onSelectionChanged(maxItems: number) {
+    this.getUsers(maxItems);
+  }
+
+  onNextPage(nextPageData: any) {
+    this.getUsers(nextPageData.maxItems, nextPageData.marker);
+  }
+
+  onPreviousPage(previousPageData: any) {
+    this.getUsers(previousPageData.maxItems, previousPageData.marker);
   }
 }

@@ -1,0 +1,21 @@
+<div class="row pt-2">
+  <!-- Max items selector -->
+  <div class="col d-flex align-items-center">
+    <select class="form-select form-select-sm w-auto" id="maxItems" [(ngModel)]="maxItems"
+      (ngModelChange)="selectionChanged($event)">
+      <option [value]="item" *ngFor="let item of maxItemsList">{{item}}</option>
+    </select>
+    <span class="ps-2 text-custom" for="maxItems">Max Items</span>
+  </div>
+  <!-- Page controls -->
+  <div class="col d-flex justify-content-end" *ngIf="data?.isTruncated || (nextClickCount > 0 && !data?.isTruncated)">
+    <button class="btn btn-sm btn-outline-secondary me-3" title="Previous page" [disabled]="!(nextClickCount >= 1)"
+      (click)="previousPage()">
+      <i class="fa fa-chevron-left"></i>
+    </button>
+    <button class="btn btn-sm btn-outline-secondary" title="Next page" [disabled]="!data?.isTruncated"
+      (click)="nextPage(data?.marker)">
+      <i class="fa fa-chevron-right"></i>
+    </button>
+  </div>
+</div>

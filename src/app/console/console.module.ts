@@ -10,6 +10,8 @@ import { ConsoleComponent } from './console.component';
 import { HomeComponent } from './home/home.component';
 import { DxDataGridModule } from 'devextreme-angular';
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
+import { RemotePaginationComponent } from '../components/remote-pagination/remote-pagination.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,14 +20,16 @@ import { SidebarComponent } from './layout/sidebar/sidebar.component';
     FooterComponent,
     HomeComponent,
     SidebarComponent,
+    RemotePaginationComponent,
   ],
   imports: [
     CommonModule,
     ConsoleRoutingModule,
+    FormsModule,
     DxDataGridModule,
     NgxLoadingModule,
   ],
-  exports: [SidebarComponent],
+  exports: [SidebarComponent, RemotePaginationComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class ConsoleModule {}

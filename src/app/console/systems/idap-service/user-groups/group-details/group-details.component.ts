@@ -15,6 +15,7 @@ export class GroupDetailsComponent implements OnInit {
   public groupSummary: any = undefined;
   public groupUsers = [];
   public groupPolicies = [];
+  public groupPoliciesData: any = {};
 
   public selectedPoliciesRows: any[] = [];
 
@@ -55,10 +56,29 @@ export class GroupDetailsComponent implements OnInit {
       });
   }
 
-  getGroupPolicies(groupName: string | null) {
-    this.idapService.getGroupPolicies(groupName).then((response) => {
-      this.groupPolicies = response.data.attachedPolicies;
-    });
+  getGroupPolicies(
+    groupName: string | null,
+    maxItems?: number,
+    marker?: string
+  ) {
+    this.idapService
+      .getGroupPolicies(groupName, maxItems, marker)
+      .then((response) => {
+        this.groupPolicies = response.data.attachedPolicies;
+        this.groupPoliciesData = response.data;
+      });
+  }
+
+  onSelectionChanged(maxItems: number) {
+    this.getGroupPolicies(this.groupName, maxItems);
+  }
+
+  onNextPage(nextPageData: any) {
+    this.getGroupPolicies(nextPageData.maxItems, nextPageData.marker);
+  }
+
+  onPreviousPage(previousPageData: any) {
+    this.getGroupPolicies(previousPageData.maxItems, previousPageData.marker);
   }
 
   detachPolicies() {

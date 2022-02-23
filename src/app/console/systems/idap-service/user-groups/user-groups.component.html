@@ -35,10 +35,6 @@
       <dx-data-grid #userGroupsContainer [dataSource]="userGroups?.data?.groups || []" [columnAutoWidth]="true"
         [showBorders]="true" [showRowLines]="true" [showColumnLines]="false" [allowColumnReordering]="true"
         [wordWrapEnabled]="true" [(selectedRowKeys)]="selectedRows" noDataText="No data available">
-        <dxo-paging [enabled]="true" [pageSize]="20" [remoteOperations]="{ groupPaging: false }">
-        </dxo-paging>
-        <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10, 20, 30, 40, 50]" [showInfo]="true">
-        </dxo-pager>
         <dxo-load-panel [height]="75" [width]="75" [showPane]="true" [shading]="false">
         </dxo-load-panel>
         <dxo-search-panel [visible]="true" [width]="240" placeholder="Search..."></dxo-search-panel>
@@ -60,6 +56,10 @@
         <dxo-export [enabled]="true" fileName="User groups" [allowExportSelectedData]="true"></dxo-export>
         <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
       </dx-data-grid>
+      <component-remote-pagination [maxItemsList]="core.maxItemsList" [maxItems]="core.maxItems"
+        [data]="userGroups?.data" (onSelectionChanged)="onSelectionChanged($event)" (onNextPage)="onNextPage($event)"
+        (onPreviousPage)="onPreviousPage($event)">
+      </component-remote-pagination>
     </ng-container>
     <ng-template #elseTemplate>
       <div class="alert alert-danger">

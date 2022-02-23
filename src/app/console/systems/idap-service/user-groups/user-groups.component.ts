@@ -22,10 +22,10 @@ export class UserGroupsComponent implements OnInit {
     this.getUserGroups();
   }
 
-  getUserGroups() {
+  getUserGroups(maxItems?: number, marker?: string) {
     this.loadingData = true;
     this.idapService
-      .getGroups()
+      .getGroups(maxItems, marker)
       .then((response) => {
         this.loadingData = false;
         this.unauthorisedDashboard.authorised = true;
@@ -37,5 +37,17 @@ export class UserGroupsComponent implements OnInit {
         this.unauthorisedDashboard =
           this.core.getUnauthorisedErrorMessage(error);
       });
+  }
+
+  onSelectionChanged(maxItems: number) {
+    this.getUserGroups(maxItems);
+  }
+
+  onNextPage(nextPageData: any) {
+    this.getUserGroups(nextPageData.maxItems, nextPageData.marker);
+  }
+
+  onPreviousPage(previousPageData: any) {
+    this.getUserGroups(previousPageData.maxItems, previousPageData.marker);
   }
 }

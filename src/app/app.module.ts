@@ -16,6 +16,7 @@ import { PasswordResetComponent } from './auth/password-reset/password-reset.com
 import { ErrorInterceptor } from './utilities/error.interceptor';
 import { JwtInterceptor } from './utilities/jwt.interceptor';
 import { DatePipe } from '@angular/common';
+import { RemotePaginationComponent } from './components/remote-pagination/remote-pagination.component';
 
 @NgModule({
   declarations: [

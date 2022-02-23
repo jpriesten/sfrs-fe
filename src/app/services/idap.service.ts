@@ -39,8 +39,12 @@ export class IdapService {
 
   /** POST: Fetch groups
    * @param {number} maxItems Maximum number of items per page
+   * @param {string} marker Next page marker
    */
-  getGroups(maxItems: number = this.core.maxItems): Promise<any> {
+  getGroups(
+    maxItems: number = this.core.maxItems,
+    marker?: string
+  ): Promise<any> {
     // if (this.core.userHasPermission("SRAUTHCODE")) { // For when policies are to be enforced
     if (true) {
       let url = `${this.fullBaseUrl}/listGroups`;
@@ -49,6 +53,7 @@ export class IdapService {
 
       // These parameters are always passed
       body.maxItems = maxItems;
+      if (!this.core.isEmptyOrNull(marker)) body.marker = marker;
 
       //caution: passing the options invalidates the form data
       return this.core.makeRemoteRequest(
@@ -68,10 +73,12 @@ export class IdapService {
   /** POST: Fetch attached group policies
    * @param {string} groupName Group name
    * @param {number} maxItems Maximum number of items per page
+   * @param {string} marker Next page marker
    */
   getGroupPolicies(
     groupName: string | null,
-    maxItems: number = this.core.maxItems
+    maxItems: number = this.core.maxItems,
+    marker?: string
   ): Promise<any> {
     // if (this.core.userHasPermission("SRAUTHCODE")) { // For when policies are to be enforced
     if (true) {
@@ -81,6 +88,7 @@ export class IdapService {
 
       // These parameters are always passed
       if (!this.core.isEmptyOrNull(groupName)) body.groupName = groupName;
+      if (!this.core.isEmptyOrNull(marker)) body.marker = marker;
 
       body.maxItems = maxItems;
 
@@ -202,8 +210,12 @@ export class IdapService {
 
   /** POST: Fetch users
    * @param {number} maxItems Maximum number of items per page
+   * @param {string} marker Next page marker
    */
-  getUsers(maxItems: number = this.core.maxItems): Promise<any> {
+  getUsers(
+    maxItems: number = this.core.maxItems,
+    marker?: string
+  ): Promise<any> {
     // if (this.core.userHasPermission("SRAUTHCODE")) { // For when policies are to be enforced
     if (true) {
       let url = `${this.fullBaseUrl}/listUsers`;
@@ -212,6 +224,7 @@ export class IdapService {
 
       // These parameters are always passed
       body.maxItems = maxItems;
+      if (!this.core.isEmptyOrNull(marker)) body.marker = marker;
 
       //caution: passing the options invalidates the form data
       return this.core.makeRemoteRequest(
@@ -409,8 +422,12 @@ export class IdapService {
 
   /** POST: Fetch policies
    * @param {number} maxItems Maximum number of items per page
+   * @param {string} marker Next page marker
    */
-  getPolicies(maxItems: number = this.core.maxItems): Promise<any> {
+  getPolicies(
+    maxItems: number = this.core.maxItems,
+    marker?: string
+  ): Promise<any> {
     // if (this.core.userHasPermission("SRAUTHCODE")) { // For when policies are to be enforced
     if (true) {
       let url = `${this.fullBaseUrl}/listPolicies`;
@@ -419,6 +436,7 @@ export class IdapService {
 
       // These parameters are always passed
       body.maxItems = maxItems;
+      if (!this.core.isEmptyOrNull(marker)) body.marker = marker;
 
       //caution: passing the options invalidates the form data
       return this.core.makeRemoteRequest(

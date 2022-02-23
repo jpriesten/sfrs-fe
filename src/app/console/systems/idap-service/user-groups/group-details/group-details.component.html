@@ -135,6 +135,10 @@
             <dxo-export [enabled]="true" fileName="Group policies" [allowExportSelectedData]="true"></dxo-export>
             <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
           </dx-data-grid>
+          <component-remote-pagination [maxItemsList]="core.maxItemsList" [maxItems]="core.maxItems"
+            [data]="groupPoliciesData" (onSelectionChanged)="onSelectionChanged($event)"
+            (onNextPage)="onNextPage($event)" (onPreviousPage)="onPreviousPage($event)">
+          </component-remote-pagination>
         </div>
       </ng-template>
     </ng-container>

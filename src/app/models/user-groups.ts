@@ -2,6 +2,7 @@ export class UserGroups {
   'data': {
     groups: [Group];
     isTruncated: boolean;
+    marker: string;
   };
   'meta': {
     requestId: string;
