@@ -11,9 +11,6 @@ import { InfrasysService } from 'src/app/services/infrasys.service';
   styleUrls: ['./site-details.component.scss'],
 })
 export class SiteDetailsComponent implements OnInit {
-  @ViewChild('elementsContainer', { static: false })
-  elementsContainer!: DxDataGridComponent;
-
   public active: any;
   public loadingData = false;
 
@@ -53,8 +50,6 @@ export class SiteDetailsComponent implements OnInit {
         this.siteAddress = response.data.site.address;
         this.siteArea = response.data.site.area;
         this.siteContact = response.data.site.contact;
-
-        console.log('The elements: ', this.siteFacilities);
       })
       .catch((error) => {
         this.loadingData = false;
@@ -63,6 +58,9 @@ export class SiteDetailsComponent implements OnInit {
       });
   }
 
+  onInitElement(event: any) {
+    event.component.expandRow(this.siteElements[0].sid);
+  }
   onRowExpanding(event: any) {
     event.component.collapseAll(-1);
   }

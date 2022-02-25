@@ -328,9 +328,8 @@
         <div class="pt-3">
           <dx-data-grid #elementsContainer [dataSource]="siteElements" [columnAutoWidth]="true" [showBorders]="true"
             [showRowLines]="true" [showColumnLines]="false" [allowColumnReordering]="true" [wordWrapEnabled]="true"
-            [hoverStateEnabled]="true" (onRowExpanding)="onRowExpanding($event)"
-            [masterDetail]="{ enabled: true, template: 'detail', autoExpandAll: true }" keyExpr="sid"
-            noDataText="No data available">
+            [hoverStateEnabled]="true" (onRowExpanding)="onRowExpanding($event)" (onInitialized)="onInitElement($event)"
+            [masterDetail]="{ enabled: true, template: 'detail' }" keyExpr="sid" noDataText="No data available">
             <dxo-paging [enabled]="true" [pageSize]="20" [remoteOperations]="{ groupPaging: false }">
             </dxo-paging>
             <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10, 20, 30, 40, 50]" [showInfo]="true">
@@ -386,21 +385,11 @@
 
                             <span class="is-false"
                               *ngIf="specificType?.elementSpecifics.length == 0 || specificType?.elementSpecifics[0]?.text?.toLowerCase() == 'false'">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" class="h-6 w-6 mr-2"
-                                fill="red" viewBox="0 0 1792 1792">
-                                <path
-                                  d="M1277 1122q0-26-19-45l-181-181 181-181q19-19 19-45 0-27-19-46l-90-90q-19-19-46-19-26 0-45 19l-181 181-181-181q-19-19-45-19-27 0-46 19l-90 90q-19 19-19 46 0 26 19 45l181 181-181 181q-19 19-19 45 0 27 19 46l90 90q19 19 46 19 26 0 45-19l181-181 181 181q19 19 45 19 27 0 46-19l90-90q19-19 19-46zm387-226q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z">
-                                </path>
-                              </svg>
+                              <i class="fa fa-lg fa-times-circle text-danger"></i>
                             </span>
                             <span class="is-true"
                               *ngIf="specificType?.elementSpecifics.length > 0 && specificType?.elementSpecifics[0]?.text?.toLowerCase() == 'true'">
-                              <svg class="h-6 w-6 mr-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                stroke="currentColor" fill="#10b981" viewBox="0 0 1792 1792">
-                                <path
-                                  d="M1412 734q0-28-18-46l-91-90q-19-19-45-19t-45 19l-408 407-226-226q-19-19-45-19t-45 19l-91 90q-18 18-18 46 0 27 18 45l362 362q19 19 45 19 27 0 46-19l543-543q18-18 18-45zm252 162q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z">
-                                </path>
-                              </svg>
+                              <i class="fa fa-lg fa-check-circle text-success"></i>
                             </span>
                           </span>
                         </div>
