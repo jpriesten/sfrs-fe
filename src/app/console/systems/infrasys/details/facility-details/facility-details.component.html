@@ -17,10 +17,11 @@
       <h3 class="">{{siteData?.siteName}}</h3>
     </div>
     <div class="col d-flex justify-content-end">
+      <button class="btn btn-sm btn-secondary me-3">Edit</button>
       <button class="btn btn-sm btn-danger">Delete</button>
     </div>
   </div>
-  <div class="row pt-3 align-items-center">
+  <div class="row pt-3 align-items-center summary-header">
     <div class="col">
       <h5>Summary</h5>
     </div>
@@ -42,14 +43,11 @@
         </div>
       </div>
     </div>
-    <div class="col d-flex justify-content-end">
-      <button class="btn btn-sm btn-secondary">Edit</button>
+    <div class="col-12 pt-3 text-wrap">
+      <p class="text-custom">{{siteFacility?.facilityType?.description}}</p>
     </div>
   </div>
-  <div class="row pt-3 text-wrap">
-    <p class="text-custom">{{siteFacility?.facilityType?.description}}</p>
-  </div>
-  <nav ngbNav #nav="ngbNav" class="nav-pills">
+  <nav ngbNav #nav="ngbNav" class="nav-pills pt-3">
     <ng-container ngbNavItem>
       <a ngbNavLink>Details</a>
       <ng-template ngbNavContent>

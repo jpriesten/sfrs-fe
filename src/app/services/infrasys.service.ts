@@ -83,8 +83,8 @@ export class InfrasysService {
       let body: any = {};
 
       // These parameters are always passed
-      body.maxItems = maxItems;
-      if (!this.core.isEmptyOrNull(marker)) body.marker = marker;
+      // body.maxItems = maxItems;
+      // if (!this.core.isEmptyOrNull(marker)) body.marker = marker;
 
       //caution: passing the options invalidates the form data
       return this.core.makeRemoteRequest(
