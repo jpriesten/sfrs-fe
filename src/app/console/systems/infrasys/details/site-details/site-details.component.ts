@@ -59,7 +59,8 @@ export class SiteDetailsComponent implements OnInit {
   }
 
   onInitElement(event: any) {
-    event.component.expandRow(this.siteElements[0].sid);
+    if (this.siteElements[0])
+      event.component.expandRow(this.siteElements[0].sid);
   }
   onRowExpanding(event: any) {
     event.component.collapseAll(-1);

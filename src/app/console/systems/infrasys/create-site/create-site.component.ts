@@ -110,7 +110,7 @@ export class CreateSiteComponent implements OnInit {
     this.siteFormGroup.controls['hasCarPark'].valueChanges.subscribe((data) => {
       if (data == true) {
         this.siteFormGroup.controls['carParkCapacity'].setValidators(
-          Validators.compose([Validators.required, Validators.min(1)])
+          Validators.required
         );
         this.siteFormGroup.controls['carParkCapacity'].updateValueAndValidity();
       } else {

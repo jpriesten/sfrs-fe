@@ -116,14 +116,14 @@
               <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Create
                 date</label>
               <div class="col-12 col-sm">
-                <span class="text-custom">{{siteContact.createDate? core.getDate(siteContact.createDate): '-'}}</span>
+                <span class="text-custom">{{siteContact?.createDate? core.getDate(siteContact.createDate): '-'}}</span>
               </div>
             </div>
             <div class="row pb-2">
               <label class="form-label col col-sm-3 fw-bold text-custom d-flex justify-content-sm-end">Update
                 date</label>
               <div class="col-12 col-sm">
-                <span class="text-custom">{{siteContact.updateDate? core.getDate(siteContact.updateDate): '-'}}</span>
+                <span class="text-custom">{{siteContact?.updateDate? core.getDate(siteContact.updateDate): '-'}}</span>
               </div>
             </div>
           </div>
