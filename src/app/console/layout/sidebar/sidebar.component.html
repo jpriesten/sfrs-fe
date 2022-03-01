@@ -105,12 +105,13 @@
                   <span>My sites</span>
                 </a>
               </li>
-              <!-- <li>
-                <a [routerLink]="['create-site']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+              <li>
+                <a [routerLink]="['create-site']" [routerLinkActive]="['router-link-active']" class="list-group-item"
+                  (click)="isActive = false; collapsed = true">
                   <i class="fa fa-plus"></i>
                   <span>Create site</span>
                 </a>
-              </li> -->
+              </li>
             </ul>
           </li>
         </div>

@@ -39,6 +39,11 @@ export class CoreService {
     }),
   };
 
+  public trueFalseOption = [
+    { text: 'true', value: true },
+    { text: 'false', value: false },
+  ];
+
   public momentOffset: string = '-0100';
 
   private modalReference: NgbModalRef | undefined;

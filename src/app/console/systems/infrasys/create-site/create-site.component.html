@@ -11,5 +11,407 @@
       <h4>Create site</h4>
     </div>
   </div>
+
+  <ng-container *ngIf="unauthorisedCreateSite.authorised; else elseTemplate">
+    <div class="row mat-typography">
+      <mat-stepper labelPosition="bottom" [linear]="isLinear" [orientation]="(stepperOrientation | async)!" #stepper>
+        <form [formGroup]="siteFormGroup">
+          <mat-step>
+            <ng-template matStepLabel>Details</ng-template>
+
+            <h5 class="mb-1 mt-3 fw-bold">Set site details</h5>
+            <hr class="mt-1">
+            <div class="pb-3">
+              <div class="row pb-2 align-items-center">
+                <label class="form-label col col-sm-3 mb-sm-0 fw-bold text-custom d-flex justify-content-sm-end"
+                  for="name">
+                  Name<span>*</span>
+                </label>
+                <div class="col-12 col-sm-5">
+                  <input type="text" class="form-control form-control-sm" id="name" formControlName="name">
+                </div>
+              </div>
+              <div class="row pb-2 align-items-center">
+                <label class="form-label col col-sm-3 mb-sm-0 fw-bold text-custom d-flex justify-content-sm-end">
+                  Has nursery<span>*</span>
+                </label>
+                <div class="col-12 col-sm-5">
+                  <div class="form-check form-check-inline" *ngFor="let option of core.trueFalseOption">
+                    <input class="form-check-input" type="radio" [id]="option.text+'hasNursery'"
+                      formControlName="hasNursery" [value]="option.value">
+                    <label class="form-check-label" [for]="option.text+'hasNursery'">{{option.text|titlecase}}</label>
+                  </div>
+                </div>
+              </div>
+              <div class="row pb-2 align-items-center">
+                <label class="form-label col col-sm-3 mb-sm-0 fw-bold text-custom d-flex justify-content-sm-end">
+                  Has car park<span>*</span>
+                </label>
+                <div class="col-12 col-sm-5">
+                  <div class="form-check form-check-inline" *ngFor="let option of core.trueFalseOption">
+                    <input class="form-check-input" type="radio" [id]="option.text+'hasCarPark'"
+                      formControlName="hasCarPark" [value]="option.value">
+                    <label class="form-check-label" [for]="option.text+'hasCarPark'">{{option.text|titlecase}}</label>
+                  </div>
+                </div>
+              </div>
+              <div class="row pb-2 align-items-center" *ngIf="siteFormGroup.value.hasCarPark == true">
+                <label class="form-label col col-sm-3 mb-sm-0 fw-bold text-custom d-flex justify-content-sm-end"
+                  for="carParkCapacity">
+                  Car park capacity<span>*</span>
+                </label>
+                <div class="col-12 col-sm-5">
+                  <input type="number" class="form-control form-control-sm" id="carParkCapacity"
+                    formControlName="carParkCapacity">
+                </div>
+              </div>
+              <div class="row pb-2 align-items-center">
+                <label class="form-label col col-sm-3 mb-sm-0 fw-bold text-custom d-flex justify-content-sm-end">
+                  Has cycle hire<span>*</span>
+                </label>
+                <div class="col-12 col-sm-5">
+                  <div class="form-check form-check-inline" *ngFor="let option of core.trueFalseOption">
+                    <input class="form-check-input" type="radio" [id]="option.text+'hasCycleHire'"
+                      formControlName="hasCycleHire" [value]="option.value">
+                    <label class="form-check-label" [for]="option.text+'hasCycleHire'">{{option.text|titlecase}}</label>
+                  </div>
+                </div>
+              </div>
+              <div class="row pb-2 align-items-center">
+                <label class="form-label col col-sm-3 mb-sm-0 fw-bold text-custom d-flex justify-content-sm-end">
+                  Has cycle park<span>*</span>
+                </label>
+                <div class="col-12 col-sm-5">
+                  <div class="form-check form-check-inline" *ngFor="let option of core.trueFalseOption">
+                    <input class="form-check-input" type="radio" [id]="option.text+'hasCyclePark'"
+                      formControlName="hasCyclePark" [value]="option.value">
+                    <label class="form-check-label" [for]="option.text+'hasCyclePark'">{{option.text|titlecase}}</label>
+                  </div>
+                </div>
+              </div>
+              <div class="row pb-2 align-items-center">
+                <label class="form-label col col-sm-3 mb-sm-0 fw-bold text-custom d-flex justify-content-sm-end">
+                  Disability access<span>*</span>
+                </label>
+                <div class="col-12 col-sm-5">
+                  <div class="form-check form-check-inline" *ngFor="let option of core.trueFalseOption">
+                    <input class="form-check-input" type="radio" [id]="option.text+'disabilityAccess'"
+                      formControlName="disabilityAccess" [value]="option.value">
+                    <label class="form-check-label"
+                      [for]="option.text+'disabilityAccess'">{{option.text|titlecase}}</label>
+                  </div>
+                </div>
+              </div>
+              <div class="row pb-2 align-items-center">
+                <label class="form-label col col-sm-3 mb-sm-0 fw-bold text-custom d-flex justify-content-sm-end">
+                  Has first aid room<span>*</span>
+                </label>
+                <div class="col-12 col-sm-5">
+                  <div class="form-check form-check-inline" *ngFor="let option of core.trueFalseOption">
+                    <input class="form-check-input" type="radio" [id]="option.text+'hasFirstAidRoom'"
+                      formControlName="hasFirstAidRoom" [value]="option.value">
+                    <label class="form-check-label"
+                      [for]="option.text+'hasFirstAidRoom'">{{option.text|titlecase}}</label>
+                  </div>
+                </div>
+              </div>
+              <div class="row pb-2 align-items-center">
+                <label class="form-label col col-sm-3 mb-sm-0 fw-bold text-custom d-flex justify-content-sm-end">
+                  Has cycle repair workshop<span>*</span>
+                </label>
+                <div class="col-12 col-sm-5">
+                  <div class="form-check form-check-inline" *ngFor="let option of core.trueFalseOption">
+                    <input class="form-check-input" type="radio" [id]="option.text+'hasCycleRepairWorkshop'"
+                      formControlName="hasCycleRepairWorkshop" [value]="option.value">
+                    <label class="form-check-label"
+                      [for]="option.text+'hasCycleRepairWorkshop'">{{option.text|titlecase}}</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="pb-3">
+              <div class="row pb-2 align-items-center">
+                <label class="form-label col col-sm-3 mb-sm-0 fw-bold text-custom d-flex justify-content-sm-end">
+                  Start date<span>*</span>
+                </label>
+                <div class="col-12 col-sm-5">
+                  <input type="date" class="form-control form-control-sm" id="name" formControlName="startDate">
+                </div>
+              </div>
+            </div>
+          </mat-step>
+          <mat-step>
+            <ng-template matStepLabel>Management</ng-template>
+
+            <h5 class="mb-1 mt-3 fw-bold">Set management information</h5>
+            <hr class="mt-1">
+            <div class="pb-3">
+              <div class="row pb-2 align-items-center">
+                <label class="form-label col col-sm-3 mb-sm-0 fw-bold text-custom d-flex justify-content-sm-end"
+                  for="managementType">
+                  Management type<span>*</span>
+                </label>
+                <div class="col-12 col-sm-5">
+                  <input type="text" class="form-control form-control-sm" id="managementType"
+                    formControlName="managementType">
+                </div>
+              </div>
+              <div class="row pb-2 align-items-center">
+                <label class="form-label col col-sm-3 mb-sm-0 fw-bold text-custom d-flex justify-content-sm-end"
+                  for="managementGroup">
+                  Management group<span>*</span>
+                </label>
+                <div class="col-12 col-sm-5">
+                  <input type="text" class="form-control form-control-sm" id="managementGroup"
+                    formControlName="managementGroup">
+                </div>
+              </div>
+              <div class="row pb-2 align-items-center">
+                <label class="form-label col col-sm-3 mb-sm-0 text-custom d-flex justify-content-sm-end"
+                  for="operatorName">
+                  Operator name
+                </label>
+                <div class="col-12 col-sm-5">
+                  <input type="text" class="form-control form-control-sm" id="operatorName"
+                    formControlName="operatorName">
+                </div>
+              </div>
+              <div class="row pb-2 align-items-center">
+                <label class="form-label col col-sm-3 mb-sm-0 fw-bold text-custom d-flex justify-content-sm-end"
+                  for="ownerType">
+                  Owner type<span>*</span>
+                </label>
+                <div class="col-12 col-sm-5">
+                  <input type="text" class="form-control form-control-sm" id="ownerType" formControlName="ownerType">
+                </div>
+              </div>
+              <div class="row pb-2 align-items-center">
+                <label class="form-label col col-sm-3 mb-sm-0 fw-bold text-custom d-flex justify-content-sm-end"
+                  for="ownerGroup">
+                  Owner group<span>*</span>
+                </label>
+                <div class="col-12 col-sm-5">
+                  <input type="text" class="form-control form-control-sm" id="ownerGroup" formControlName="ownerGroup">
+                </div>
+              </div>
+              <div class="row pb-2 align-items-center">
+                <label class="form-label col col-sm-3 mb-sm-0 fw-bold text-custom d-flex justify-content-sm-end"
+                  for="educationPhase">
+                  Education phase<span>*</span>
+                </label>
+                <div class="col-12 col-sm-5">
+                  <input type="text" class="form-control form-control-sm" id="educationPhase"
+                    formControlName="educationPhase">
+                </div>
+              </div>
+            </div>
+          </mat-step>
+          <mat-step>
+            <ng-template matStepLabel>Address</ng-template>
+
+            <h5 class="mb-1 mt-3 fw-bold">Add address</h5>
+            <hr class="mt-1">
+            <div class="pb-3">
+              <div class="row pb-2 align-items-center">
+                <label class="form-label col col-sm-3 mb-sm-0 text-custom d-flex justify-content-sm-end"
+                  for="buildingName">
+                  Building name
+                </label>
+                <div class="col-12 col-sm-5">
+                  <input type="text" class="form-control form-control-sm" id="buildingName"
+                    formControlName="buildingName">
+                </div>
+              </div>
+              <div class="row pb-2 align-items-center">
+                <label class="form-label col col-sm-3 mb-sm-0 text-custom d-flex justify-content-sm-end"
+                  for="subBuildingName">
+                  Sub building name
+                </label>
+                <div class="col-12 col-sm-5">
+                  <input type="text" class="form-control form-control-sm" id="subBuildingName"
+                    formControlName="subBuildingName">
+                </div>
+              </div>
+              <div class="row pb-2 align-items-center">
+                <label class="form-label col col-sm-3 mb-sm-0 text-custom d-flex justify-content-sm-end"
+                  for="buildingNumber">
+                  Building number
+                </label>
+                <div class="col-12 col-sm-5">
+                  <input type="text" class="form-control form-control-sm" id="buildingNumber"
+                    formControlName="buildingNumber">
+                </div>
+              </div>
+              <div class="row pb-2 align-items-center">
+                <label class="form-label col col-sm-3 mb-sm-0 fw-bold text-custom d-flex justify-content-sm-end"
+                  for="thoroughfareName">
+                  Thorough fare name<span>*</span>
+                </label>
+                <div class="col-12 col-sm-5">
+                  <input type="text" class="form-control form-control-sm" id="thoroughfareName"
+                    formControlName="thoroughfareName">
+                </div>
+              </div>
+              <div class="row pb-2 align-items-center">
+                <label class="form-label col col-sm-3 mb-sm-0 text-custom d-flex justify-content-sm-end"
+                  for="dependentThoroughfare">
+                  Dependent thorough fare
+                </label>
+                <div class="col-12 col-sm-5">
+                  <input type="text" class="form-control form-control-sm" id="dependentThoroughfare"
+                    formControlName="dependentThoroughfare">
+                </div>
+              </div>
+              <div class="row pb-2 align-items-center">
+                <label class="form-label col col-sm-3 mb-sm-0 text-custom d-flex justify-content-sm-end"
+                  for="dependentLocality">
+                  Dependent locality
+                </label>
+                <div class="col-12 col-sm-5">
+                  <input type="text" class="form-control form-control-sm" id="dependentLocality"
+                    formControlName="dependentLocality">
+                </div>
+              </div>
+              <div class="row pb-2 align-items-center">
+                <label class="form-label col col-sm-3 mb-sm-0 fw-bold text-custom d-flex justify-content-sm-end"
+                  for="postTown">
+                  Post town<span>*</span>
+                </label>
+                <div class="col-12 col-sm-5">
+                  <input type="text" class="form-control form-control-sm" id="postTown" formControlName="postTown">
+                </div>
+              </div>
+              <div class="row pb-2 align-items-center">
+                <label class="form-label col col-sm-3 mb-sm-0 fw-bold text-custom d-flex justify-content-sm-end"
+                  for="postCode">
+                  Post code<span>*</span>
+                </label>
+                <div class="col-12 col-sm-5">
+                  <input type="text" class="form-control form-control-sm" id="postCode" formControlName="postCode">
+                </div>
+              </div>
+              <div class="row pb-2 align-items-center">
+                <label class="form-label col col-sm-3 mb-sm-0 text-custom d-flex justify-content-sm-end" for="latitude">
+                  Latitude
+                </label>
+                <div class="col-12 col-sm-5">
+                  <input type="text" class="form-control form-control-sm" id="latitude" formControlName="latitude">
+                </div>
+              </div>
+              <div class="row pb-2 align-items-center">
+                <label class="form-label col col-sm-3 mb-sm-0 text-custom d-flex justify-content-sm-end"
+                  for="longitude">
+                  Longitude
+                </label>
+                <div class="col-12 col-sm-5">
+                  <input type="text" class="form-control form-control-sm" id="longitude" formControlName="longitude">
+                </div>
+              </div>
+            </div>
+          </mat-step>
+          <mat-step>
+            <ng-template matStepLabel>Area</ng-template>
+
+            <h5 class="mb-1 mt-3 fw-bold">Define area</h5>
+            <hr class="mt-1">
+            <div class="pb-3">
+              <div class="row pb-2 align-items-center">
+                <label class="form-label col col-sm-3 mb-sm-0 fw-bold text-custom d-flex justify-content-sm-end">
+                  Province<span>*</span>
+                </label>
+                <div class="col-12 col-sm-5">
+                  <select class="form-select form-select-sm" formControlName="province"
+                    (ngModelChange)="onGeoChange($event, 'province')">
+                    <option value="">Select a province...</option>
+                    <option [ngValue]="province.code" *ngFor="let province of provinces; let i=index">
+                      {{province.name}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="row pb-2 align-items-center">
+                <label class="form-label col col-sm-3 mb-sm-0 fw-bold text-custom d-flex justify-content-sm-end">
+                  District<span>*</span>
+                </label>
+                <div class="col-12 col-sm-5">
+                  <select class="form-select form-select-sm" formControlName="district"
+                    (ngModelChange)="onGeoChange($event, 'district')">
+                    <option value="">Select a district...</option>
+                    <option [ngValue]="district.code" *ngFor="let district of districts; let i=index">
+                      {{district.name}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="row pb-2 align-items-center">
+                <label class="form-label col col-sm-3 mb-sm-0 fw-bold text-custom d-flex justify-content-sm-end">
+                  Local<span>*</span>
+                </label>
+                <div class="col-12 col-sm-5">
+                  <select class="form-select form-select-sm" formControlName="local"
+                    (ngModelChange)="onGeoChange($event, 'local')">
+                    <option value="">Select a local...</option>
+                    <option [ngValue]="local.code" *ngFor="let local of locals; let i=index">
+                      {{local.name}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="row pb-2 align-items-center">
+                <label class="form-label col col-sm-3 mb-sm-0 fw-bold text-custom d-flex justify-content-sm-end">
+                  Ward<span>*</span>
+                </label>
+                <div class="col-12 col-sm-5">
+                  <select class="form-select form-select-sm" formControlName="ward"
+                    (ngModelChange)="onGeoChange($event, 'ward')">
+                    <option value="">Select a ward...</option>
+                    <option [ngValue]="ward.code" *ngFor="let ward of wards; let i=index">
+                      {{ward.number}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </mat-step>
+        </form>
+      </mat-stepper>
+    </div>
+
+    <hr class="m-0 mb-1">
+    <div class="row">
+      <div class="col">
+        <span class="fw-bold">* Required</span>
+      </div>
+      <div class="col d-flex justify-content-end align-items-center">
+        <a [routerLink]="['/console/infrasys/create-site']" (click)="reset(stepper)">Reset</a>
+        <button class="btn btn-sm btn-custom-secondary ms-3" (click)="stepper.previous()"
+          *ngIf="stepper.selectedIndex != 0">
+          Back
+        </button>
+        <button class="btn btn-sm btn-custom-secondary ms-3" (click)="stepper.next()"
+          *ngIf="stepper.selectedIndex == 0">
+          Next: Management
+        </button>
+        <button class="btn btn-sm btn-custom-secondary ms-3" (click)="stepper.next()"
+          *ngIf="stepper.selectedIndex == 1">
+          Next: Address
+        </button>
+        <button class="btn btn-sm btn-custom-secondary ms-3" (click)="stepper.next()"
+          *ngIf="stepper.selectedIndex == 2">
+          Next: Area
+        </button>
+        <button class="btn btn-sm btn-custom-secondary ms-3" [disabled]="siteFormGroup.invalid"
+          (click)="createSite(stepper)" *ngIf="stepper.selectedIndex == 3">
+          Create site
+        </button>
+      </div>
+    </div>
+  </ng-container>
+  <ng-template #elseTemplate>
+    <div class="alert alert-danger">
+      <h4 class="alert-heading">Unauthorised action</h4>
+      <p>{{unauthorisedCreateSite.description}}</p>
+    </div>
+  </ng-template>
 </div>
 <ngx-loading [show]="loadingData"></ngx-loading>
