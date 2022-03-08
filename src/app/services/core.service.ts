@@ -153,8 +153,8 @@ export class CoreService {
     });
   }
 
-  errorToast(message: string) {
-    this.toastService.error(message, undefined, {
+  errorToast(message: string, title?: string) {
+    this.toastService.error(message, title, {
       easing: 'ease-in',
       timeOut: 15000,
     });

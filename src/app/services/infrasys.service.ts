@@ -164,6 +164,32 @@ export class InfrasysService {
     }
   }
 
+  /** POST: Fetch site lookup values
+   */
+  getSiteLookups(): Promise<any> {
+    // if (this.core.userHasPermission("SRAUTHCODE")) { // For when policies are to be enforced
+    if (true) {
+      let url = `${this.fullBaseUrl}/listSiteLookups`;
+
+      let body: any = {};
+
+      // These parameters are always passed
+
+      //caution: passing the options invalidates the form data
+      return this.core.makeRemoteRequest(
+        url,
+        'post',
+        body,
+        this.core.httpOptions.infrasysHeaders
+      );
+    } else {
+      return this.core.fakePromise(
+        'error',
+        "Sorry, you're not allowed to do this!"
+      );
+    }
+  }
+
   /** POST: Create a site
    * @param {string} siteData Raw json data
    */
@@ -177,6 +203,64 @@ export class InfrasysService {
 
       // These parameters are always passed
       body = siteData;
+
+      //caution: passing the options invalidates the form data
+      return this.core.makeRemoteRequest(
+        url,
+        'post',
+        body,
+        this.core.httpOptions.infrasysHeaders
+      );
+    } else {
+      return this.core.fakePromise(
+        'error',
+        "Sorry, you're not allowed to do this!"
+      );
+    }
+  }
+
+  /** POST: Create a site contact
+   * @param {string} siteContactData Raw json data
+   */
+  createSiteContact(siteContactData: any): Promise<any> {
+    // if (this.core.userHasPermission("SRAUTHCODE")) { // For when policies are to be enforced
+    if (true) {
+      let url = `${this.fullBaseUrl}/createSiteContact`;
+      8;
+
+      let body: any = {};
+
+      // These parameters are always passed
+      body = siteContactData;
+
+      //caution: passing the options invalidates the form data
+      return this.core.makeRemoteRequest(
+        url,
+        'post',
+        body,
+        this.core.httpOptions.infrasysHeaders
+      );
+    } else {
+      return this.core.fakePromise(
+        'error',
+        "Sorry, you're not allowed to do this!"
+      );
+    }
+  }
+
+  /** POST: Create a site contact
+   * @param {string} siteActivityData Raw json data
+   */
+  createSiteActivity(siteActivityData: any): Promise<any> {
+    // if (this.core.userHasPermission("SRAUTHCODE")) { // For when policies are to be enforced
+    if (true) {
+      let url = `${this.fullBaseUrl}/createSiteActivity`;
+      8;
+
+      let body: any = {};
+
+      // These parameters are always passed
+      body = siteActivityData;
 
       //caution: passing the options invalidates the form data
       return this.core.makeRemoteRequest(

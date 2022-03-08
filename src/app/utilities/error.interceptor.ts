@@ -53,7 +53,11 @@ export class ErrorInterceptor implements HttpInterceptor {
                 this.core.errorToast(errorType.description);
               // else this.core.errorToast('Unauthorised action');
             } else {
-              this.core.errorToast('Unknown error. Please contact support.');
+              this.core.errorToast(
+                this.appError.errors[0].detail,
+                'Please contact support.'
+              );
+              // this.core.errorToast('Unknown error. Please contact support.');
             }
           }
         },

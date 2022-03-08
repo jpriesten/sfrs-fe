@@ -2,6 +2,7 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { StepperOrientation } from '@angular/cdk/stepper';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ThemePalette } from '@angular/material/core';
 import { MatStepper } from '@angular/material/stepper';
 import { map, Observable } from 'rxjs';
 import { CoreService } from 'src/app/services/core.service';
@@ -17,10 +18,13 @@ import { InfrasysService } from 'src/app/services/infrasys.service';
 export class CreateSiteComponent implements OnInit {
   unauthorisedCreateSite = { authorised: true, description: '' };
   loadingData = false;
+
   public siteFormGroup!: FormGroup;
+  public siteContactFormGroup!: FormGroup;
 
   private tempLocalStorageKeys = ['site-data'];
   public userData: any = undefined;
+  public lookupValues: any = {};
   public tags: any[] = [];
   public provinces: any[] = [];
   public districts: any[] = [];
@@ -28,8 +32,12 @@ export class CreateSiteComponent implements OnInit {
   public wards: any[] = [];
 
   // MatStepper values
-  public isLinear = false;
+  public isLinear = true;
+  public isCompleted = false;
   public stepperOrientation: Observable<StepperOrientation>;
+
+  public siteId = '';
+  public selectedActivities: any[] = [];
 
   constructor(
     public core: CoreService,
@@ -46,9 +54,12 @@ export class CreateSiteComponent implements OnInit {
 
   ngOnInit(): void {
     this.initSiteForm();
+    this.initSiteContactForm();
 
     this.hasCarPackChanged();
     if (this.core.user != null) this.getUser(this.core.user.data.user.userName);
+
+    this.getLookups();
   }
 
   initSiteForm() {
@@ -103,6 +114,20 @@ export class CreateSiteComponent implements OnInit {
       district: geoData.district,
       local: geoData.local,
       ward: geoData.ward,
+    });
+  }
+
+  initSiteContactForm() {
+    this.siteContactFormGroup = this.fb.group({
+      title: ['', Validators.required],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      designation: ['', Validators.required],
+      telephoneNumber: ['', Validators.required],
+      email: ['', Validators.email],
+      website: [''],
+      twitter: [''],
+      facebook: [''],
     });
   }
 
@@ -168,6 +193,20 @@ export class CreateSiteComponent implements OnInit {
       })
       .catch((error) => {
         this.loadingData = false;
+        this.unauthorisedCreateSite =
+          this.core.getUnauthorisedErrorMessage(error);
+      });
+  }
+
+  getLookups() {
+    this.infrasysService
+      .getSiteLookups()
+      .then((response) => {
+        this.unauthorisedCreateSite.authorised = true;
+        this.lookupValues = response.data.lookup;
+        console.log('Site lookups: ', this.lookupValues);
+      })
+      .catch((error) => {
         this.unauthorisedCreateSite =
           this.core.getUnauthorisedErrorMessage(error);
       });
@@ -245,7 +284,7 @@ export class CreateSiteComponent implements OnInit {
       });
   }
 
-  createSite(stepper: MatStepper) {
+  createSite(rootStepper: MatStepper, stepper: MatStepper) {
     let siteData = {
       name: this.siteFormGroup.getRawValue().name,
       hasCarPark: this.siteFormGroup.getRawValue().hasCarPark,
@@ -285,11 +324,48 @@ export class CreateSiteComponent implements OnInit {
       },
     };
     this.loadingData = true;
+    this.isCompleted = false;
     this.infrasysService
       .createSite(siteData)
+      .then((site) => {
+        this.loadingData = false;
+        this.isCompleted = true;
+        this.siteId = site.data.sid;
+        rootStepper.selectedIndex = 1;
+        this.reset(stepper);
+      })
+      .catch(() => {
+        this.loadingData = false;
+        this.isCompleted = false;
+      });
+  }
+
+  createSiteContact(rootStepper: MatStepper) {
+    let siteData = { ...this.siteContactFormGroup.value, siteId: this.siteId };
+    this.loadingData = true;
+    this.infrasysService
+      .createSiteContact(siteData)
       .then(() => {
         this.loadingData = false;
-        this.reset(stepper);
+        rootStepper.next();
+      })
+      .catch(() => {
+        this.loadingData = false;
+      });
+  }
+
+  createSiteActivities(rootStepper: MatStepper) {
+    let activityCodes: any[] = [];
+    this.selectedActivities.forEach((activity) => {
+      activityCodes.push(activity.code);
+    });
+    let siteData = { siteId: this.siteId, activities: activityCodes };
+    this.loadingData = true;
+    this.infrasysService
+      .createSiteActivity(siteData)
+      .then(() => {
+        this.loadingData = false;
+        rootStepper.next();
       })
       .catch(() => {
         this.loadingData = false;
